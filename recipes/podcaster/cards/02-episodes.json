@@ -1,0 +1,29 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#collection",
+    "title": "Latest episodes",
+    "layout": "list",
+    "items": [
+      {
+        "tag": "Ep. 112 · 48 min",
+        "title": "The person who renews the certificates",
+        "description": "With Sample Guest, site reliability engineer.",
+        "uri": "https://signal.example.com/112"
+      },
+      {
+        "tag": "Ep. 111 · 52 min",
+        "title": "Undersea cables, explained",
+        "description": "With Sample Guest, network engineer.",
+        "uri": "https://signal.example.com/111"
+      },
+      {
+        "tag": "Ep. 110 · 39 min",
+        "title": "Who moderates the moderators?",
+        "uri": "https://signal.example.com/110"
+      }
+    ]
+  },
+  "surface": "outlined",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

@@ -1,0 +1,147 @@
+{
+  "id": "speaker",
+  "version": "0.1.0",
+  "title": "Speaker",
+  "summary": "For speakers: a booking button first, the topics you speak on, recent talks with video, and what organisers need.",
+  "persona": {
+    "for": [
+      "Keynote and conference speakers",
+      "Workshop facilitators",
+      "Experts who speak alongside their main work"
+    ],
+    "notFor": [
+      "Researchers whose talks are part of academic work (start from researcher)"
+    ]
+  },
+  "lexicon": {
+    "repository": "https://github.com/Undefined6799/unset",
+    "commit": "4abcada"
+  },
+  "preview": "preview.png",
+  "cards": [
+    {
+      "file": "cards/01-book.json",
+      "purpose": "The main ask: book them."
+    },
+    {
+      "file": "cards/02-topics.json",
+      "purpose": "Two to four topics, one line each."
+    },
+    {
+      "file": "cards/03-organisers.json",
+      "purpose": "What organisers need: bio, photo, formats."
+    },
+    {
+      "file": "cards/04-talks.json",
+      "purpose": "Recent talks, with video where it exists."
+    },
+    {
+      "file": "cards/05-elsewhere.json",
+      "purpose": "Optional: where to follow them.",
+      "optional": true
+    }
+  ],
+  "slots": [
+    {
+      "id": "displayName",
+      "file": "profile.json",
+      "pointer": "/displayName",
+      "kind": "text",
+      "required": true,
+      "ask": "What name do you want at the top of the page?",
+      "write": "Exactly as they give it. Never shorten or translate it."
+    },
+    {
+      "id": "headline",
+      "file": "profile.json",
+      "pointer": "/headline",
+      "kind": "text",
+      "required": true,
+      "ask": "In one line, what do you do and for whom?",
+      "write": "One sentence, at most 120 characters, no hashtags or emoji."
+    },
+    {
+      "id": "location",
+      "file": "profile.json",
+      "pointer": "/location",
+      "kind": "text",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you want a place on your profile? A city or region is enough.",
+      "write": "As they write it. Never infer it."
+    },
+    {
+      "id": "website",
+      "file": "profile.json",
+      "pointer": "/website",
+      "kind": "uri",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a website of your own?",
+      "write": "A full https URL."
+    },
+    {
+      "id": "avatar",
+      "file": "profile.json",
+      "pointer": "/avatar",
+      "kind": "image",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a square photo or logo for your profile picture?",
+      "write": "The member uploads it in the editor; never fetch one from the web."
+    },
+    {
+      "id": "book",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 2,
+      "ask": "How should organisers book you: a booking page, an agent, email?",
+      "write": "First button = the booking page (hire preset). Agent addresses only with the agent's agreement. Only an address they confirm may be public: everyone can see it.",
+      "file": "cards/01-book.json"
+    },
+    {
+      "id": "topics",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": true,
+      "ask": "What two to four topics do you speak on? One line each on the angle you take.",
+      "write": "A list: bold topic title, then the angle in one line.",
+      "file": "cards/02-topics.json"
+    },
+    {
+      "id": "organisers",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": false,
+      "ifEmpty": "drop-card",
+      "ask": "What formats do you offer, do you have a speaker kit, and how do you handle fees?",
+      "write": "Formats, kit link and fee policy as they state them. Never publish a fee figure unless they ask.",
+      "file": "cards/03-organisers.json"
+    },
+    {
+      "id": "talks",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 10,
+      "ask": "Which recent talks should be listed? Links to video are best.",
+      "write": "tag = event · year; title as delivered; description = format and whether video exists. Audience numbers only if the event published them.",
+      "file": "cards/04-talks.json"
+    },
+    {
+      "id": "elsewhere",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 6,
+      "ifEmpty": "drop-card",
+      "ask": "Where else should organisers look you up?",
+      "write": "Account URLs only.",
+      "file": "cards/05-elsewhere.json"
+    }
+  ]
+}

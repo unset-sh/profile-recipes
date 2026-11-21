@@ -1,0 +1,9 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#readme",
+    "text": "**What clients say**\n\n“Maya got five founders to agree on one roadmap in a week.” — Sample Client, CEO at Example Health\n\n“The sprint saved us a quarter of building the wrong thing.” — Sample Client, CTO at Example Care"
+  },
+  "width": "half",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

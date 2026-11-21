@@ -1,0 +1,30 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#collection",
+    "title": "Ways to work with me",
+    "layout": "list",
+    "items": [
+      {
+        "tag": "12 weeks · £240",
+        "title": "Couch to 5K, coached",
+        "description": "A plan that adapts every week, plus a call every fortnight.",
+        "uri": "https://sam.example.com/5k"
+      },
+      {
+        "tag": "Monthly · £60",
+        "title": "Ongoing coaching",
+        "description": "Your plan, adjusted weekly, with messaging support.",
+        "uri": "https://sam.example.com/monthly"
+      },
+      {
+        "tag": "Saturdays · free",
+        "title": "Community run",
+        "description": "5 km at a chatty pace. Everyone welcome.",
+        "uri": "https://sam.example.com/community"
+      }
+    ]
+  },
+  "surface": "outlined",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

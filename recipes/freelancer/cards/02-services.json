@@ -1,0 +1,30 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#collection",
+    "title": "How I can help",
+    "layout": "list",
+    "items": [
+      {
+        "tag": "2 weeks · from €6,000",
+        "title": "Product strategy sprint",
+        "description": "We pick the one bet worth making this quarter and write the plan to test it.",
+        "uri": "https://maya.example.com/sprint"
+      },
+      {
+        "tag": "Monthly · from €3,500",
+        "title": "Fractional head of product",
+        "description": "Two days a week leading your product work until you hire.",
+        "uri": "https://maya.example.com/fractional"
+      },
+      {
+        "tag": "Half day · €900",
+        "title": "Roadmap review",
+        "description": "A written review of your roadmap with the three changes I would make.",
+        "uri": "https://maya.example.com/review"
+      }
+    ]
+  },
+  "surface": "outlined",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

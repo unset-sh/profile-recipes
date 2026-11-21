@@ -1,0 +1,151 @@
+{
+  "id": "freelancer",
+  "version": "0.1.0",
+  "title": "Freelancer or consultant",
+  "summary": "Sell your expertise: a clear way to book an intro call, what you offer and roughly what it costs, proof from past clients.",
+  "persona": {
+    "for": [
+      "Independent consultants",
+      "Freelance designers, developers, writers and marketers",
+      "Fractional executives"
+    ],
+    "notFor": [
+      "Agencies with a team page to show (start from small-business)"
+    ]
+  },
+  "lexicon": {
+    "repository": "https://github.com/Undefined6799/unset",
+    "commit": "4abcada"
+  },
+  "preview": "preview.png",
+  "cards": [
+    {
+      "file": "cards/01-book.json",
+      "purpose": "The one action a prospect should take."
+    },
+    {
+      "file": "cards/02-services.json",
+      "purpose": "What they sell, each with a format and a starting price."
+    },
+    {
+      "file": "cards/03-proof.json",
+      "purpose": "Short testimonials, each attributed."
+    },
+    {
+      "file": "cards/04-work.json",
+      "purpose": "Case studies, if they can share any.",
+      "optional": true
+    },
+    {
+      "file": "cards/05-elsewhere.json",
+      "purpose": "Professional profiles.",
+      "optional": true
+    }
+  ],
+  "slots": [
+    {
+      "id": "displayName",
+      "file": "profile.json",
+      "pointer": "/displayName",
+      "kind": "text",
+      "required": true,
+      "ask": "What name do you want at the top of the page?",
+      "write": "Exactly as they give it. Never shorten or translate it."
+    },
+    {
+      "id": "headline",
+      "file": "profile.json",
+      "pointer": "/headline",
+      "kind": "text",
+      "required": true,
+      "ask": "In one line, what do you do and for whom?",
+      "write": "One sentence, at most 120 characters, no hashtags or emoji."
+    },
+    {
+      "id": "location",
+      "file": "profile.json",
+      "pointer": "/location",
+      "kind": "text",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you want a place on your profile? A city or region is enough.",
+      "write": "As they write it. Never infer it."
+    },
+    {
+      "id": "website",
+      "file": "profile.json",
+      "pointer": "/website",
+      "kind": "uri",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a website of your own?",
+      "write": "A full https URL."
+    },
+    {
+      "id": "avatar",
+      "file": "profile.json",
+      "pointer": "/avatar",
+      "kind": "image",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a square photo or logo for your profile picture?",
+      "write": "The member uploads it in the editor; never fetch one from the web."
+    },
+    {
+      "id": "booking",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 2,
+      "ask": "How should a new client start: a booking link for an intro call, email, or both?",
+      "write": "The first button is the booking link (bookCall preset) when they have one. Email: Only an address they confirm may be public: everyone can see it.",
+      "file": "cards/01-book.json"
+    },
+    {
+      "id": "services",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 5,
+      "ask": "What do you offer? For each: a name, how long or how often, a starting price if you publish one, and one line on the outcome.",
+      "write": "tag = format · price, only if they publish prices; title = the service name; description = the outcome for the client, not the activity.",
+      "file": "cards/02-services.json"
+    },
+    {
+      "id": "testimonials",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": false,
+      "ifEmpty": "drop-card",
+      "ask": "Do you have two or three short client quotes you have permission to publish?",
+      "write": "Each quote verbatim, with name and role as the client approved. Never write or polish a quote.",
+      "file": "cards/03-proof.json"
+    },
+    {
+      "id": "cases",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 6,
+      "ifEmpty": "drop-card",
+      "ask": "Are there case studies or projects you can link to?",
+      "write": "tag = client, only if named publicly; title = the result in a few words.",
+      "file": "cards/04-work.json"
+    },
+    {
+      "id": "elsewhere",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 6,
+      "ifEmpty": "drop-card",
+      "ask": "Which professional profiles or newsletter should be linked?",
+      "write": "Account URLs only; a label and description only for their own pages.",
+      "file": "cards/05-elsewhere.json"
+    }
+  ]
+}

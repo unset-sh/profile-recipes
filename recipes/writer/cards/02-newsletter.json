@@ -1,0 +1,17 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#buttons",
+    "heading": "Letters from the desk",
+    "text": "A short letter every month: what I'm writing, reading and getting wrong.",
+    "buttons": [
+      {
+        "$type": "sh.unset.section#linkButton",
+        "preset": "subscribe",
+        "uri": "https://odile.example.com/letters"
+      }
+    ]
+  },
+  "width": "half",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

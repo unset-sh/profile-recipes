@@ -1,0 +1,52 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#collection",
+    "title": "Selected work",
+    "layout": "grid",
+    "items": [
+      {
+        "tag": "Case study",
+        "title": "Scheduling for night nurses",
+        "description": "Research with 30 nurses, three rounds of testing.",
+        "uri": "https://jordan.example.com/work/scheduling",
+        "image": {
+          "image": {
+            "$type": "blob",
+            "ref": {
+              "$link": "bafkreibdpcum555tm2pwwbcbzflf233m3qcap26kz57vtec2vfunt3tupy"
+            },
+            "mimeType": "image/jpeg",
+            "size": 26391
+          },
+          "alt": "Sample picture: a blue gradient standing in for app screens.",
+          "aspectRatio": {
+            "width": 1600,
+            "height": 1000
+          }
+        }
+      },
+      {
+        "tag": "Case study",
+        "title": "Booking an appointment in 3 taps",
+        "uri": "https://jordan.example.com/work/booking",
+        "image": {
+          "image": {
+            "$type": "blob",
+            "ref": {
+              "$link": "bafkreigpwbuc3g3qnahwdf46o3rlqtp3kpy2dyon2ycai57hglycr6llfm"
+            },
+            "mimeType": "image/jpeg",
+            "size": 25731
+          },
+          "alt": "Sample picture: a green gradient standing in for app screens.",
+          "aspectRatio": {
+            "width": 1600,
+            "height": 1000
+          }
+        }
+      }
+    ]
+  },
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

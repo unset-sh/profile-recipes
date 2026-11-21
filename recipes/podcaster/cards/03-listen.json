@@ -1,0 +1,21 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#links",
+    "title": "Listen anywhere",
+    "layout": "list",
+    "items": [
+      {
+        "uri": "https://open.spotify.com/show/example-signal"
+      },
+      {
+        "uri": "https://music.apple.com/podcast/example-signal"
+      },
+      {
+        "uri": "https://www.youtube.com/@example-signal"
+      }
+    ]
+  },
+  "width": "half",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

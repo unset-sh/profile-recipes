@@ -1,0 +1,20 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#links",
+    "layout": "grid",
+    "items": [
+      {
+        "uri": "https://bsky.app/profile/odile.example.com"
+      },
+      {
+        "uri": "https://www.instagram.com/example.odile"
+      },
+      {
+        "uri": "https://www.goodreads.com/author/example-odile"
+      }
+    ]
+  },
+  "surface": "outlined",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

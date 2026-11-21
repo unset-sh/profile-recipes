@@ -1,0 +1,9 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#readme",
+    "text": "**This term**\n\n- Tuesday 18:30: intervals, Example Park\n- Thursday 07:00: easy run, canal path\n- Saturday 09:00: community run, Example Park gates"
+  },
+  "width": "half",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

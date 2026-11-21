@@ -1,0 +1,148 @@
+{
+  "id": "job-seeker",
+  "version": "0.1.0",
+  "title": "Job seeker",
+  "summary": "A résumé that reads in ten seconds: what you're looking for, your experience as a timeline, selected work, and a way to reach you.",
+  "persona": {
+    "for": [
+      "People looking for a new role",
+      "Graduates",
+      "Career changers"
+    ],
+    "notFor": [
+      "Freelancers selling services (start from freelancer)"
+    ]
+  },
+  "lexicon": {
+    "repository": "https://github.com/Undefined6799/unset",
+    "commit": "4abcada"
+  },
+  "preview": "preview.png",
+  "cards": [
+    {
+      "file": "cards/01-looking.json",
+      "purpose": "What role they want, where, and from when."
+    },
+    {
+      "file": "cards/02-experience.json",
+      "purpose": "Roles as a timeline, newest first."
+    },
+    {
+      "file": "cards/03-work.json",
+      "purpose": "Two to four case studies with a picture."
+    },
+    {
+      "file": "cards/04-contact.json",
+      "purpose": "How a recruiter gets in touch."
+    },
+    {
+      "file": "cards/05-profiles.json",
+      "purpose": "Professional profiles."
+    }
+  ],
+  "slots": [
+    {
+      "id": "displayName",
+      "file": "profile.json",
+      "pointer": "/displayName",
+      "kind": "text",
+      "required": true,
+      "ask": "What name do you want at the top of the page?",
+      "write": "Exactly as they give it. Never shorten or translate it."
+    },
+    {
+      "id": "headline",
+      "file": "profile.json",
+      "pointer": "/headline",
+      "kind": "text",
+      "required": true,
+      "ask": "In one line, what do you do and for whom?",
+      "write": "One sentence, at most 120 characters, no hashtags or emoji."
+    },
+    {
+      "id": "location",
+      "file": "profile.json",
+      "pointer": "/location",
+      "kind": "text",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you want a place on your profile? A city or region is enough.",
+      "write": "As they write it. Never infer it."
+    },
+    {
+      "id": "website",
+      "file": "profile.json",
+      "pointer": "/website",
+      "kind": "uri",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a website of your own?",
+      "write": "A full https URL."
+    },
+    {
+      "id": "avatar",
+      "file": "profile.json",
+      "pointer": "/avatar",
+      "kind": "image",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a square photo or logo for your profile picture?",
+      "write": "The member uploads it in the editor; never fetch one from the web."
+    },
+    {
+      "id": "looking",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": true,
+      "ask": "What role are you looking for, where, and from when? What are you best at?",
+      "write": "Bold-labelled lines as in the sample. Never mention salary, health, family or immigration status unless they insist.",
+      "file": "cards/01-looking.json"
+    },
+    {
+      "id": "experience",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 10,
+      "ask": "What roles have you had? For each: years, title, employer and one result you're proud of.",
+      "write": "tag = years; title = role · employer; description = one result, with a number only if they give it. Newest first. No links needed.",
+      "file": "cards/02-experience.json"
+    },
+    {
+      "id": "work",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 4,
+      "ifEmpty": "drop-card",
+      "ask": "Do you have case studies or work samples you can share publicly?",
+      "write": "Only work cleared for public sharing. They upload any pictures.",
+      "file": "cards/03-work.json"
+    },
+    {
+      "id": "contact",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 2,
+      "ask": "How should recruiters reach you? Do you have a CV link?",
+      "write": "Email: Only an address they confirm may be public: everyone can see it. A CV link only to a file they host and are happy to make public.",
+      "file": "cards/04-contact.json"
+    },
+    {
+      "id": "profiles",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 4,
+      "ifEmpty": "drop-card",
+      "ask": "Which professional profiles should be linked?",
+      "write": "Account URLs only.",
+      "file": "cards/05-profiles.json"
+    }
+  ]
+}

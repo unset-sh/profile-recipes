@@ -1,0 +1,19 @@
+{
+  "$type": "sh.unset.profile",
+  "displayName": "Priya Raman",
+  "headline": "Keynote speaker on trust and safety online. Former head of policy at Example Social.",
+  "avatarShape": "round",
+  "location": "London",
+  "website": "https://priya.example.com",
+  "avatar": {
+    "$type": "blob",
+    "ref": {
+      "$link": "bafkreigakmbl3kslci7buefeaxgmszai2fgzk2zofhsm3qrgl6pe4yr7be"
+    },
+    "mimeType": "image/jpeg",
+    "size": 10253
+  },
+  "visibility": "public",
+  "listed": true,
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

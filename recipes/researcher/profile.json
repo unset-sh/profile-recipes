@@ -1,0 +1,19 @@
+{
+  "$type": "sh.unset.profile",
+  "displayName": "Dr Lena Brandt",
+  "headline": "Computational ecologist. I model how forests recover after fire. Example University.",
+  "avatarShape": "round",
+  "location": "Uppsala",
+  "website": "https://lena.example.org",
+  "avatar": {
+    "$type": "blob",
+    "ref": {
+      "$link": "bafkreifv5ceduzbzxbesfqb3nsulp7svxnmoahqz4tnwornn5h5vvszaom"
+    },
+    "mimeType": "image/jpeg",
+    "size": 7128
+  },
+  "visibility": "public",
+  "listed": true,
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

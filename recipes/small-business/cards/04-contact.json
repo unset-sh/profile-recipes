@@ -1,0 +1,16 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#buttons",
+    "heading": "Wholesale and custom orders",
+    "text": "For shops, restaurants and weddings.",
+    "buttons": [
+      {
+        "$type": "sh.unset.section#emailButton",
+        "address": "studio@fernandclay.example.com"
+      }
+    ]
+  },
+  "width": "half",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

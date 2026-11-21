@@ -1,0 +1,72 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#collection",
+    "title": "Releases",
+    "layout": "carousel",
+    "items": [
+      {
+        "tag": "Single · 2026",
+        "title": "Undertow",
+        "uri": "https://lowtides.example.com/undertow",
+        "image": {
+          "image": {
+            "$type": "blob",
+            "ref": {
+              "$link": "bafkreiaklgqfwpglc3d3743a34tyfwmnxg4nxhg5ubq2aljjljmklfrcpy"
+            },
+            "mimeType": "image/jpeg",
+            "size": 20815
+          },
+          "alt": "Sample cover: a blurred teal gradient standing in for the single's artwork.",
+          "aspectRatio": {
+            "width": 1200,
+            "height": 1200
+          }
+        }
+      },
+      {
+        "tag": "Album · 2024",
+        "title": "Salt in the Wires",
+        "uri": "https://lowtides.example.com/salt",
+        "image": {
+          "image": {
+            "$type": "blob",
+            "ref": {
+              "$link": "bafkreid4uv6nug4y2qvt2d7cesihplgub5hyajfv5utrww442d4jhnbyv4"
+            },
+            "mimeType": "image/jpeg",
+            "size": 20762
+          },
+          "alt": "Sample cover: a blurred amber gradient standing in for the album artwork.",
+          "aspectRatio": {
+            "width": 1200,
+            "height": 1200
+          }
+        }
+      },
+      {
+        "tag": "EP · 2022",
+        "title": "Low Water",
+        "uri": "https://lowtides.example.com/low-water",
+        "image": {
+          "image": {
+            "$type": "blob",
+            "ref": {
+              "$link": "bafkreiahc4d2c6zyzjth7tbhw3epmpyvqdy5qvo55a3n34bl7bosudbhx4"
+            },
+            "mimeType": "image/jpeg",
+            "size": 15081
+          },
+          "alt": "Sample cover: a blurred violet gradient standing in for the EP artwork.",
+          "aspectRatio": {
+            "width": 1200,
+            "height": 1200
+          }
+        }
+      }
+    ]
+  },
+  "surface": "plain",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

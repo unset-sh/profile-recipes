@@ -1,0 +1,23 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#collection",
+    "title": "Talks and teaching",
+    "layout": "list",
+    "items": [
+      {
+        "tag": "Keynote · 2026",
+        "title": "Forests after fire: what the satellites miss",
+        "description": "Example Ecology Congress, Lisbon",
+        "uri": "https://congress.example.org/2026/brandt"
+      },
+      {
+        "tag": "Course · every spring",
+        "title": "Ecological modelling (MSc)",
+        "uri": "https://lena.example.org/teaching"
+      }
+    ]
+  },
+  "surface": "plain",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

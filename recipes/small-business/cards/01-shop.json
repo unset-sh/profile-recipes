@@ -1,0 +1,22 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#buttons",
+    "heading": "The spring collection is in",
+    "text": "Glazed in small batches; when a colour sells out, it is gone.",
+    "buttons": [
+      {
+        "$type": "sh.unset.section#linkButton",
+        "preset": "custom",
+        "uri": "https://fernandclay.example.com/shop",
+        "label": "Visit the shop"
+      },
+      {
+        "$type": "sh.unset.section#linkButton",
+        "preset": "subscribe",
+        "uri": "https://fernandclay.example.com/news"
+      }
+    ]
+  },
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

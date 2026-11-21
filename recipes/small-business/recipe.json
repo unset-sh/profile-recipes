@@ -1,0 +1,152 @@
+{
+  "id": "small-business",
+  "version": "0.1.0",
+  "title": "Small business or maker",
+  "summary": "For small shops and makers: a shop button up top, products with photos and prices, opening hours and where to find you.",
+  "persona": {
+    "for": [
+      "Makers and craft studios",
+      "Independent shops and cafés",
+      "Small online brands"
+    ],
+    "notFor": [
+      "Solo artists selling originals (start from artist)"
+    ]
+  },
+  "lexicon": {
+    "repository": "https://github.com/Undefined6799/unset",
+    "commit": "4abcada"
+  },
+  "preview": "preview.png",
+  "cards": [
+    {
+      "file": "cards/01-shop.json",
+      "purpose": "The main ask: shop."
+    },
+    {
+      "file": "cards/02-products.json",
+      "purpose": "Three to nine products with photos and prices."
+    },
+    {
+      "file": "cards/03-visit.json",
+      "purpose": "Opening hours and address."
+    },
+    {
+      "file": "cards/04-contact.json",
+      "purpose": "Wholesale and custom orders.",
+      "optional": true
+    },
+    {
+      "file": "cards/05-elsewhere.json",
+      "purpose": "Social accounts and marketplaces.",
+      "optional": true
+    }
+  ],
+  "slots": [
+    {
+      "id": "displayName",
+      "file": "profile.json",
+      "pointer": "/displayName",
+      "kind": "text",
+      "required": true,
+      "ask": "What name do you want at the top of the page?",
+      "write": "Exactly as they give it. Never shorten or translate it."
+    },
+    {
+      "id": "headline",
+      "file": "profile.json",
+      "pointer": "/headline",
+      "kind": "text",
+      "required": true,
+      "ask": "In one line, what do you do and for whom?",
+      "write": "One sentence, at most 120 characters, no hashtags or emoji."
+    },
+    {
+      "id": "location",
+      "file": "profile.json",
+      "pointer": "/location",
+      "kind": "text",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you want a place on your profile? A city or region is enough.",
+      "write": "As they write it. Never infer it."
+    },
+    {
+      "id": "website",
+      "file": "profile.json",
+      "pointer": "/website",
+      "kind": "uri",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a website of your own?",
+      "write": "A full https URL."
+    },
+    {
+      "id": "avatar",
+      "file": "profile.json",
+      "pointer": "/avatar",
+      "kind": "image",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a square photo or logo for your profile picture?",
+      "write": "The member uploads it in the editor; never fetch one from the web."
+    },
+    {
+      "id": "shop",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 2,
+      "ask": "Where do people buy from you, and what's new right now?",
+      "write": "Heading = what's new; first button = their shop (custom, \"Visit the shop\" or \"Order now\").",
+      "file": "cards/01-shop.json"
+    },
+    {
+      "id": "products",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 9,
+      "ifEmpty": "drop-card",
+      "ask": "Which three to nine products should be shown? For each: name, price, one detail and a link. You'll upload a photo of each in the editor.",
+      "write": "tag = price as on their shop; title = product name; description = size or one useful detail.",
+      "file": "cards/02-products.json"
+    },
+    {
+      "id": "visit",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": false,
+      "ifEmpty": "drop-card",
+      "ask": "Can people visit you? When, and where?",
+      "write": "Hours and address exactly as they give them. A business address only; never a home address unless they say it is the shop.",
+      "file": "cards/03-visit.json"
+    },
+    {
+      "id": "contact",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 2,
+      "ifEmpty": "drop-card",
+      "ask": "Do you take wholesale or custom orders? Which address may be public?",
+      "write": "Email: Only an address they confirm may be public: everyone can see it.",
+      "file": "cards/04-contact.json"
+    },
+    {
+      "id": "elsewhere",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 8,
+      "ifEmpty": "drop-card",
+      "ask": "Which social accounts or marketplaces should be linked?",
+      "write": "Account URLs only.",
+      "file": "cards/05-elsewhere.json"
+    }
+  ]
+}

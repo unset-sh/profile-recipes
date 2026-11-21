@@ -1,0 +1,9 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#readme",
+    "text": "Odile Marsh writes about families and the rooms they gather in. Her stories have appeared in Example Review and on Example Radio.\n\n**Agent:** Sample Agent, Example Literary Agency\n**Rights and permissions:** via the agency."
+  },
+  "surface": "plain",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

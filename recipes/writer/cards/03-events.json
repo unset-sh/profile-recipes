@@ -1,0 +1,22 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#collection",
+    "title": "Events",
+    "layout": "list",
+    "items": [
+      {
+        "tag": "12 May 2026 · Bristol",
+        "title": "Launch of The Long Table",
+        "uri": "https://events.example.org/long-table-launch"
+      },
+      {
+        "tag": "6 Jun 2026 · Hay",
+        "title": "In conversation at Example Festival",
+        "uri": "https://festival.example.org/odile"
+      }
+    ]
+  },
+  "width": "half",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

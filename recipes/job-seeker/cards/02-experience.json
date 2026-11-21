@@ -1,0 +1,27 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#collection",
+    "title": "Experience",
+    "layout": "list",
+    "items": [
+      {
+        "tag": "2022 – now",
+        "title": "Product designer · Example Care",
+        "description": "Led the redesign of the nurse scheduling app; cut missed shifts by a third."
+      },
+      {
+        "tag": "2019 – 2022",
+        "title": "UX designer · Example Health",
+        "description": "Designed the patient appointment flow used in 40 clinics."
+      },
+      {
+        "tag": "2017 – 2019",
+        "title": "Junior designer · Example Studio",
+        "description": "Websites and apps for public-sector clients."
+      }
+    ]
+  },
+  "surface": "outlined",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

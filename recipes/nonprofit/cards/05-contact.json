@@ -1,0 +1,23 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#links",
+    "title": "Get in touch",
+    "layout": "grid",
+    "items": [
+      {
+        "uri": "https://riversidefood.example.org/contact",
+        "label": "Contact us",
+        "description": "Partnerships, press and food donations."
+      },
+      {
+        "uri": "https://www.instagram.com/example.riversidefood"
+      },
+      {
+        "uri": "https://bsky.app/profile/riversidefood.example.org"
+      }
+    ]
+  },
+  "surface": "plain",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

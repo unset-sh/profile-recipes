@@ -1,0 +1,9 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#readme",
+    "text": "**Day to day:** Rust, Go, PostgreSQL, Kubernetes\n**Comfortable with:** TypeScript, Terraform, observability\n**Learning:** formal methods with TLA+\n\nMaintainer of tidequeue. Contributor to a few database drivers."
+  },
+  "width": "half",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

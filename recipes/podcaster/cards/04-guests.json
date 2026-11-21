@@ -1,0 +1,22 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#buttons",
+    "heading": "Be a guest or sponsor",
+    "text": "Pitch a guest in three lines. Sponsors: one read per episode, booked a month ahead.",
+    "buttons": [
+      {
+        "$type": "sh.unset.section#emailButton",
+        "address": "hello@signal.example.com"
+      },
+      {
+        "$type": "sh.unset.section#linkButton",
+        "preset": "custom",
+        "uri": "https://signal.example.com/sponsor",
+        "label": "Sponsor info"
+      }
+    ]
+  },
+  "width": "half",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

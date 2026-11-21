@@ -236,8 +236,8 @@ function sampleUri(ctx: Context, uri: string): Problem[] {
   }
   if (url.protocol !== "https:" && url.protocol !== "http:") return [`${uri}: only http and https links show`];
   if (EXAMPLE_DOMAIN.test(url.hostname)) return [];
-  if (ctx.limits.sampleHosts.includes(url.hostname) && url.pathname.toLowerCase().includes("example")) return [];
-  return [`${uri}: sample links use an example domain, or a listed platform with "example" in the path`];
+  if (ctx.limits.sampleHosts.includes(url.hostname) && `${url.pathname}${url.search}`.toLowerCase().includes("example")) return [];
+  return [`${uri}: sample links use an example domain, or a listed platform with "example" in the path or query`];
 }
 
 function checkSlots(m: Obj, records: Map<string, Obj>): Problem[] {

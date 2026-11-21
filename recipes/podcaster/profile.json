@@ -1,0 +1,18 @@
+{
+  "$type": "sh.unset.profile",
+  "displayName": "Signal & Noise",
+  "headline": "A weekly show about the people who keep the internet running. Hosted by Dev Kapoor.",
+  "avatarShape": "roundedSquare",
+  "website": "https://signal.example.com",
+  "avatar": {
+    "$type": "blob",
+    "ref": {
+      "$link": "bafkreihlcfesxmwxrfxzwfifbgsodcnpmb22qyficnhwx7xszbbzph7yeu"
+    },
+    "mimeType": "image/jpeg",
+    "size": 11618
+  },
+  "visibility": "public",
+  "listed": true,
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

@@ -1,0 +1,20 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#links",
+    "layout": "grid",
+    "items": [
+      {
+        "uri": "https://www.linkedin.com/in/example-priya"
+      },
+      {
+        "uri": "https://bsky.app/profile/priya.example.com"
+      },
+      {
+        "uri": "https://www.youtube.com/@example-priya"
+      }
+    ]
+  },
+  "surface": "plain",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

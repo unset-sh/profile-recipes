@@ -1,0 +1,147 @@
+{
+  "id": "nonprofit",
+  "version": "0.1.0",
+  "title": "Nonprofit or community organiser",
+  "summary": "For nonprofits and community groups: donate and volunteer up front, the mission in plain words, upcoming events, and where the money goes.",
+  "persona": {
+    "for": [
+      "Charities and nonprofits",
+      "Community groups and mutual-aid networks",
+      "Grassroots campaigns"
+    ],
+    "notFor": [
+      "Companies with a social mission selling products (start from small-business)"
+    ]
+  },
+  "lexicon": {
+    "repository": "https://github.com/Undefined6799/unset",
+    "commit": "4abcada"
+  },
+  "preview": "preview.png",
+  "cards": [
+    {
+      "file": "cards/01-support.json",
+      "purpose": "The main asks: donate and volunteer."
+    },
+    {
+      "file": "cards/02-mission.json",
+      "purpose": "The mission and what they do, in plain words."
+    },
+    {
+      "file": "cards/03-money.json",
+      "purpose": "Optional: where the money goes.",
+      "optional": true
+    },
+    {
+      "file": "cards/04-events.json",
+      "purpose": "Upcoming events and regular sessions."
+    },
+    {
+      "file": "cards/05-contact.json",
+      "purpose": "Contact and social accounts."
+    }
+  ],
+  "slots": [
+    {
+      "id": "displayName",
+      "file": "profile.json",
+      "pointer": "/displayName",
+      "kind": "text",
+      "required": true,
+      "ask": "What name do you want at the top of the page?",
+      "write": "Exactly as they give it. Never shorten or translate it."
+    },
+    {
+      "id": "headline",
+      "file": "profile.json",
+      "pointer": "/headline",
+      "kind": "text",
+      "required": true,
+      "ask": "In one line, what do you do and for whom?",
+      "write": "One sentence, at most 120 characters, no hashtags or emoji."
+    },
+    {
+      "id": "location",
+      "file": "profile.json",
+      "pointer": "/location",
+      "kind": "text",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you want a place on your profile? A city or region is enough.",
+      "write": "As they write it. Never infer it."
+    },
+    {
+      "id": "website",
+      "file": "profile.json",
+      "pointer": "/website",
+      "kind": "uri",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a website of your own?",
+      "write": "A full https URL."
+    },
+    {
+      "id": "avatar",
+      "file": "profile.json",
+      "pointer": "/avatar",
+      "kind": "image",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a square photo or logo for your profile picture?",
+      "write": "The member uploads it in the editor; never fetch one from the web."
+    },
+    {
+      "id": "support",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 3,
+      "ask": "What do you most need from visitors: donations, volunteers, both? Share the links.",
+      "write": "Heading = the impact in one concrete line they can stand behind; text = what a typical gift does, only as they state it.",
+      "file": "cards/01-support.json"
+    },
+    {
+      "id": "mission",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": true,
+      "ask": "What does your organisation do, for whom, and where? Are you registered?",
+      "write": "Plain words, two short paragraphs. Registration number exactly as on the official register.",
+      "file": "cards/02-mission.json"
+    },
+    {
+      "id": "money",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": false,
+      "ifEmpty": "drop-card",
+      "ask": "Do you publish how donations are spent?",
+      "write": "Figures only from their published accounts, with a link to them.",
+      "file": "cards/03-money.json"
+    },
+    {
+      "id": "events",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 12,
+      "ifEmpty": "drop-card",
+      "ask": "What regular sessions or upcoming events should people know about?",
+      "write": "tag = schedule or date; title = event; description = public venue and who it is for.",
+      "file": "cards/04-events.json"
+    },
+    {
+      "id": "contact",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 8,
+      "ask": "How should people contact you, and which accounts should be linked?",
+      "write": "Prefer a contact page over a personal email. Account URLs only.",
+      "file": "cards/05-contact.json"
+    }
+  ]
+}

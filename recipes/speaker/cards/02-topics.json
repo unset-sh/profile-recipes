@@ -1,0 +1,9 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#readme",
+    "text": "**Topics**\n\n- **Designing for trust:** what platforms get wrong about safety\n- **Moderation at scale:** the decisions nobody sees\n- **Policy for builders:** regulation explained for product teams"
+  },
+  "width": "half",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

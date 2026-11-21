@@ -1,0 +1,29 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#collection",
+    "title": "Come along",
+    "layout": "list",
+    "items": [
+      {
+        "tag": "Every Friday · 18:00",
+        "title": "Community dinner",
+        "description": "Example Hall, Riverside Road. Free, everyone welcome.",
+        "uri": "https://riversidefood.example.org/dinner"
+      },
+      {
+        "tag": "Saturdays · 10:00",
+        "title": "Food bank open",
+        "description": "Example Hall side entrance.",
+        "uri": "https://riversidefood.example.org/foodbank"
+      },
+      {
+        "tag": "18 Apr 2026",
+        "title": "Spring fundraiser quiz",
+        "uri": "https://riversidefood.example.org/quiz"
+      }
+    ]
+  },
+  "surface": "outlined",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

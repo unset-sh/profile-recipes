@@ -1,0 +1,19 @@
+{
+  "$type": "sh.unset.profile",
+  "displayName": "Maya Ferreira",
+  "headline": "Product strategy for early-stage health startups. Independent since 2019.",
+  "avatarShape": "round",
+  "location": "Porto · remote",
+  "website": "https://maya.example.com",
+  "avatar": {
+    "$type": "blob",
+    "ref": {
+      "$link": "bafkreibwim5z2tcjxen4s6xb433v3mqlt4owr4yxbkrw2xl6smuzzel5oq"
+    },
+    "mimeType": "image/jpeg",
+    "size": 9400
+  },
+  "visibility": "public",
+  "listed": true,
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

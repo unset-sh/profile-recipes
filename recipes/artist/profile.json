@@ -1,0 +1,19 @@
+{
+  "$type": "sh.unset.profile",
+  "displayName": "Ines Kowal",
+  "headline": "Illustrator. Books, editorial and the occasional mural.",
+  "avatarShape": "roundedSquare",
+  "location": "Kraków",
+  "website": "https://ines.example.com",
+  "avatar": {
+    "$type": "blob",
+    "ref": {
+      "$link": "bafkreib4vrcltrmzpcdq6nxehmmvtctxfl7zaprtwhetwzawgw7z52jory"
+    },
+    "mimeType": "image/jpeg",
+    "size": 7948
+  },
+  "visibility": "public",
+  "listed": true,
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

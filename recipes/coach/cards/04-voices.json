@@ -1,0 +1,9 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#readme",
+    "text": "**What runners say**\n\n“I never thought I'd run a 5K. I ran two.” — Sample Runner\n\n“Sam made comeback running feel safe after my injury.” — Sample Runner"
+  },
+  "width": "half",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

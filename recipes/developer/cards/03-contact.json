@@ -1,0 +1,21 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#buttons",
+    "heading": "Open to contract work",
+    "text": "Backend and infrastructure, from Q2.",
+    "buttons": [
+      {
+        "$type": "sh.unset.section#linkButton",
+        "preset": "hire",
+        "uri": "https://ari.example.com/work"
+      },
+      {
+        "$type": "sh.unset.section#emailButton",
+        "address": "ari@ari.example.com"
+      }
+    ]
+  },
+  "width": "half",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

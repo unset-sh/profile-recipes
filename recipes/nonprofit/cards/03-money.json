@@ -1,0 +1,9 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#readme",
+    "text": "**Where the money goes**\n\n- 72% fresh food and kitchen supplies\n- 18% van, fuel and storage\n- 10% insurance and admin\n\nAnnual report at riversidefood.example.org/report."
+  },
+  "width": "half",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}
