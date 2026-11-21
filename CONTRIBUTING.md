@@ -14,7 +14,7 @@ One recipe per pull request.
 2. Edit `profile.json` and the files in `cards/`. Use only the card kinds and fields in [`lexicons/`](lexicons/).
    List the cards in `recipe.json` in page order, each with a one-line `purpose`.
 3. Use invented sample data only: names you made up, links on `example.com`, `example.org` or `example.net`, or a
-   platform listed in `limits.json` with "example" in the path. Never a real person's account.
+   platform listed in `limits.json` with "example" in the path or query. Never a real person's account.
 4. Sample pictures go in `assets/` as JPEG with no metadata, your own work or generated, released under CC0. Get the
    reference to paste into a record with `npm run blob-ref -- recipes/<id>/assets/<file>.jpg`.
 5. Write a slot in `recipe.json` for every field a person fills in: `ask` is the question, `write` is how to word

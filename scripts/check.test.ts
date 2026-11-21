@@ -40,6 +40,8 @@ test("sample data may not point at real people", () => {
   assert.match(checkRecord(ctx, dir, text("see https://realperson.dev")).join(), /example domain/);
   assert.match(checkRecord(ctx, dir, text("see https://bsky.app/profile/someone.bsky.social")).join(), /example domain/);
   assert.deepEqual(checkRecord(ctx, dir, text("see https://bsky.app/profile/sam.example.com or tips@sam.example.org")), []);
+  assert.deepEqual(checkRecord(ctx, dir, text("see https://scholar.google.com/citations?user=example-sam")), []);
+  assert.match(checkRecord(ctx, dir, text("see https://scholar.google.com/citations?user=AbC123")).join(), /example domain/);
 });
 
 test("a blob that names no file in assets/ fails", () => {
