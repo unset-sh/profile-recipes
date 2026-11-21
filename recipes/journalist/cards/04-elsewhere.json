@@ -1,0 +1,24 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#links",
+    "title": "Follow my work",
+    "layout": "list",
+    "items": [
+      {
+        "uri": "https://bsky.app/profile/rhea.example.com"
+      },
+      {
+        "uri": "https://www.linkedin.com/in/example-rhea"
+      },
+      {
+        "uri": "https://rhea.example.com/newsletter",
+        "label": "Newsletter",
+        "description": "One email a month: what I found and what I'm chasing."
+      }
+    ]
+  },
+  "width": "half",
+  "surface": "plain",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

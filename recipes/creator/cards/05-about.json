@@ -1,0 +1,9 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#readme",
+    "text": "I started filming dinners on a student budget in 2021. Now it's a small team of two and a very tired stove.\n\n**Every recipe** is tested three times and costs under €5 a portion.\n**Sponsored videos** always say so in the first ten seconds."
+  },
+  "width": "half",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

@@ -1,0 +1,158 @@
+{
+  "id": "journalist",
+  "version": "0.1.0",
+  "title": "Journalist",
+  "summary": "For reporters and editors: your beat up front, your best work as a list, and a safe way for sources to reach you.",
+  "persona": {
+    "for": [
+      "Staff and freelance reporters",
+      "Editors",
+      "Newsletter writers who report"
+    ],
+    "notFor": [
+      "Opinion columnists with no reporting to list (start from creator)"
+    ]
+  },
+  "lexicon": {
+    "repository": "https://github.com/Undefined6799/unset",
+    "commit": "4abcada"
+  },
+  "preview": "preview.png",
+  "cards": [
+    {
+      "file": "cards/01-about.json",
+      "purpose": "Beat, outlets, languages and corrections policy. The first thing an editor or source reads."
+    },
+    {
+      "file": "cards/02-reporting.json",
+      "purpose": "Three to six stories they are proudest of, newest first."
+    },
+    {
+      "file": "cards/03-tips.json",
+      "purpose": "How sources reach them. The secure channel comes first."
+    },
+    {
+      "file": "cards/04-elsewhere.json",
+      "purpose": "Where to follow their work."
+    },
+    {
+      "file": "cards/05-appearances.json",
+      "purpose": "Optional: talks, panels and podcasts.",
+      "optional": true
+    }
+  ],
+  "slots": [
+    {
+      "id": "displayName",
+      "file": "profile.json",
+      "pointer": "/displayName",
+      "kind": "text",
+      "required": true,
+      "ask": "What name do you publish under?",
+      "write": "Exactly as they give it. Never shorten or translate it."
+    },
+    {
+      "id": "headline",
+      "file": "profile.json",
+      "pointer": "/headline",
+      "kind": "text",
+      "required": true,
+      "ask": "In one line, what do you do and for whom?",
+      "write": "One sentence, at most 120 characters, no hashtags or emoji."
+    },
+    {
+      "id": "location",
+      "file": "profile.json",
+      "pointer": "/location",
+      "kind": "text",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you want a place on your profile? A city or region is enough.",
+      "write": "As they write it. Never infer it."
+    },
+    {
+      "id": "website",
+      "file": "profile.json",
+      "pointer": "/website",
+      "kind": "uri",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a website of your own?",
+      "write": "A full https URL."
+    },
+    {
+      "id": "avatar",
+      "file": "profile.json",
+      "pointer": "/avatar",
+      "kind": "image",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a square photo or logo for your profile picture?",
+      "write": "The member uploads it in the editor; never fetch one from the web."
+    },
+    {
+      "id": "about",
+      "file": "cards/01-about.json",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": true,
+      "ask": "Which outlets do you work for, what is your beat, and which languages do you report in?",
+      "write": "Two short paragraphs and a short list, as in the sample. Plain facts in the first person; no superlatives."
+    },
+    {
+      "id": "reporting",
+      "file": "cards/02-reporting.json",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 6,
+      "ask": "Share links to three to six stories you are proudest of.",
+      "write": "Per story: tag = outlet · year; title = the published headline; description = one line on what it found. Newest first. Use only links they give you."
+    },
+    {
+      "id": "tipsChannel",
+      "file": "cards/03-tips.json",
+      "pointer": "/content/buttons/0/uri",
+      "kind": "uri",
+      "required": false,
+      "ifEmpty": "drop-item",
+      "ask": "Do you have a secure way for sources to reach you, such as SecureDrop or a Signal contact page?",
+      "write": "Their URL only. If they have none, remove the button and drop the SecureDrop sentence from the text."
+    },
+    {
+      "id": "tipsEmail",
+      "file": "cards/03-tips.json",
+      "pointer": "/content/buttons/1/address",
+      "kind": "email",
+      "required": false,
+      "ifEmpty": "drop-item",
+      "ask": "Is there an email address you want to publish for tips? It will be visible to everyone.",
+      "write": "Only an address they confirm they want public."
+    },
+    {
+      "id": "elsewhere",
+      "file": "cards/04-elsewhere.json",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 6,
+      "ifEmpty": "drop-card",
+      "ask": "Where else can people follow your work (Bluesky, a newsletter, LinkedIn)?",
+      "write": "The URL only for accounts; the app shows the site and account name itself. A label and one-line description only for your own pages."
+    },
+    {
+      "id": "appearances",
+      "file": "cards/05-appearances.json",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 6,
+      "ifEmpty": "drop-card",
+      "ask": "Any talks, panels or podcast appearances you want to list?",
+      "write": "tag = format · year; title = the talk or episode title; description = event and city."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "repository": "https://github.com/Undefined6799/unset",
+  "path": "shared/lexicons/schemas",
+  "commit": "4abcada",
+  "copied": "2026-11-21",
+  "files": ["sh.unset.profile.json", "sh.unset.section.json", "sh.unset.defs.json"],
+  "published": false,
+  "note": "sh.unset.section and sh.unset.defs are not yet in the app's published.lock.json, so they may still change. Recipes stay 0.x until they are published."
+}

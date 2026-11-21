@@ -1,0 +1,21 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#links",
+    "title": "Elsewhere",
+    "layout": "grid",
+    "items": [
+      {
+        "uri": "https://www.instagram.com/example.tomas"
+      },
+      {
+        "uri": "https://vimeo.com/exampletomas"
+      },
+      {
+        "uri": "https://bsky.app/profile/tomas.example.com"
+      }
+    ]
+  },
+  "surface": "outlined",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

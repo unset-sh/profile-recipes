@@ -1,0 +1,148 @@
+{
+  "id": "creator",
+  "version": "0.1.0",
+  "title": "Creator",
+  "summary": "For creators and influencers: one clear subscribe action, the latest work as a carousel, every platform in one place, and a door for brands.",
+  "persona": {
+    "for": [
+      "Video creators and streamers",
+      "Influencers",
+      "Podcasters"
+    ],
+    "notFor": [
+      "People who mainly want to show written or reported work (start from journalist)"
+    ]
+  },
+  "lexicon": {
+    "repository": "https://github.com/Undefined6799/unset",
+    "commit": "4abcada"
+  },
+  "preview": "preview.png",
+  "cards": [
+    {
+      "file": "cards/01-subscribe.json",
+      "purpose": "The one action they most want from a visitor."
+    },
+    {
+      "file": "cards/02-latest.json",
+      "purpose": "Their three to six latest pieces, with thumbnails."
+    },
+    {
+      "file": "cards/03-everywhere.json",
+      "purpose": "Every platform they post on."
+    },
+    {
+      "file": "cards/04-partnerships.json",
+      "purpose": "Optional: how brands reach them.",
+      "optional": true
+    },
+    {
+      "file": "cards/05-about.json",
+      "purpose": "A short story and their house rules (sponsorship disclosure)."
+    }
+  ],
+  "slots": [
+    {
+      "id": "displayName",
+      "file": "profile.json",
+      "pointer": "/displayName",
+      "kind": "text",
+      "required": true,
+      "ask": "What name do you publish under?",
+      "write": "Exactly as they give it. Never shorten or translate it."
+    },
+    {
+      "id": "headline",
+      "file": "profile.json",
+      "pointer": "/headline",
+      "kind": "text",
+      "required": true,
+      "ask": "In one line, what do you do and for whom?",
+      "write": "One sentence, at most 120 characters, no hashtags or emoji."
+    },
+    {
+      "id": "location",
+      "file": "profile.json",
+      "pointer": "/location",
+      "kind": "text",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you want a place on your profile? A city or region is enough.",
+      "write": "As they write it. Never infer it."
+    },
+    {
+      "id": "website",
+      "file": "profile.json",
+      "pointer": "/website",
+      "kind": "uri",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a website of your own?",
+      "write": "A full https URL."
+    },
+    {
+      "id": "avatar",
+      "file": "profile.json",
+      "pointer": "/avatar",
+      "kind": "image",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a square photo or logo for your profile picture?",
+      "write": "The member uploads it in the editor; never fetch one from the web."
+    },
+    {
+      "id": "mainAction",
+      "file": "cards/01-subscribe.json",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 2,
+      "ask": "What is the one thing you most want a visitor to do: subscribe, join a newsletter, support you?",
+      "write": "The first button is that action. Use the subscribe preset for a channel or newsletter; custom with a two-to-four-word label otherwise. Heading = their schedule or promise."
+    },
+    {
+      "id": "latest",
+      "file": "cards/02-latest.json",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 6,
+      "ask": "Which three to six recent pieces should visitors see first?",
+      "write": "tag = format · length; title = the published title; the member uploads each thumbnail in the editor. Use only links they give you."
+    },
+    {
+      "id": "platforms",
+      "file": "cards/03-everywhere.json",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 12,
+      "ask": "Which platforms do you post on? Paste your profile links.",
+      "write": "The URL only; add a label only where the URL names no account."
+    },
+    {
+      "id": "partnerships",
+      "file": "cards/04-partnerships.json",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 2,
+      "ifEmpty": "drop-card",
+      "ask": "Do you want brands to contact you? If so, which email address may be public?",
+      "write": "Publish an email only if they confirm it may be public. Text = what kind of brands they work with."
+    },
+    {
+      "id": "about",
+      "file": "cards/05-about.json",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": true,
+      "ask": "How did you start, and is there anything every viewer should know (how you disclose sponsorships, for example)?",
+      "write": "Two or three short lines, in their voice."
+    }
+  ]
+}

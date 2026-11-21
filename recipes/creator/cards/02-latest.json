@@ -1,0 +1,72 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#collection",
+    "title": "Latest videos",
+    "layout": "carousel",
+    "items": [
+      {
+        "tag": "Video · 12 min",
+        "title": "Five dinners from one bag of rice",
+        "uri": "https://www.youtube.com/@example-juno/rice-dinners",
+        "image": {
+          "image": {
+            "$type": "blob",
+            "ref": {
+              "$link": "bafkreiggburti56crw3445gxb4ilpfi4ui5fxlcwybizi52neurk7ai5am"
+            },
+            "mimeType": "image/jpeg",
+            "size": 15318
+          },
+          "alt": "Sample picture: a red-to-gold gradient standing in for a video thumbnail.",
+          "aspectRatio": {
+            "width": 1280,
+            "height": 720
+          }
+        }
+      },
+      {
+        "tag": "Video · 9 min",
+        "title": "The €3 lunch, ranked",
+        "uri": "https://www.youtube.com/@example-juno/three-euro-lunch",
+        "image": {
+          "image": {
+            "$type": "blob",
+            "ref": {
+              "$link": "bafkreihvvrceysuzcbroryuanu6qdhgxd5rokjsunzpbhrm5ltodgynloi"
+            },
+            "mimeType": "image/jpeg",
+            "size": 13513
+          },
+          "alt": "Sample picture: a teal gradient standing in for a video thumbnail.",
+          "aspectRatio": {
+            "width": 1280,
+            "height": 720
+          }
+        }
+      },
+      {
+        "tag": "Short · 1 min",
+        "title": "Crispy chickpeas, no oven",
+        "uri": "https://www.youtube.com/shorts/example3",
+        "image": {
+          "image": {
+            "$type": "blob",
+            "ref": {
+              "$link": "bafkreicc3jt4f72btbndrhpftuqcfssor35bwynxnuwa6fk6kka5u5jrom"
+            },
+            "mimeType": "image/jpeg",
+            "size": 12300
+          },
+          "alt": "Sample picture: a violet-to-pink gradient standing in for a video thumbnail.",
+          "aspectRatio": {
+            "width": 1280,
+            "height": 720
+          }
+        }
+      }
+    ]
+  },
+  "surface": "plain",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

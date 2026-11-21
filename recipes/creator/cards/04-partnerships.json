@@ -1,0 +1,23 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#buttons",
+    "heading": "Brand partnerships",
+    "text": "I only work with food and kitchen brands I already use. Media kit on request.",
+    "buttons": [
+      {
+        "$type": "sh.unset.section#emailButton",
+        "address": "partnerships@juno.example.com"
+      },
+      {
+        "$type": "sh.unset.section#linkButton",
+        "preset": "custom",
+        "label": "Media kit",
+        "uri": "https://juno.example.com/media-kit"
+      }
+    ]
+  },
+  "width": "half",
+  "surface": "outlined",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

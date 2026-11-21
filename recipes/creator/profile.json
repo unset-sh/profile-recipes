@@ -1,0 +1,19 @@
+{
+  "$type": "sh.unset.profile",
+  "displayName": "Juno Park",
+  "headline": "Videos about cheap, good food. New recipe every Thursday.",
+  "avatar": {
+    "$type": "blob",
+    "ref": {
+      "$link": "bafkreicfngkbx6fibxqju4ui55ndy3dftfmdxu2ejvj57knqfsf5r6yuny"
+    },
+    "mimeType": "image/jpeg",
+    "size": 9291
+  },
+  "avatarShape": "round",
+  "location": "Toronto",
+  "website": "https://juno.example.com",
+  "visibility": "public",
+  "listed": true,
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

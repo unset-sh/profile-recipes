@@ -1,0 +1,23 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#collection",
+    "title": "Talks and appearances",
+    "layout": "list",
+    "items": [
+      {
+        "tag": "Panel · 2026",
+        "title": "Following the money in the energy transition",
+        "description": "Example Journalism Festival, Perugia",
+        "uri": "https://festival.example.org/2026/energy"
+      },
+      {
+        "tag": "Podcast · 2025",
+        "title": "How a reporter reads a contract",
+        "uri": "https://podcast.example.net/episodes/42"
+      }
+    ]
+  },
+  "surface": "plain",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

@@ -1,0 +1,74 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#collection",
+    "title": "Projects",
+    "layout": "grid",
+    "items": [
+      {
+        "tag": "Long-term series",
+        "title": "The Last Fishing Towns",
+        "description": "Five years on the Portuguese coast, as the boats leave.",
+        "uri": "https://tomas.example.com/last-fishing-towns",
+        "image": {
+          "image": {
+            "$type": "blob",
+            "ref": {
+              "$link": "bafkreicsxp3kyoid66q6mb7ykzpkts5zyarwdo6ticce7kd3xvwrni3pjq"
+            },
+            "mimeType": "image/jpeg",
+            "size": 27230
+          },
+          "alt": "Sample picture: a blue gradient standing in for a coastline.",
+          "aspectRatio": {
+            "width": 1600,
+            "height": 1067
+          }
+        }
+      },
+      {
+        "tag": "Series",
+        "title": "Night Shift",
+        "description": "The people who keep Lisbon running between midnight and six.",
+        "uri": "https://tomas.example.com/night-shift",
+        "image": {
+          "image": {
+            "$type": "blob",
+            "ref": {
+              "$link": "bafkreif2qyolziels7upzfxz5icty4ewdrvwjztrgbd3oyahinyg3kjfz4"
+            },
+            "mimeType": "image/jpeg",
+            "size": 16768
+          },
+          "alt": "Sample picture: a violet gradient standing in for a city at night.",
+          "aspectRatio": {
+            "width": 1600,
+            "height": 1067
+          }
+        }
+      },
+      {
+        "tag": "Commission · Example Magazine",
+        "title": "Market Days",
+        "description": "A photo essay on Europe's last covered markets.",
+        "uri": "https://magazine.example.org/market-days",
+        "image": {
+          "image": {
+            "$type": "blob",
+            "ref": {
+              "$link": "bafkreidhz23moeiia7wgxcyzri2zfv23jkeoqcw34bhfgpx4ptwaxnnoru"
+            },
+            "mimeType": "image/jpeg",
+            "size": 22282
+          },
+          "alt": "Sample picture: an amber gradient standing in for a market.",
+          "aspectRatio": {
+            "width": 1600,
+            "height": 1067
+          }
+        }
+      }
+    ]
+  },
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

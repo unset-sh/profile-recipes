@@ -1,0 +1,19 @@
+{
+  "$type": "sh.unset.profile",
+  "displayName": "Rhea Lindqvist",
+  "headline": "Investigative reporter covering climate, energy and the money behind them",
+  "avatar": {
+    "$type": "blob",
+    "ref": {
+      "$link": "bafkreiagsnoyd74hpc45ujltxg4lzto4lt6xatdy74e5jj6l6gssehdeae"
+    },
+    "mimeType": "image/jpeg",
+    "size": 8081
+  },
+  "avatarShape": "round",
+  "location": "Rotterdam",
+  "website": "https://rhea.example.com",
+  "visibility": "public",
+  "listed": true,
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

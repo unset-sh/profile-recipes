@@ -1,0 +1,149 @@
+{
+  "id": "photographer",
+  "version": "0.1.0",
+  "title": "Photographer",
+  "summary": "Pictures first: a full-width gallery, projects as a grid, then a short bio and a clear way to hire you.",
+  "persona": {
+    "for": [
+      "Documentary and editorial photographers",
+      "Wedding and portrait photographers",
+      "Illustrators and visual artists"
+    ],
+    "notFor": [
+      "Videographers whose work lives on a video platform (start from creator)"
+    ]
+  },
+  "lexicon": {
+    "repository": "https://github.com/Undefined6799/unset",
+    "commit": "4abcada"
+  },
+  "preview": "preview.png",
+  "cards": [
+    {
+      "file": "cards/01-recent.json",
+      "purpose": "Six to twelve of their strongest recent pictures, no frame around them."
+    },
+    {
+      "file": "cards/02-projects.json",
+      "purpose": "Series or commissions, each with a cover picture."
+    },
+    {
+      "file": "cards/03-about.json",
+      "purpose": "Who they are, who they work for, prints."
+    },
+    {
+      "file": "cards/04-hire.json",
+      "purpose": "How to commission them."
+    },
+    {
+      "file": "cards/05-elsewhere.json",
+      "purpose": "Portfolio platforms and social accounts.",
+      "optional": true
+    }
+  ],
+  "slots": [
+    {
+      "id": "displayName",
+      "file": "profile.json",
+      "pointer": "/displayName",
+      "kind": "text",
+      "required": true,
+      "ask": "What name do you publish under?",
+      "write": "Exactly as they give it. Never shorten or translate it."
+    },
+    {
+      "id": "headline",
+      "file": "profile.json",
+      "pointer": "/headline",
+      "kind": "text",
+      "required": true,
+      "ask": "In one line, what do you do and for whom?",
+      "write": "One sentence, at most 120 characters, no hashtags or emoji."
+    },
+    {
+      "id": "location",
+      "file": "profile.json",
+      "pointer": "/location",
+      "kind": "text",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you want a place on your profile? A city or region is enough.",
+      "write": "As they write it. Never infer it."
+    },
+    {
+      "id": "website",
+      "file": "profile.json",
+      "pointer": "/website",
+      "kind": "uri",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a website of your own?",
+      "write": "A full https URL."
+    },
+    {
+      "id": "avatar",
+      "file": "profile.json",
+      "pointer": "/avatar",
+      "kind": "image",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a square photo or logo for your profile picture?",
+      "write": "The member uploads it in the editor; never fetch one from the web."
+    },
+    {
+      "id": "gallery",
+      "file": "cards/01-recent.json",
+      "pointer": "/content/images",
+      "kind": "list",
+      "required": true,
+      "min": 3,
+      "max": 12,
+      "ask": "Which six to twelve pictures best show your work now?",
+      "write": "The member uploads each picture in the editor. Per picture: alt = what is in it, for someone who cannot see it; caption = place and year, or the title they use. Ask; never guess what a picture shows."
+    },
+    {
+      "id": "projects",
+      "file": "cards/02-projects.json",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 9,
+      "ifEmpty": "drop-card",
+      "ask": "Do you have series or commissions you want to show, each with a cover picture?",
+      "write": "tag = Series, Long-term series or Commission · client; title = their title; description = one line on what it is about."
+    },
+    {
+      "id": "about",
+      "file": "cards/03-about.json",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": true,
+      "ask": "Where are you based, what kind of work do you take, and which clients may you name?",
+      "write": "One short paragraph plus bold-labelled lines, as in the sample. Name only clients they say they may name."
+    },
+    {
+      "id": "hireButtons",
+      "file": "cards/04-hire.json",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 3,
+      "ask": "How should people commission you: a booking page, a call, email?",
+      "write": "Keep the presets (hire, bookCall) that match a URL they give you; publish an email only if they confirm it may be public. The first button is the main one."
+    },
+    {
+      "id": "elsewhere",
+      "file": "cards/05-elsewhere.json",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 6,
+      "ifEmpty": "drop-card",
+      "ask": "Which portfolio sites or social accounts should be linked?",
+      "write": "The account URL only; the app shows the site and account name itself."
+    }
+  ]
+}

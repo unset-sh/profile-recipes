@@ -1,0 +1,30 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#collection",
+    "title": "Selected reporting",
+    "layout": "list",
+    "items": [
+      {
+        "tag": "The Example Post · 2026",
+        "title": "Who paid for the pipeline nobody uses",
+        "description": "A six-month investigation into €2.1 bn of public money and the consultants who advised on it.",
+        "uri": "https://news.example.com/pipeline"
+      },
+      {
+        "tag": "Example Weekly · 2025",
+        "title": "The carbon credits that were counted twice",
+        "description": "How one forest was sold to three airlines.",
+        "uri": "https://weekly.example.org/carbon-credits"
+      },
+      {
+        "tag": "The Example Post · 2025",
+        "title": "Inside the grid queue",
+        "description": "Why 400 wind farms are waiting for a cable.",
+        "uri": "https://news.example.com/grid-queue"
+      }
+    ]
+  },
+  "surface": "outlined",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

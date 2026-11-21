@@ -1,0 +1,22 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#buttons",
+    "heading": "A new recipe every Thursday",
+    "text": "Subscribe so you never miss one. The newsletter has the written recipes and shopping lists.",
+    "buttons": [
+      {
+        "$type": "sh.unset.section#linkButton",
+        "preset": "subscribe",
+        "uri": "https://www.youtube.com/@example-juno"
+      },
+      {
+        "$type": "sh.unset.section#linkButton",
+        "preset": "custom",
+        "label": "Get the newsletter",
+        "uri": "https://juno.example.com/newsletter"
+      }
+    ]
+  },
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

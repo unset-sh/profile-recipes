@@ -1,0 +1,76 @@
+/* Preview styles. Colours and fonts from the unset.sh theme (Undefined6799/unset shared/ui/theme.css @ 4abcada). */
+@font-face { font-family: "Space Grotesk"; src: url("fonts/SpaceGrotesk-Variable.woff2") format("woff2"); font-weight: 300 700; }
+@font-face { font-family: "JetBrains Mono"; src: url("fonts/JetBrainsMono-Variable.woff2") format("woff2"); font-weight: 100 800; }
+
+:root {
+  color-scheme: light dark;
+  --radius: 4px;
+  --background: light-dark(#f0edee, #17161b);
+  --foreground: light-dark(#0a090c, #f0edee);
+  --card: light-dark(#fbfafa, #232227);
+  --muted: light-dark(#e2dee0, #0f0e12);
+  --muted-foreground: light-dark(#5a575b, #a19ea2);
+  --border: light-dark(#d6d2d4, #312f36);
+  --primary: light-dark(#0a090c, #f0edee);
+  --primary-foreground: light-dark(#f0edee, #0a090c);
+  --mono: "JetBrains Mono", ui-monospace, monospace;
+}
+* { box-sizing: border-box; }
+body { margin: 0 auto; max-width: 960px; padding: 40px 24px 56px; background: var(--background); color: var(--foreground);
+  font: 15px/1.55 "Space Grotesk", ui-sans-serif, system-ui, sans-serif; }
+a { color: inherit; text-decoration: none; }
+h1 { font-size: 28px; line-height: 1.15; margin: 0; letter-spacing: -0.01em; }
+h2 { font-size: 17px; margin: 0 0 12px; }
+p { margin: 0 0 10px; }
+small { color: var(--muted-foreground); display: block; font-size: 13px; }
+
+.profile { display: flex; gap: 20px; align-items: center; margin-bottom: 28px; }
+.avatar { width: 88px; height: 88px; object-fit: cover; flex: none; }
+.avatar.round { border-radius: 50%; }
+.avatar.roundedSquare { border-radius: 18px; }
+.headline { font-size: 16px; margin: 6px 0 4px; }
+.meta { color: var(--muted-foreground); font-family: var(--mono); font-size: 12px; margin: 0; }
+
+.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.card { grid-column: span 2; border-radius: calc(var(--radius) * 2); padding: 20px; min-width: 0; }
+.card.half { grid-column: span 1; }
+.card.filled { background: var(--card); box-shadow: 0 1px 2px rgb(0 0 0 / 0.06); }
+.card.outlined { border: 1px solid var(--border); }
+.card.plain { padding-inline: 0; }
+.md ul { margin: 0 0 10px; padding-left: 18px; }
+
+.eyebrow, .tag, .host { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted-foreground); }
+.eyebrow { display: block; margin-bottom: 6px; }
+
+.links { display: grid; gap: 8px; }
+.links.grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+.links.carousel { grid-auto-flow: column; grid-auto-columns: 180px; overflow-x: auto; }
+.link { display: grid; gap: 2px; padding: 10px 12px; border-radius: var(--radius); background: var(--muted); }
+
+.entries { display: grid; gap: 12px; }
+.entries.list .entry { padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.entries.list .entry:last-child { border-bottom: 0; padding-bottom: 0; }
+.entries.grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+.entries.carousel { grid-auto-flow: column; grid-auto-columns: minmax(240px, 32%); overflow-x: auto; }
+.entry { display: grid; gap: 4px; align-content: start; }
+.cover { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius); margin-bottom: 4px; }
+.entries.carousel .cover { aspect-ratio: 16 / 9; }
+
+.buttons { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.btn { padding: 8px 14px; border-radius: var(--radius); border: 1px solid var(--border); font-weight: 500; font-size: 14px; }
+.btn.primary { background: var(--primary); color: var(--primary-foreground); border-color: var(--primary); }
+
+.gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.gallery figure { margin: 0; }
+.gallery figcaption { font-size: 12px; color: var(--muted-foreground); margin-top: 4px; }
+.pic { display: block; width: 100%; border-radius: var(--radius); }
+.pic.fill { aspect-ratio: 1; object-fit: cover; }
+
+footer { margin-top: 32px; font-family: var(--mono); font-size: 11px; color: var(--muted-foreground); }
+
+.intro { margin-bottom: 28px; }
+.index { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+.recipe { display: grid; gap: 6px; background: var(--card); padding: 12px; border-radius: calc(var(--radius) * 2); }
+.recipe img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: top; border-radius: var(--radius); border: 1px solid var(--border); }
+
+@media (max-width: 640px) { .card.half { grid-column: span 2; } .gallery { grid-template-columns: 1fr 1fr; } }

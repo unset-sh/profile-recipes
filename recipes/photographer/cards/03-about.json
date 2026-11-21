@@ -1,0 +1,9 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#readme",
+    "text": "Photographer based in Lisbon, working across Portugal and Spain for magazines, NGOs and a few brands I believe in.\n\n**Clients:** Example Magazine, The Example Post, Example Foundation\n**Prints:** limited editions of each series are available on request."
+  },
+  "width": "half",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

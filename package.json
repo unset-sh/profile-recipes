@@ -1,0 +1,27 @@
+{
+  "name": "@unset-sh/profile-recipes",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Ready-made unset.sh profile layouts for different kinds of people, with guides an AI can follow.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "validate": "node scripts/validate.ts",
+    "render": "node scripts/render.ts",
+    "previews": "node scripts/render.ts && node scripts/previews.ts",
+    "blob-ref": "node scripts/blob-ref.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test \"scripts/**/*.test.ts\"",
+    "check": "npm run typecheck && npm test && npm run validate"
+  },
+  "devDependencies": {
+    "@atproto/lexicon": "0.7.21",
+    "@types/node": "22.20.5",
+    "multiformats": "14.0.6",
+    "playwright": "1.63.0",
+    "typescript": "7.0.2"
+  }
+}

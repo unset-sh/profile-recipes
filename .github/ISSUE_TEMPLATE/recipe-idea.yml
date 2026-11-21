@@ -1,0 +1,23 @@
+name: Recipe idea
+description: Suggest a profile recipe for a kind of person we don't cover yet.
+labels: ["recipe-idea"]
+body:
+  - type: input
+    id: persona
+    attributes:
+      label: Who is it for?
+      placeholder: "e.g. academic researcher, musician, small shop"
+    validations:
+      required: true
+  - type: textarea
+    id: needs
+    attributes:
+      label: What does their profile need to do?
+      description: Who visits it, and what should they be able to do in ten seconds?
+    validations:
+      required: true
+  - type: textarea
+    id: cards
+    attributes:
+      label: Cards you have in mind
+      description: Optional. Any of text, links, collection, buttons, image, gallery.

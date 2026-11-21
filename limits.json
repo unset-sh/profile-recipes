@@ -1,0 +1,6 @@
+{
+  "$comment": "The unset.sh editor's own limits, stricter than the lexicon's (ADR 0051 point 5). From Undefined6799/unset @ 4abcada: domains/profile/profile.ts APP_LIMITS and domains/profile/card-edit.ts CARD_EDIT_LIMITS. sampleHosts are platforms a sample link may point at, with 'example' in its path.",
+  "profile": { "headlineGraphemes": 120 },
+  "cardListItems": { "links": 30, "collection": 30 },
+  "sampleHosts": ["bsky.app", "www.youtube.com", "www.instagram.com", "www.tiktok.com", "github.com", "vimeo.com", "www.linkedin.com", "www.twitch.tv", "open.spotify.com"]
+}

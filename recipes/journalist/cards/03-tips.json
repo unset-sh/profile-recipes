@@ -1,0 +1,22 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#buttons",
+    "heading": "Have a story?",
+    "text": "I protect my sources. For anything sensitive, use SecureDrop rather than email.",
+    "buttons": [
+      {
+        "$type": "sh.unset.section#linkButton",
+        "preset": "custom",
+        "label": "Send a tip securely",
+        "uri": "https://rhea.example.com/securedrop"
+      },
+      {
+        "$type": "sh.unset.section#emailButton",
+        "address": "tips@rhea.example.com"
+      }
+    ]
+  },
+  "width": "half",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

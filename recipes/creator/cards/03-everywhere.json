@@ -1,0 +1,27 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#links",
+    "title": "Where I post",
+    "layout": "grid",
+    "items": [
+      {
+        "uri": "https://www.youtube.com/@example-juno"
+      },
+      {
+        "uri": "https://www.tiktok.com/@example.juno"
+      },
+      {
+        "uri": "https://www.instagram.com/example.juno"
+      },
+      {
+        "uri": "https://www.twitch.tv/example_juno"
+      },
+      {
+        "uri": "https://open.spotify.com/show/example-juno",
+        "label": "Podcast"
+      }
+    ]
+  },
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}
