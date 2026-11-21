@@ -1,0 +1,135 @@
+{
+  "id": "artist",
+  "version": "0.1.0",
+  "title": "Artist or illustrator",
+  "summary": "For artists and illustrators: the work fills the page, then how to commission you and where to buy prints.",
+  "persona": {
+    "for": [
+      "Illustrators",
+      "Painters and printmakers",
+      "Concept and comic artists"
+    ],
+    "notFor": [
+      "Photographers (start from photographer)",
+      "Studios selling many products (start from small-business)"
+    ]
+  },
+  "lexicon": {
+    "repository": "https://github.com/Undefined6799/unset",
+    "commit": "4abcada"
+  },
+  "preview": "preview.png",
+  "cards": [
+    {
+      "file": "cards/01-work.json",
+      "purpose": "Six to twelve pieces that show their range."
+    },
+    {
+      "file": "cards/02-commissions.json",
+      "purpose": "How commissions work and how to start one."
+    },
+    {
+      "file": "cards/03-shop.json",
+      "purpose": "Optional: where to buy prints or originals.",
+      "optional": true
+    },
+    {
+      "file": "cards/04-about.json",
+      "purpose": "Process, clients and what a commission costs."
+    }
+  ],
+  "slots": [
+    {
+      "id": "displayName",
+      "file": "profile.json",
+      "pointer": "/displayName",
+      "kind": "text",
+      "required": true,
+      "ask": "What name do you want at the top of the page?",
+      "write": "Exactly as they give it. Never shorten or translate it."
+    },
+    {
+      "id": "headline",
+      "file": "profile.json",
+      "pointer": "/headline",
+      "kind": "text",
+      "required": true,
+      "ask": "In one line, what do you do and for whom?",
+      "write": "One sentence, at most 120 characters, no hashtags or emoji."
+    },
+    {
+      "id": "location",
+      "file": "profile.json",
+      "pointer": "/location",
+      "kind": "text",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you want a place on your profile? A city or region is enough.",
+      "write": "As they write it. Never infer it."
+    },
+    {
+      "id": "website",
+      "file": "profile.json",
+      "pointer": "/website",
+      "kind": "uri",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a website of your own?",
+      "write": "A full https URL."
+    },
+    {
+      "id": "avatar",
+      "file": "profile.json",
+      "pointer": "/avatar",
+      "kind": "image",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a square photo or logo for your profile picture?",
+      "write": "The member uploads it in the editor; never fetch one from the web."
+    },
+    {
+      "id": "work",
+      "pointer": "/content/images",
+      "kind": "list",
+      "required": true,
+      "min": 3,
+      "max": 12,
+      "ask": "Which six to twelve pieces best show your work now?",
+      "write": "They upload each piece in the editor. Alt = what the piece shows, from their own description; caption = title, medium, and client or year.",
+      "file": "cards/01-work.json"
+    },
+    {
+      "id": "commissions",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 2,
+      "ifEmpty": "drop-card",
+      "ask": "Are you open to commissions? How should people start one?",
+      "write": "Heading = open or closed, as they say; text = what they take on and response time. Email: Only an address they confirm may be public: everyone can see it.",
+      "file": "cards/02-commissions.json"
+    },
+    {
+      "id": "shop",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 6,
+      "ifEmpty": "drop-card",
+      "ask": "Do you sell prints or originals anywhere?",
+      "write": "Shop URLs with a label and one line on what is sold there; social accounts as URL only.",
+      "file": "cards/03-shop.json"
+    },
+    {
+      "id": "about",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": true,
+      "ask": "What media do you work in, who have you worked for, and do you publish commission prices?",
+      "write": "One line on their media, then bold-labelled lines. Prices only if they publish them; clients only if they may be named.",
+      "file": "cards/04-about.json"
+    }
+  ]
+}

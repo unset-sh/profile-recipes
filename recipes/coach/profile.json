@@ -1,0 +1,19 @@
+{
+  "$type": "sh.unset.profile",
+  "displayName": "Sam Okafor",
+  "headline": "Running coach for beginners and comeback runners. In person in Leeds, online anywhere.",
+  "avatarShape": "round",
+  "location": "Leeds",
+  "website": "https://sam.example.com",
+  "avatar": {
+    "$type": "blob",
+    "ref": {
+      "$link": "bafkreieoj4a73gvaqkjzcrhnk6anknts5ycpdx6i4hd6qp2h2pgxcmfs4a"
+    },
+    "mimeType": "image/jpeg",
+    "size": 7487
+  },
+  "visibility": "public",
+  "listed": true,
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

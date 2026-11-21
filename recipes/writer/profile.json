@@ -1,0 +1,19 @@
+{
+  "$type": "sh.unset.profile",
+  "displayName": "Odile Marsh",
+  "headline": "Novelist. Quiet books about loud families. New novel “The Long Table” out in May.",
+  "avatarShape": "round",
+  "location": "Bristol",
+  "website": "https://odile.example.com",
+  "avatar": {
+    "$type": "blob",
+    "ref": {
+      "$link": "bafkreiejdfvesbqbpmpepmlwdnfd37eigwsvmwsedppgsztl7cd65xmaoy"
+    },
+    "mimeType": "image/jpeg",
+    "size": 8844
+  },
+  "visibility": "public",
+  "listed": true,
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

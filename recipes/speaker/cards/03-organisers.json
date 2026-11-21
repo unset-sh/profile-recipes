@@ -1,0 +1,9 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#readme",
+    "text": "**For organisers**\n\nFormats: 20–45 min keynote, panel, half-day workshop.\nSpeaker kit with bio, photos and tech rider at priya.example.com/kit.\nFee on request; reduced for non-profits."
+  },
+  "width": "half",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

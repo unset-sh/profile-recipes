@@ -1,0 +1,19 @@
+{
+  "$type": "sh.unset.profile",
+  "displayName": "Ari Novak",
+  "headline": "Backend engineer. I build boring, reliable systems and the tools around them.",
+  "avatarShape": "roundedSquare",
+  "location": "Berlin",
+  "website": "https://ari.example.com",
+  "avatar": {
+    "$type": "blob",
+    "ref": {
+      "$link": "bafkreidcusesw3pkyelyjaeajb7spt4feswmi5wshulsjpavahgum756pe"
+    },
+    "mimeType": "image/jpeg",
+    "size": 8586
+  },
+  "visibility": "public",
+  "listed": true,
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

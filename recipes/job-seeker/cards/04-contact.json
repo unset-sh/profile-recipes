@@ -1,0 +1,22 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#buttons",
+    "heading": "Let's talk",
+    "text": "I reply within two working days.",
+    "buttons": [
+      {
+        "$type": "sh.unset.section#emailButton",
+        "address": "jordan@jordan.example.com"
+      },
+      {
+        "$type": "sh.unset.section#linkButton",
+        "preset": "custom",
+        "uri": "https://jordan.example.com/cv.pdf",
+        "label": "Download CV"
+      }
+    ]
+  },
+  "width": "half",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

@@ -1,0 +1,23 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#buttons",
+    "heading": "Help us feed 400 families a week",
+    "text": "Every €10 covers a family's fresh produce for a week.",
+    "buttons": [
+      {
+        "$type": "sh.unset.section#linkButton",
+        "preset": "custom",
+        "uri": "https://riversidefood.example.org/donate",
+        "label": "Donate"
+      },
+      {
+        "$type": "sh.unset.section#linkButton",
+        "preset": "custom",
+        "uri": "https://riversidefood.example.org/volunteer",
+        "label": "Volunteer"
+      }
+    ]
+  },
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

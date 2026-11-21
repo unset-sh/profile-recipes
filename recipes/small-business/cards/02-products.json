@@ -1,0 +1,74 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#collection",
+    "title": "Bestsellers",
+    "layout": "grid",
+    "items": [
+      {
+        "tag": "€38",
+        "title": "Moss mug",
+        "description": "350 ml, dishwasher safe.",
+        "uri": "https://fernandclay.example.com/shop/moss-mug",
+        "image": {
+          "image": {
+            "$type": "blob",
+            "ref": {
+              "$link": "bafkreic2l6jdnmsvbphxv7g6ukeqdidz32dynlpmprqt3ykfjcasocuzpq"
+            },
+            "mimeType": "image/jpeg",
+            "size": 27672
+          },
+          "alt": "Sample picture: a green gradient standing in for a glazed mug.",
+          "aspectRatio": {
+            "width": 1400,
+            "height": 1400
+          }
+        }
+      },
+      {
+        "tag": "€64",
+        "title": "Tide bowl",
+        "description": "Serving bowl, 24 cm.",
+        "uri": "https://fernandclay.example.com/shop/tide-bowl",
+        "image": {
+          "image": {
+            "$type": "blob",
+            "ref": {
+              "$link": "bafkreib5cnlzzd2xglifswyzbdgl4dobdoxg247nunjxmkuuud2f46gt6q"
+            },
+            "mimeType": "image/jpeg",
+            "size": 19511
+          },
+          "alt": "Sample picture: a blue gradient standing in for a serving bowl.",
+          "aspectRatio": {
+            "width": 1400,
+            "height": 1400
+          }
+        }
+      },
+      {
+        "tag": "€22",
+        "title": "Pebble planter",
+        "uri": "https://fernandclay.example.com/shop/pebble-planter",
+        "image": {
+          "image": {
+            "$type": "blob",
+            "ref": {
+              "$link": "bafkreie5pji2pfwwrtro5whk3apov3l42547tsbthfojq3aocqps67jzj4"
+            },
+            "mimeType": "image/jpeg",
+            "size": 25868
+          },
+          "alt": "Sample picture: a sand gradient standing in for a small planter.",
+          "aspectRatio": {
+            "width": 1400,
+            "height": 1400
+          }
+        }
+      }
+    ]
+  },
+  "surface": "plain",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

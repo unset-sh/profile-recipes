@@ -1,0 +1,150 @@
+{
+  "id": "developer",
+  "version": "0.1.0",
+  "title": "Developer",
+  "summary": "For software developers: projects first, the stack you work in, talks and writing, and where to find your code.",
+  "persona": {
+    "for": [
+      "Software engineers",
+      "Open-source maintainers",
+      "Data and ML engineers"
+    ],
+    "notFor": [
+      "Developers looking for a job right now (start from job-seeker)"
+    ]
+  },
+  "lexicon": {
+    "repository": "https://github.com/Undefined6799/unset",
+    "commit": "4abcada"
+  },
+  "preview": "preview.png",
+  "cards": [
+    {
+      "file": "cards/01-projects.json",
+      "purpose": "Three to six projects they want to be known for."
+    },
+    {
+      "file": "cards/02-stack.json",
+      "purpose": "What they work in and what they are learning."
+    },
+    {
+      "file": "cards/03-contact.json",
+      "purpose": "Optional: how to reach them for work.",
+      "optional": true
+    },
+    {
+      "file": "cards/04-writing.json",
+      "purpose": "Talks and posts.",
+      "optional": true
+    },
+    {
+      "file": "cards/05-code.json",
+      "purpose": "Code hosts and social accounts."
+    }
+  ],
+  "slots": [
+    {
+      "id": "displayName",
+      "file": "profile.json",
+      "pointer": "/displayName",
+      "kind": "text",
+      "required": true,
+      "ask": "What name do you want at the top of the page?",
+      "write": "Exactly as they give it. Never shorten or translate it."
+    },
+    {
+      "id": "headline",
+      "file": "profile.json",
+      "pointer": "/headline",
+      "kind": "text",
+      "required": true,
+      "ask": "In one line, what do you do and for whom?",
+      "write": "One sentence, at most 120 characters, no hashtags or emoji."
+    },
+    {
+      "id": "location",
+      "file": "profile.json",
+      "pointer": "/location",
+      "kind": "text",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you want a place on your profile? A city or region is enough.",
+      "write": "As they write it. Never infer it."
+    },
+    {
+      "id": "website",
+      "file": "profile.json",
+      "pointer": "/website",
+      "kind": "uri",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a website of your own?",
+      "write": "A full https URL."
+    },
+    {
+      "id": "avatar",
+      "file": "profile.json",
+      "pointer": "/avatar",
+      "kind": "image",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a square photo or logo for your profile picture?",
+      "write": "The member uploads it in the editor; never fetch one from the web."
+    },
+    {
+      "id": "projects",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 6,
+      "ask": "Which three to six projects do you want to be known for? Paste their links.",
+      "write": "tag = main language · licence; title = the project name; description = what it does in one line, from the project's own README if they agree.",
+      "file": "cards/01-projects.json"
+    },
+    {
+      "id": "stack",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": true,
+      "ask": "What do you work in day to day, what are you comfortable with, and what are you learning?",
+      "write": "Bold-labelled lines as in the sample; no skill ratings or percentages.",
+      "file": "cards/02-stack.json"
+    },
+    {
+      "id": "contact",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 2,
+      "ifEmpty": "drop-card",
+      "ask": "Do you want people to contact you about work? If so, how?",
+      "write": "Heading = their availability in a few words. Email: Only an address they confirm may be public: everyone can see it.",
+      "file": "cards/03-contact.json"
+    },
+    {
+      "id": "writing",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 8,
+      "ifEmpty": "drop-card",
+      "ask": "Any talks or posts you want to list?",
+      "write": "tag = Talk or Post · year; title = the published title; description = event and city for talks.",
+      "file": "cards/04-writing.json"
+    },
+    {
+      "id": "code",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 6,
+      "ask": "Where is your code, and which other accounts should be linked?",
+      "write": "Account URLs only; the app shows the site and account name.",
+      "file": "cards/05-code.json"
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "id": "coach",
+  "version": "0.1.0",
+  "title": "Coach or teacher",
+  "summary": "For coaches and teachers: a free intro call first, the ways to work with you and what they cost, the weekly schedule, and what students say.",
+  "persona": {
+    "for": [
+      "Coaches (career, fitness, life)",
+      "Tutors and language teachers",
+      "Yoga and movement teachers"
+    ],
+    "notFor": [
+      "Consultants selling to companies (start from freelancer)"
+    ]
+  },
+  "lexicon": {
+    "repository": "https://github.com/Undefined6799/unset",
+    "commit": "4abcada"
+  },
+  "preview": "preview.png",
+  "cards": [
+    {
+      "file": "cards/01-start.json",
+      "purpose": "The main ask: a free intro."
+    },
+    {
+      "file": "cards/02-offers.json",
+      "purpose": "Ways to work with them, each with a format and price."
+    },
+    {
+      "file": "cards/03-schedule.json",
+      "purpose": "The regular schedule."
+    },
+    {
+      "file": "cards/04-voices.json",
+      "purpose": "Optional: what students say.",
+      "optional": true
+    },
+    {
+      "file": "cards/05-elsewhere.json",
+      "purpose": "Where to follow them.",
+      "optional": true
+    }
+  ],
+  "slots": [
+    {
+      "id": "displayName",
+      "file": "profile.json",
+      "pointer": "/displayName",
+      "kind": "text",
+      "required": true,
+      "ask": "What name do you want at the top of the page?",
+      "write": "Exactly as they give it. Never shorten or translate it."
+    },
+    {
+      "id": "headline",
+      "file": "profile.json",
+      "pointer": "/headline",
+      "kind": "text",
+      "required": true,
+      "ask": "In one line, what do you do and for whom?",
+      "write": "One sentence, at most 120 characters, no hashtags or emoji."
+    },
+    {
+      "id": "location",
+      "file": "profile.json",
+      "pointer": "/location",
+      "kind": "text",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you want a place on your profile? A city or region is enough.",
+      "write": "As they write it. Never infer it."
+    },
+    {
+      "id": "website",
+      "file": "profile.json",
+      "pointer": "/website",
+      "kind": "uri",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a website of your own?",
+      "write": "A full https URL."
+    },
+    {
+      "id": "avatar",
+      "file": "profile.json",
+      "pointer": "/avatar",
+      "kind": "image",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a square photo or logo for your profile picture?",
+      "write": "The member uploads it in the editor; never fetch one from the web."
+    },
+    {
+      "id": "start",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 2,
+      "ask": "How should a new student start: a free call, a trial class, a booking page?",
+      "write": "Heading = a question their student would ask; first button = the booking link.",
+      "file": "cards/01-start.json"
+    },
+    {
+      "id": "offers",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 6,
+      "ask": "What are the ways to work with you? For each: format, length, price if public, and who it is for.",
+      "write": "tag = length or frequency · price; title = the offer; description = what the student gets.",
+      "file": "cards/02-offers.json"
+    },
+    {
+      "id": "schedule",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": false,
+      "ifEmpty": "drop-card",
+      "ask": "Do you have regular classes or sessions? When and where?",
+      "write": "A bulleted list: day time: session, place. Public places only.",
+      "file": "cards/03-schedule.json"
+    },
+    {
+      "id": "voices",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": false,
+      "ifEmpty": "drop-card",
+      "ask": "Do you have short quotes from students you may publish?",
+      "write": "Verbatim, attributed as each student agreed (first name only is fine). Never write a quote.",
+      "file": "cards/04-voices.json"
+    },
+    {
+      "id": "elsewhere",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 6,
+      "ifEmpty": "drop-card",
+      "ask": "Where else do you post?",
+      "write": "Account URLs only.",
+      "file": "cards/05-elsewhere.json"
+    }
+  ]
+}

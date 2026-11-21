@@ -1,0 +1,23 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#collection",
+    "title": "Talks and writing",
+    "layout": "list",
+    "items": [
+      {
+        "tag": "Talk · 2026",
+        "title": "Your queue is a database",
+        "description": "Example Conf, Amsterdam",
+        "uri": "https://ari.example.com/talks/queue"
+      },
+      {
+        "tag": "Post · 2025",
+        "title": "What we learned running Postgres at 40k writes/s",
+        "uri": "https://ari.example.com/blog/postgres-writes"
+      }
+    ]
+  },
+  "surface": "outlined",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

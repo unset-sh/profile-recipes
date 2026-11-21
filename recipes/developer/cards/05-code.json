@@ -1,0 +1,21 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#links",
+    "title": "Find me",
+    "layout": "grid",
+    "items": [
+      {
+        "uri": "https://github.com/example-ari"
+      },
+      {
+        "uri": "https://bsky.app/profile/ari.example.com"
+      },
+      {
+        "uri": "https://www.linkedin.com/in/example-ari"
+      }
+    ]
+  },
+  "surface": "plain",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

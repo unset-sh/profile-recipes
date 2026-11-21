@@ -1,0 +1,139 @@
+{
+  "id": "podcaster",
+  "version": "0.1.0",
+  "title": "Podcaster",
+  "summary": "For podcasts and their hosts: follow buttons first, the latest episodes, everywhere to listen, and a way for guests and sponsors to reach you.",
+  "persona": {
+    "for": [
+      "Independent podcasters",
+      "Hosts of interview shows",
+      "Audio documentary makers"
+    ],
+    "notFor": [
+      "Video-first creators (start from creator)"
+    ]
+  },
+  "lexicon": {
+    "repository": "https://github.com/Undefined6799/unset",
+    "commit": "4abcada"
+  },
+  "preview": "preview.png",
+  "cards": [
+    {
+      "file": "cards/01-follow.json",
+      "purpose": "The main ask: follow the show."
+    },
+    {
+      "file": "cards/02-episodes.json",
+      "purpose": "The three to six latest or best episodes."
+    },
+    {
+      "file": "cards/03-listen.json",
+      "purpose": "Every platform the show is on."
+    },
+    {
+      "file": "cards/04-guests.json",
+      "purpose": "How guests and sponsors get in touch."
+    },
+    {
+      "file": "cards/05-host.json",
+      "purpose": "Optional: about the host.",
+      "optional": true
+    }
+  ],
+  "slots": [
+    {
+      "id": "displayName",
+      "file": "profile.json",
+      "pointer": "/displayName",
+      "kind": "text",
+      "required": true,
+      "ask": "What name do you want at the top of the page?",
+      "write": "Exactly as they give it. Never shorten or translate it."
+    },
+    {
+      "id": "headline",
+      "file": "profile.json",
+      "pointer": "/headline",
+      "kind": "text",
+      "required": true,
+      "ask": "In one line, what do you do and for whom?",
+      "write": "One sentence, at most 120 characters, no hashtags or emoji."
+    },
+    {
+      "id": "website",
+      "file": "profile.json",
+      "pointer": "/website",
+      "kind": "uri",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a website of your own?",
+      "write": "A full https URL."
+    },
+    {
+      "id": "avatar",
+      "file": "profile.json",
+      "pointer": "/avatar",
+      "kind": "image",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a square photo or logo for your profile picture?",
+      "write": "The member uploads it in the editor; never fetch one from the web."
+    },
+    {
+      "id": "follow",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 3,
+      "ask": "Where should people follow the show first? Share the show's links and its RSS feed if public.",
+      "write": "Heading = the schedule; first button = the platform they prefer (subscribe preset).",
+      "file": "cards/01-follow.json"
+    },
+    {
+      "id": "episodes",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 6,
+      "ask": "Which three to six episodes should a new listener hear?",
+      "write": "tag = episode number · length; title exactly as published; description = the guest and their role, as credited.",
+      "file": "cards/02-episodes.json"
+    },
+    {
+      "id": "listen",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 10,
+      "ask": "Which platforms is the show on? Paste the show pages.",
+      "write": "Show page URLs only.",
+      "file": "cards/03-listen.json"
+    },
+    {
+      "id": "guests",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 2,
+      "ifEmpty": "drop-card",
+      "ask": "Do you take guest pitches or sponsors? Which address may be public?",
+      "write": "Text = what a good pitch looks like and how sponsorship works, in their words. Email: Only an address they confirm may be public: everyone can see it.",
+      "file": "cards/04-guests.json"
+    },
+    {
+      "id": "host",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": false,
+      "ifEmpty": "drop-card",
+      "ask": "Anything listeners should know about you or how the show is made?",
+      "write": "Two or three sentences, including how the show is funded if they say.",
+      "file": "cards/05-host.json"
+    }
+  ]
+}

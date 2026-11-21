@@ -1,0 +1,125 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#gallery",
+    "title": "Work",
+    "images": [
+      {
+        "image": {
+          "image": {
+            "$type": "blob",
+            "ref": {
+              "$link": "bafkreih7lkgak5h5rts22lijhgxdsvbi74ormsujqwqjkrg5kcx4txv5ty"
+            },
+            "mimeType": "image/jpeg",
+            "size": 26506
+          },
+          "alt": "Sample picture: a soft coral gradient standing in for an illustration.",
+          "aspectRatio": {
+            "width": 1400,
+            "height": 1400
+          }
+        },
+        "caption": "Night Garden, gouache, 2026",
+        "fit": "fill"
+      },
+      {
+        "image": {
+          "image": {
+            "$type": "blob",
+            "ref": {
+              "$link": "bafkreih4muctjo5x4pwpm3odz2jxovroc6vtioe666gcpv52kqv56aqury"
+            },
+            "mimeType": "image/jpeg",
+            "size": 37101
+          },
+          "alt": "Sample picture: a deep blue gradient standing in for a portrait illustration.",
+          "aspectRatio": {
+            "width": 1400,
+            "height": 1750
+          }
+        },
+        "caption": "The Lighthouse Keeper, ink and watercolour",
+        "fit": "fill"
+      },
+      {
+        "image": {
+          "image": {
+            "$type": "blob",
+            "ref": {
+              "$link": "bafkreig7f5pnfr6ankua3myt3yuspmt2rnpm63sb3zfp45nycy6mrg24f4"
+            },
+            "mimeType": "image/jpeg",
+            "size": 23361
+          },
+          "alt": "Sample picture: a green gradient standing in for a landscape.",
+          "aspectRatio": {
+            "width": 1400,
+            "height": 1400
+          }
+        },
+        "caption": "Fen, digital, for Example Magazine",
+        "fit": "fill"
+      },
+      {
+        "image": {
+          "image": {
+            "$type": "blob",
+            "ref": {
+              "$link": "bafkreigzrjg5gzhisgpxkarvsaomx6uc6wshfbnswivn3fngjhs2t4oivm"
+            },
+            "mimeType": "image/jpeg",
+            "size": 21228
+          },
+          "alt": "Sample picture: a sand-coloured gradient standing in for a book cover.",
+          "aspectRatio": {
+            "width": 1400,
+            "height": 1050
+          }
+        },
+        "caption": "Cover for “The Quiet Year”",
+        "fit": "fill"
+      },
+      {
+        "image": {
+          "image": {
+            "$type": "blob",
+            "ref": {
+              "$link": "bafkreieq6zwpl47xlhlnorxptriusvzam44tidxivpsnfj42apzwovuwka"
+            },
+            "mimeType": "image/jpeg",
+            "size": 20895
+          },
+          "alt": "Sample picture: a plum gradient standing in for a character study.",
+          "aspectRatio": {
+            "width": 1400,
+            "height": 1750
+          }
+        },
+        "caption": "Character studies, 2025",
+        "fit": "fill"
+      },
+      {
+        "image": {
+          "image": {
+            "$type": "blob",
+            "ref": {
+              "$link": "bafkreihyww5nww5nnr5232orgci7xbzak322dhtt2cs3lic5aycycykpgy"
+            },
+            "mimeType": "image/jpeg",
+            "size": 25915
+          },
+          "alt": "Sample picture: a teal gradient standing in for a print.",
+          "aspectRatio": {
+            "width": 1400,
+            "height": 1400
+          }
+        },
+        "caption": "Harbour, risograph print",
+        "fit": "fill"
+      }
+    ]
+  },
+  "surface": "plain",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

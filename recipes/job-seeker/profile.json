@@ -1,0 +1,19 @@
+{
+  "$type": "sh.unset.profile",
+  "displayName": "Jordan Lee",
+  "headline": "Product designer looking for a senior role in health tech. Available from April.",
+  "avatarShape": "round",
+  "location": "Amsterdam · open to remote",
+  "website": "https://jordan.example.com",
+  "avatar": {
+    "$type": "blob",
+    "ref": {
+      "$link": "bafkreicofm7ak62u5v7awl4h76qdzd4sfhxoxzuty4zi2wqiyvr7ugjktu"
+    },
+    "mimeType": "image/jpeg",
+    "size": 8567
+  },
+  "visibility": "public",
+  "listed": true,
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

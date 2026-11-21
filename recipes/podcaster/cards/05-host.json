@@ -1,0 +1,9 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#readme",
+    "text": "**About the host.** Dev Kapoor spent ten years on call before switching to the microphone. Every episode is independently produced and ad-supported; sponsors never choose guests."
+  },
+  "surface": "plain",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

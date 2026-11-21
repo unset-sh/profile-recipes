@@ -1,0 +1,29 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#collection",
+    "title": "Recent talks",
+    "layout": "list",
+    "items": [
+      {
+        "tag": "Example Summit · 2026",
+        "title": "Safety is a product decision",
+        "description": "Keynote, 1,200 attendees. Video available.",
+        "uri": "https://videos.example.com/priya-summit-2026"
+      },
+      {
+        "tag": "Example Conf · 2025",
+        "title": "The moderators' view",
+        "description": "Panel chair.",
+        "uri": "https://conf.example.org/2025/moderation-panel"
+      },
+      {
+        "tag": "Example Forum · 2025",
+        "title": "Policy for people who ship",
+        "uri": "https://forum.example.org/2025/priya"
+      }
+    ]
+  },
+  "surface": "outlined",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

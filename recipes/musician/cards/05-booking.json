@@ -1,0 +1,22 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#buttons",
+    "heading": "Booking and press",
+    "text": "For shows, festivals and interviews.",
+    "buttons": [
+      {
+        "$type": "sh.unset.section#emailButton",
+        "address": "booking@lowtides.example.com"
+      },
+      {
+        "$type": "sh.unset.section#linkButton",
+        "preset": "custom",
+        "uri": "https://lowtides.example.com/press",
+        "label": "Press kit"
+      }
+    ]
+  },
+  "width": "half",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

@@ -1,0 +1,22 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#buttons",
+    "heading": "Join the lab",
+    "text": "One funded PhD position from autumn 2026. Postdoc enquiries welcome.",
+    "buttons": [
+      {
+        "$type": "sh.unset.section#linkButton",
+        "preset": "custom",
+        "uri": "https://lena.example.org/positions",
+        "label": "Open positions"
+      },
+      {
+        "$type": "sh.unset.section#emailButton",
+        "address": "lena.brandt@example.org"
+      }
+    ]
+  },
+  "width": "half",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

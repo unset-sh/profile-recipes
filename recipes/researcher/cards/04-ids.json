@@ -1,0 +1,24 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#links",
+    "title": "Profiles",
+    "layout": "list",
+    "items": [
+      {
+        "uri": "https://orcid.org/example-0000-0002-1825-0097"
+      },
+      {
+        "uri": "https://scholar.google.com/citations?user=example-lena"
+      },
+      {
+        "uri": "https://github.com/example-lena"
+      },
+      {
+        "uri": "https://bsky.app/profile/lena.example.org"
+      }
+    ]
+  },
+  "width": "half",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

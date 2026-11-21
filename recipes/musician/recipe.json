@@ -1,0 +1,151 @@
+{
+  "id": "musician",
+  "version": "0.1.0",
+  "title": "Musician or band",
+  "summary": "For musicians and bands: the newest release up top, the catalogue as cover art, tour dates with tickets, and every place to listen.",
+  "persona": {
+    "for": [
+      "Solo artists and bands",
+      "DJs and producers",
+      "Composers"
+    ],
+    "notFor": [
+      "Music podcasts (start from podcaster)"
+    ]
+  },
+  "lexicon": {
+    "repository": "https://github.com/Undefined6799/unset",
+    "commit": "4abcada"
+  },
+  "preview": "preview.png",
+  "cards": [
+    {
+      "file": "cards/01-latest.json",
+      "purpose": "The newest release and where to hear it."
+    },
+    {
+      "file": "cards/02-releases.json",
+      "purpose": "Albums, EPs and singles with cover art, newest first."
+    },
+    {
+      "file": "cards/03-tour.json",
+      "purpose": "Upcoming shows with ticket links.",
+      "optional": true
+    },
+    {
+      "file": "cards/04-listen.json",
+      "purpose": "Every place to listen and follow."
+    },
+    {
+      "file": "cards/05-booking.json",
+      "purpose": "Booking and press contacts."
+    }
+  ],
+  "slots": [
+    {
+      "id": "displayName",
+      "file": "profile.json",
+      "pointer": "/displayName",
+      "kind": "text",
+      "required": true,
+      "ask": "What name do you want at the top of the page?",
+      "write": "Exactly as they give it. Never shorten or translate it."
+    },
+    {
+      "id": "headline",
+      "file": "profile.json",
+      "pointer": "/headline",
+      "kind": "text",
+      "required": true,
+      "ask": "In one line, what do you do and for whom?",
+      "write": "One sentence, at most 120 characters, no hashtags or emoji."
+    },
+    {
+      "id": "location",
+      "file": "profile.json",
+      "pointer": "/location",
+      "kind": "text",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you want a place on your profile? A city or region is enough.",
+      "write": "As they write it. Never infer it."
+    },
+    {
+      "id": "website",
+      "file": "profile.json",
+      "pointer": "/website",
+      "kind": "uri",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a website of your own?",
+      "write": "A full https URL."
+    },
+    {
+      "id": "avatar",
+      "file": "profile.json",
+      "pointer": "/avatar",
+      "kind": "image",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a square photo or logo for your profile picture?",
+      "write": "The member uploads it in the editor; never fetch one from the web."
+    },
+    {
+      "id": "latest",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 2,
+      "ask": "What is your newest release, and where should people listen to it first?",
+      "write": "Heading = the release and its status (out now, out on a date); first button = Listen now to the link they choose.",
+      "file": "cards/01-latest.json"
+    },
+    {
+      "id": "releases",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 12,
+      "ask": "Which releases should be listed? For each: the type, year and a link. You'll upload the cover art in the editor.",
+      "write": "tag = Single, EP or Album · year; title exactly as released; newest first. Alt text = a description of the cover art from them.",
+      "file": "cards/02-releases.json"
+    },
+    {
+      "id": "tour",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 30,
+      "ifEmpty": "drop-card",
+      "ask": "Do you have upcoming shows? For each: date, city, venue and ticket link.",
+      "write": "tag = date · city; title = venue; description only for notes such as support acts or sold out. Remove past dates.",
+      "file": "cards/03-tour.json"
+    },
+    {
+      "id": "listen",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 10,
+      "ask": "Where can people listen and follow you? Paste the artist pages.",
+      "write": "Artist page URLs only; the app shows each platform's icon.",
+      "file": "cards/04-listen.json"
+    },
+    {
+      "id": "booking",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 2,
+      "ifEmpty": "drop-card",
+      "ask": "Who handles booking and press, and which address may be public?",
+      "write": "Email: Only an address they confirm may be public: everyone can see it. Agents' addresses only with the agent's agreement.",
+      "file": "cards/05-booking.json"
+    }
+  ]
+}

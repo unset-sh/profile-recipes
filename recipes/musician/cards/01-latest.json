@@ -1,0 +1,22 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#buttons",
+    "heading": "“Undertow” is out now",
+    "text": "Our first single from the new album, out in spring.",
+    "buttons": [
+      {
+        "$type": "sh.unset.section#linkButton",
+        "preset": "custom",
+        "uri": "https://open.spotify.com/track/example-undertow",
+        "label": "Listen now"
+      },
+      {
+        "$type": "sh.unset.section#linkButton",
+        "preset": "subscribe",
+        "uri": "https://lowtides.example.com/mailing-list"
+      }
+    ]
+  },
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

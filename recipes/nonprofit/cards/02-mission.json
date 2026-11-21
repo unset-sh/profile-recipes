@@ -1,0 +1,9 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#readme",
+    "text": "**What we do**\n\nWe collect surplus food from local shops and farms and share it, free, with anyone who needs it. On Fridays we cook a community dinner.\n\nRegistered charity no. 0000000 (sample)."
+  },
+  "width": "half",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

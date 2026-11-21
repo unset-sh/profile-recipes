@@ -1,0 +1,22 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#buttons",
+    "heading": "Commissions open",
+    "text": "Book covers, editorial and private pieces. I reply within a week.",
+    "buttons": [
+      {
+        "$type": "sh.unset.section#linkButton",
+        "preset": "custom",
+        "uri": "https://ines.example.com/commissions",
+        "label": "Start a commission"
+      },
+      {
+        "$type": "sh.unset.section#emailButton",
+        "address": "studio@ines.example.com"
+      }
+    ]
+  },
+  "width": "half",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

@@ -1,0 +1,150 @@
+{
+  "id": "researcher",
+  "version": "0.1.0",
+  "title": "Researcher or academic",
+  "summary": "For researchers: what you work on in plain words, selected publications, your identifiers, and how to collaborate or apply to work with you.",
+  "persona": {
+    "for": [
+      "Academics and postdocs",
+      "PhD students",
+      "Industry researchers"
+    ],
+    "notFor": [
+      "Science journalists (start from journalist)"
+    ]
+  },
+  "lexicon": {
+    "repository": "https://github.com/Undefined6799/unset",
+    "commit": "4abcada"
+  },
+  "preview": "preview.png",
+  "cards": [
+    {
+      "file": "cards/01-research.json",
+      "purpose": "What they work on, in words a non-specialist understands."
+    },
+    {
+      "file": "cards/02-publications.json",
+      "purpose": "Five to ten selected publications."
+    },
+    {
+      "file": "cards/03-join.json",
+      "purpose": "Optional: openings and supervision.",
+      "optional": true
+    },
+    {
+      "file": "cards/04-ids.json",
+      "purpose": "Scholarly identifiers and profiles."
+    },
+    {
+      "file": "cards/05-talks.json",
+      "purpose": "Optional: talks and teaching.",
+      "optional": true
+    }
+  ],
+  "slots": [
+    {
+      "id": "displayName",
+      "file": "profile.json",
+      "pointer": "/displayName",
+      "kind": "text",
+      "required": true,
+      "ask": "What name do you want at the top of the page?",
+      "write": "Exactly as they give it. Never shorten or translate it."
+    },
+    {
+      "id": "headline",
+      "file": "profile.json",
+      "pointer": "/headline",
+      "kind": "text",
+      "required": true,
+      "ask": "In one line, what do you do and for whom?",
+      "write": "One sentence, at most 120 characters, no hashtags or emoji."
+    },
+    {
+      "id": "location",
+      "file": "profile.json",
+      "pointer": "/location",
+      "kind": "text",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you want a place on your profile? A city or region is enough.",
+      "write": "As they write it. Never infer it."
+    },
+    {
+      "id": "website",
+      "file": "profile.json",
+      "pointer": "/website",
+      "kind": "uri",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a website of your own?",
+      "write": "A full https URL."
+    },
+    {
+      "id": "avatar",
+      "file": "profile.json",
+      "pointer": "/avatar",
+      "kind": "image",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a square photo or logo for your profile picture?",
+      "write": "The member uploads it in the editor; never fetch one from the web."
+    },
+    {
+      "id": "research",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": true,
+      "ask": "What do you study, in a sentence a curious non-specialist would understand? What is your position and group?",
+      "write": "One plain-language paragraph, then bold-labelled affiliation and group lines exactly as the institution lists them.",
+      "file": "cards/01-research.json"
+    },
+    {
+      "id": "publications",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 10,
+      "ask": "Which five to ten publications should be listed? DOIs or links are enough; I'll copy the details.",
+      "write": "tag = venue · year (or Preprint · year); title exactly as published; description = authors in the venue's format, theirs included. Link the DOI.",
+      "file": "cards/02-publications.json"
+    },
+    {
+      "id": "join",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 2,
+      "ifEmpty": "drop-card",
+      "ask": "Are you recruiting students or postdocs, or open to collaboration?",
+      "write": "Text = what is open and from when, as on the official advert. Institutional email only if they want it shown. Only an address they confirm may be public: everyone can see it.",
+      "file": "cards/03-join.json"
+    },
+    {
+      "id": "ids",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 8,
+      "ask": "Which scholarly profiles should be linked: ORCID, Google Scholar, institutional page, code?",
+      "write": "Profile URLs only.",
+      "file": "cards/04-ids.json"
+    },
+    {
+      "id": "talks",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 8,
+      "ifEmpty": "drop-card",
+      "ask": "Any talks or courses you want to list?",
+      "write": "tag = type · year; title as given; description = event and city.",
+      "file": "cards/05-talks.json"
+    }
+  ]
+}

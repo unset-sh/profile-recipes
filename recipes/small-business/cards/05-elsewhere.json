@@ -1,0 +1,20 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#links",
+    "layout": "grid",
+    "items": [
+      {
+        "uri": "https://www.instagram.com/example.fernandclay"
+      },
+      {
+        "uri": "https://www.etsy.com/shop/examplefernandclay"
+      },
+      {
+        "uri": "https://www.tiktok.com/@example.fernandclay"
+      }
+    ]
+  },
+  "surface": "outlined",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

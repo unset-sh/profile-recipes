@@ -1,0 +1,29 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#collection",
+    "title": "Projects",
+    "layout": "grid",
+    "items": [
+      {
+        "tag": "Rust · MIT",
+        "title": "tidequeue",
+        "description": "A small, durable job queue on top of Postgres.",
+        "uri": "https://github.com/example-ari/tidequeue"
+      },
+      {
+        "tag": "Go · Apache-2.0",
+        "title": "certwatch",
+        "description": "Alerts before your TLS certificates expire.",
+        "uri": "https://github.com/example-ari/certwatch"
+      },
+      {
+        "tag": "TypeScript",
+        "title": "atproto-feed-kit",
+        "description": "Helpers for writing atproto feed generators.",
+        "uri": "https://github.com/example-ari/feed-kit"
+      }
+    ]
+  },
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

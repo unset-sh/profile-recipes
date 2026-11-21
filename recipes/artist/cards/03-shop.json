@@ -1,0 +1,20 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#links",
+    "title": "Prints and shop",
+    "layout": "list",
+    "items": [
+      {
+        "uri": "https://shop.ines.example.com",
+        "label": "Print shop",
+        "description": "Signed giclée and risograph prints."
+      },
+      {
+        "uri": "https://www.instagram.com/example.ines"
+      }
+    ]
+  },
+  "width": "half",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

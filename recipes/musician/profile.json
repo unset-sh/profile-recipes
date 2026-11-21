@@ -1,0 +1,19 @@
+{
+  "$type": "sh.unset.profile",
+  "displayName": "The Low Tides",
+  "headline": "Four-piece indie band from Glasgow. New single “Undertow” out now.",
+  "avatarShape": "round",
+  "location": "Glasgow",
+  "website": "https://lowtides.example.com",
+  "avatar": {
+    "$type": "blob",
+    "ref": {
+      "$link": "bafkreifzndv5t2sshrenckrvaez5ismw2kqvwighicl4l54rxmp32iqzoq"
+    },
+    "mimeType": "image/jpeg",
+    "size": 11372
+  },
+  "visibility": "public",
+  "listed": true,
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

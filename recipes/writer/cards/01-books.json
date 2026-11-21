@@ -1,0 +1,73 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#collection",
+    "title": "Books",
+    "layout": "grid",
+    "items": [
+      {
+        "tag": "Novel · May 2026",
+        "title": "The Long Table",
+        "description": "Three generations, one Sunday lunch. Pre-order now.",
+        "uri": "https://odile.example.com/the-long-table",
+        "image": {
+          "image": {
+            "$type": "blob",
+            "ref": {
+              "$link": "bafkreiftetr3f53pkygc2ud52auppbtvqml4byjib5uyns2h2wcvj3kpyu"
+            },
+            "mimeType": "image/jpeg",
+            "size": 20630
+          },
+          "alt": "Sample cover: a muted rose gradient standing in for the book jacket.",
+          "aspectRatio": {
+            "width": 1000,
+            "height": 1500
+          }
+        }
+      },
+      {
+        "tag": "Novel · 2023",
+        "title": "Weather Indoors",
+        "description": "Shortlisted for the Example Prize.",
+        "uri": "https://odile.example.com/weather-indoors",
+        "image": {
+          "image": {
+            "$type": "blob",
+            "ref": {
+              "$link": "bafkreihtbbc5gq3l7njke7pnyyk64hkh62sak5rxron6me4jjpo2sv7ila"
+            },
+            "mimeType": "image/jpeg",
+            "size": 25515
+          },
+          "alt": "Sample cover: a slate blue gradient standing in for the book jacket.",
+          "aspectRatio": {
+            "width": 1000,
+            "height": 1500
+          }
+        }
+      },
+      {
+        "tag": "Stories · 2020",
+        "title": "Small Hours",
+        "uri": "https://odile.example.com/small-hours",
+        "image": {
+          "image": {
+            "$type": "blob",
+            "ref": {
+              "$link": "bafkreidn23w2r57fdnwfmxsqetlruwmxamu24mcbm7x3qik6jnxqtzflnu"
+            },
+            "mimeType": "image/jpeg",
+            "size": 22774
+          },
+          "alt": "Sample cover: an ochre gradient standing in for the book jacket.",
+          "aspectRatio": {
+            "width": 1000,
+            "height": 1500
+          }
+        }
+      }
+    ]
+  },
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

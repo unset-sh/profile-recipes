@@ -1,0 +1,151 @@
+{
+  "id": "writer",
+  "version": "0.1.0",
+  "title": "Writer or author",
+  "summary": "For authors: books as covers with where to buy them, the newsletter as the main ask, and upcoming events.",
+  "persona": {
+    "for": [
+      "Novelists and non-fiction authors",
+      "Poets",
+      "Essayists with published books"
+    ],
+    "notFor": [
+      "Reporters (start from journalist)"
+    ]
+  },
+  "lexicon": {
+    "repository": "https://github.com/Undefined6799/unset",
+    "commit": "4abcada"
+  },
+  "preview": "preview.png",
+  "cards": [
+    {
+      "file": "cards/01-books.json",
+      "purpose": "Their books with covers and buy links, newest first."
+    },
+    {
+      "file": "cards/02-newsletter.json",
+      "purpose": "The main ask: the newsletter."
+    },
+    {
+      "file": "cards/03-events.json",
+      "purpose": "Optional: readings, festivals, signings.",
+      "optional": true
+    },
+    {
+      "file": "cards/04-about.json",
+      "purpose": "Short bio and representation."
+    },
+    {
+      "file": "cards/05-elsewhere.json",
+      "purpose": "Social and reader platforms.",
+      "optional": true
+    }
+  ],
+  "slots": [
+    {
+      "id": "displayName",
+      "file": "profile.json",
+      "pointer": "/displayName",
+      "kind": "text",
+      "required": true,
+      "ask": "What name do you want at the top of the page?",
+      "write": "Exactly as they give it. Never shorten or translate it."
+    },
+    {
+      "id": "headline",
+      "file": "profile.json",
+      "pointer": "/headline",
+      "kind": "text",
+      "required": true,
+      "ask": "In one line, what do you do and for whom?",
+      "write": "One sentence, at most 120 characters, no hashtags or emoji."
+    },
+    {
+      "id": "location",
+      "file": "profile.json",
+      "pointer": "/location",
+      "kind": "text",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you want a place on your profile? A city or region is enough.",
+      "write": "As they write it. Never infer it."
+    },
+    {
+      "id": "website",
+      "file": "profile.json",
+      "pointer": "/website",
+      "kind": "uri",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a website of your own?",
+      "write": "A full https URL."
+    },
+    {
+      "id": "avatar",
+      "file": "profile.json",
+      "pointer": "/avatar",
+      "kind": "image",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "Do you have a square photo or logo for your profile picture?",
+      "write": "The member uploads it in the editor; never fetch one from the web."
+    },
+    {
+      "id": "books",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 12,
+      "ask": "Which books should be listed? For each: the form, publication date, one line about it, and where to buy it. You'll upload the covers in the editor.",
+      "write": "tag = form · date; title exactly as published; description = the jacket line or a prize, as they give it. Newest first.",
+      "file": "cards/01-books.json"
+    },
+    {
+      "id": "newsletter",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 2,
+      "ifEmpty": "drop-card",
+      "ask": "Do you have a newsletter? What is it called and how often does it go out?",
+      "write": "Heading = the newsletter's name; text = what is in it and how often, in their voice.",
+      "file": "cards/02-newsletter.json"
+    },
+    {
+      "id": "events",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 20,
+      "ifEmpty": "drop-card",
+      "ask": "Any upcoming readings, festivals or signings?",
+      "write": "tag = date · place; title = the event; upcoming only.",
+      "file": "cards/03-events.json"
+    },
+    {
+      "id": "about",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": true,
+      "ask": "How would you like to be introduced, and who represents you?",
+      "write": "Third person if they prefer it for press; agent only with the agent's name as the agency publishes it.",
+      "file": "cards/04-about.json"
+    },
+    {
+      "id": "elsewhere",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 6,
+      "ifEmpty": "drop-card",
+      "ask": "Which social or reader platforms should be linked?",
+      "write": "Account URLs only.",
+      "file": "cards/05-elsewhere.json"
+    }
+  ]
+}

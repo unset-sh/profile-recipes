@@ -1,0 +1,19 @@
+{
+  "$type": "sh.unset.profile",
+  "displayName": "Riverside Food Collective",
+  "headline": "Volunteer-run food bank and community kitchen in Riverside since 2018.",
+  "avatarShape": "roundedSquare",
+  "location": "Riverside",
+  "website": "https://riversidefood.example.org",
+  "avatar": {
+    "$type": "blob",
+    "ref": {
+      "$link": "bafkreic3i726nvikyhyv42zsnufhdqcjljhpww5moyegcrnuim5ffzrhf4"
+    },
+    "mimeType": "image/jpeg",
+    "size": 9774
+  },
+  "visibility": "public",
+  "listed": true,
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

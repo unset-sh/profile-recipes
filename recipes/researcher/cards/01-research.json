@@ -1,0 +1,8 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#readme",
+    "text": "I study how forests recover after wildfire, combining satellite data with field plots to predict which stands regrow and which turn to shrubland.\n\n**Affiliation:** Associate Professor, Department of Ecology, Example University\n**Group:** Fire & Forest Lab (four PhD students, two postdocs)"
+  },
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

@@ -1,0 +1,24 @@
+{
+  "$type": "sh.unset.section",
+  "content": {
+    "$type": "sh.unset.section#links",
+    "title": "Listen",
+    "layout": "list",
+    "items": [
+      {
+        "uri": "https://open.spotify.com/artist/example-lowtides"
+      },
+      {
+        "uri": "https://music.apple.com/artist/example-lowtides"
+      },
+      {
+        "uri": "https://www.youtube.com/@example-lowtides"
+      },
+      {
+        "uri": "https://www.instagram.com/example.lowtides"
+      }
+    ]
+  },
+  "width": "half",
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

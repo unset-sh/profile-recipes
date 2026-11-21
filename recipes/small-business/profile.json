@@ -1,0 +1,19 @@
+{
+  "$type": "sh.unset.profile",
+  "displayName": "Fern & Clay",
+  "headline": "Handmade stoneware from a two-person studio. Shop online or visit us on Saturdays.",
+  "avatarShape": "roundedSquare",
+  "location": "Ghent",
+  "website": "https://fernandclay.example.com",
+  "avatar": {
+    "$type": "blob",
+    "ref": {
+      "$link": "bafkreihwjisszg5sjxrprzv5chlvaarkn4ze5hmim7v6nqmoqs43gkexo4"
+    },
+    "mimeType": "image/jpeg",
+    "size": 10345
+  },
+  "visibility": "public",
+  "listed": true,
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}
