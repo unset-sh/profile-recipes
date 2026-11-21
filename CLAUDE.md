@@ -10,7 +10,6 @@ follows to build someone's profile.
 - **Does not belong here:** the lexicon schemas (`lexicons/` is a copy; the source is `Undefined6799/unset`), and the
   profile editor and its limits (`limits.json` mirrors the app).
 - **Uses:** `Undefined6799/unset`, whose lexicon schemas and editor limits are copied here at a pinned commit.
-
 - **Licence:** everything written for unset.sh is AGPL-3.0-only; work we use from others keeps its own licence. This
   repository is published as MIT (tooling) and CC0-1.0 (recipes) today; changing that needs the owner.
 
