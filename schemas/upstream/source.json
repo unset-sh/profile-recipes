@@ -1,0 +1,18 @@
+{
+  "repository": "https://github.com/Undefined6799/unset",
+  "path": "shared/lexicons/schemas",
+  "commit": "0dd079517074917ebd5217f7ecf15f4984cdd5d3",
+  "copied": "2026-11-21",
+  "files": [
+    "sh.unset.profile.json",
+    "sh.unset.card.json",
+    "sh.unset.block.text.json",
+    "sh.unset.block.links.json",
+    "sh.unset.block.showcase.json",
+    "sh.unset.block.buttons.json",
+    "sh.unset.block.images.json",
+    "sh.unset.block.defs.json"
+  ],
+  "published": false,
+  "note": "Vendored upstream Lexicon documents, not recipe examples. The upstream published.lock.json is empty at this commit; these schemas remain drafts. Local validation does not establish that every schema feature is exposed by the app editor or renderer."
+}

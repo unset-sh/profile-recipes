@@ -1,8 +1,8 @@
 {
   "id": "artist",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "title": "Artist or illustrator",
-  "summary": "For artists and illustrators: the work fills the page, then how to commission you and where to buy prints.",
+  "summary": "A gallery profile: introduce your practice, give one body of work space, then separate commissions from editions and the full portfolio.",
   "persona": {
     "for": [
       "Illustrators",
@@ -16,26 +16,26 @@
   },
   "lexicon": {
     "repository": "https://github.com/Undefined6799/unset",
-    "commit": "4abcada"
+    "commit": "0dd079517074917ebd5217f7ecf15f4984cdd5d3"
   },
   "preview": "preview.png",
   "cards": [
     {
+      "file": "cards/04-about.json",
+      "purpose": "Introduce the medium, practice and commission scope before the work."
+    },
+    {
       "file": "cards/01-work.json",
-      "purpose": "Six to twelve pieces that show their range."
+      "purpose": "A named body of work with titles, captions and uncropped proportions."
     },
     {
       "file": "cards/02-commissions.json",
-      "purpose": "How commissions work and how to start one."
+      "purpose": "A clear commission enquiry, with availability only when confirmed."
     },
     {
       "file": "cards/03-shop.json",
-      "purpose": "Optional: where to buy prints or originals.",
+      "purpose": "Editions and the complete portfolio, separate from commissioning.",
       "optional": true
-    },
-    {
-      "file": "cards/04-about.json",
-      "purpose": "Process, clients and what a commission costs."
     }
   ],
   "slots": [
@@ -55,7 +55,80 @@
       "kind": "text",
       "required": true,
       "ask": "In one line, what do you do and for whom?",
-      "write": "One sentence, at most 120 characters, no hashtags or emoji."
+      "write": "One sentence, at most 120 characters, no hashtags or emoji. This appears in the About popover, not beside the name; repeat the essential purpose in the first text card."
+    },
+    {
+      "id": "about",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": true,
+      "ask": "What media do you work in, who have you worked for, and do you publish commission prices?",
+      "write": "One line on their media, then bold-labelled lines. Prices only if they publish them; clients only if they may be named. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/04-about.json"
+    },
+    {
+      "id": "seriesTitle",
+      "file": "cards/01-work.json",
+      "pointer": "/content/title",
+      "kind": "text",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "What title identifies this body of work? A series name or a short description is enough.",
+      "write": "Use their supplied series title or a short description of the selected work, at most 100 characters. Replace the demonstration title; if they have no title, omit it. Do not infer a theme from the pictures."
+    },
+    {
+      "id": "work",
+      "pointer": "/content/images",
+      "kind": "list",
+      "required": true,
+      "min": 3,
+      "max": 12,
+      "ask": "Which six to twelve pieces best show your work now?",
+      "write": "They upload each piece in the editor. Alt = what the piece shows, from their own description; caption = title, medium, and client or year. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback. Keep each uploaded image’s original aspect ratio, add a descriptive title for the set, and use fit=contain. The images block is schema-supported but not yet shown in the current app; keep the first text card and portfolio links useful without it.",
+      "file": "cards/01-work.json"
+    },
+    {
+      "id": "commissionsText",
+      "file": "cards/02-commissions.json",
+      "pointer": "/content/text",
+      "kind": "text",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "What should people know before taking this action: who it is for, format, timing, price or reply expectations, only if you want to publish them?",
+      "write": "One or two short sentences, at most 400 characters. Include only facts supplied for this action; do not assume an introductory call is free or that any date, price or reply time is current. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "commissions",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 2,
+      "ifEmpty": "drop-card",
+      "ask": "Are you open to commissions? How should people start one?",
+      "write": "Heading = open or closed, as they say; text = what they take on and response time. Email: Only an address they confirm may be public: everyone can see it. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/02-commissions.json"
+    },
+    {
+      "id": "commissionsHeading",
+      "file": "cards/02-commissions.json",
+      "pointer": "/content/heading",
+      "kind": "text",
+      "required": true,
+      "ask": "What short heading should introduce this action?",
+      "write": "Use a clear heading that describes the action; no unconfirmed availability or promise. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "shop",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 6,
+      "ifEmpty": "drop-card",
+      "ask": "Where can people see your complete portfolio, or buy prints and originals?",
+      "write": "Use a label and one useful line for their portfolio or shop; include only their own supplied destinations. Social accounts can use the account URL alone. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/03-shop.json"
     },
     {
       "id": "location",
@@ -84,52 +157,8 @@
       "kind": "image",
       "required": false,
       "ifEmpty": "drop-field",
-      "ask": "Do you have a square photo or logo for your profile picture?",
-      "write": "The member uploads it in the editor; never fetch one from the web."
-    },
-    {
-      "id": "work",
-      "pointer": "/content/images",
-      "kind": "list",
-      "required": true,
-      "min": 3,
-      "max": 12,
-      "ask": "Which six to twelve pieces best show your work now?",
-      "write": "They upload each piece in the editor. Alt = what the piece shows, from their own description; caption = title, medium, and client or year.",
-      "file": "cards/01-work.json"
-    },
-    {
-      "id": "commissions",
-      "pointer": "/content/buttons",
-      "kind": "list",
-      "required": false,
-      "min": 1,
-      "max": 2,
-      "ifEmpty": "drop-card",
-      "ask": "Are you open to commissions? How should people start one?",
-      "write": "Heading = open or closed, as they say; text = what they take on and response time. Email: Only an address they confirm may be public: everyone can see it.",
-      "file": "cards/02-commissions.json"
-    },
-    {
-      "id": "shop",
-      "pointer": "/content/items",
-      "kind": "list",
-      "required": false,
-      "min": 1,
-      "max": 6,
-      "ifEmpty": "drop-card",
-      "ask": "Do you sell prints or originals anywhere?",
-      "write": "Shop URLs with a label and one line on what is sold there; social accounts as URL only.",
-      "file": "cards/03-shop.json"
-    },
-    {
-      "id": "about",
-      "pointer": "/content/text",
-      "kind": "markdown",
-      "required": true,
-      "ask": "What media do you work in, who have you worked for, and do you publish commission prices?",
-      "write": "One line on their media, then bold-labelled lines. Prices only if they publish them; clients only if they may be named.",
-      "file": "cards/04-about.json"
+      "ask": "Do you have a photo, artwork or logo you want to upload as the profile picture?",
+      "write": "The person uploads their chosen picture in the editor. Never fetch, generate or infer a personal photo. Use their description for alt text wherever the editor asks for it."
     }
   ]
 }

@@ -1,6 +1,7 @@
 // Each rule in check.ts, shown failing on a record that breaks it and passing on the shipped recipes.
 import assert from "node:assert/strict";
-import { readdirSync } from "node:fs";
+import { cpSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
 import { checkRecipe, checkRecord, loadContext, pointerGet } from "./check.ts";
@@ -10,7 +11,7 @@ const ctx = loadContext(root);
 const dir = join(root, "recipes", "journalist");
 const T = "2026-01-01T00:00:00.000Z";
 const profile = (extra: object) => ({ $type: "sh.unset.profile", displayName: "Sample", createdAt: T, ...extra });
-const readme = (extra: object) => ({ $type: "sh.unset.section", createdAt: T, content: { $type: "sh.unset.section#readme", text: "Hi" }, ...extra });
+const readme = (extra: object) => ({ $type: "sh.unset.card", createdAt: T, content: { $type: "sh.unset.block.text", text: "Hi" }, ...extra });
 
 test("every shipped recipe passes", () => {
   for (const id of readdirSync(join(root, "recipes"))) assert.deepEqual(checkRecipe(ctx, join(root, "recipes", id), id), []);
@@ -20,9 +21,9 @@ test("a record the lexicon refuses fails", () => {
   assert.match(checkRecord(ctx, dir, profile({ createdAt: "yesterday" })).join(), /datetime/);
 });
 
-test("a field the lexicon does not define fails, as the app refuses it on save", () => {
+test("a template field the vendored schemas do not define fails", () => {
   assert.match(checkRecord(ctx, dir, readme({ colour: "red" })).join(), /\$\.colour: not defined/);
-  assert.match(checkRecord(ctx, dir, readme({ content: { $type: "sh.unset.section#readme", text: "x", font: "serif" } })).join(), /content\.font/);
+  assert.match(checkRecord(ctx, dir, readme({ content: { $type: "sh.unset.block.text", text: "x", font: "serif" } })).join(), /content\.font/);
 });
 
 test("a headline over the editor's limit fails though the lexicon allows it", () => {
@@ -30,12 +31,24 @@ test("a headline over the editor's limit fails though the lexicon allows it", ()
   assert.deepEqual(checkRecord(ctx, dir, profile({ headline: "x".repeat(120) })), []);
 });
 
+test("text templates respect the editor's UTF-8 byte cap below the schema cap", () => {
+  const content = (text: string) => readme({ content: { $type: "sh.unset.block.text", text } });
+  assert.deepEqual(checkRecord(ctx, dir, content("é".repeat(5000))), []);
+  assert.match(checkRecord(ctx, dir, content("é".repeat(5001))).join(), /editor allows 10000 UTF-8 bytes/);
+});
+
+test("showcase templates respect the editor's row cap", () => {
+  const content = (length: number) => readme({ content: { $type: "sh.unset.block.showcase", items: Array.from({ length }, () => ({ title: "Sample" })) } });
+  assert.deepEqual(checkRecord(ctx, dir, content(30)), []);
+  assert.match(checkRecord(ctx, dir, content(31)).join(), /editor allows 30 rows/);
+});
+
 test("a template that sets the card order fails", () => {
   assert.match(checkRecord(ctx, dir, profile({ cards: ["3kabc"] })).join(), /\$\.cards: leave out/);
 });
 
 test("sample data may not point at real people", () => {
-  const text = (t: string) => readme({ content: { $type: "sh.unset.section#readme", text: t } });
+  const text = (t: string) => readme({ content: { $type: "sh.unset.block.text", text: t } });
   assert.match(checkRecord(ctx, dir, text("mail me@gmail.com")).join(), /example\.com/);
   assert.match(checkRecord(ctx, dir, text("see https://realperson.dev")).join(), /example domain/);
   assert.match(checkRecord(ctx, dir, text("see https://bsky.app/profile/someone.bsky.social")).join(), /example domain/);
@@ -52,4 +65,70 @@ test("a blob that names no file in assets/ fails", () => {
 test("pointerGet follows RFC 6901", () => {
   assert.equal(pointerGet({ a: [{ "b/c": 1 }] }, "/a/0/b~1c"), 1);
   assert.equal(pointerGet({ a: 1 }, "/missing"), undefined);
+  for (const pointer of ["/a/00", "/a/+0", "/a/", "/a/0e0", "/a/0/~2"]) {
+    assert.equal(pointerGet({ a: [{ "~2": 1 }] }, pointer), undefined, pointer);
+  }
+});
+
+test("current card blocks validate with optional fields omitted", () => {
+  assert.deepEqual(checkRecord(ctx, dir, { $type: "sh.unset.card", content: { $type: "sh.unset.block.text", text: "Hi" } }), []);
+  assert.deepEqual(checkRecord(ctx, dir, { $type: "sh.unset.profile" }), []);
+});
+
+test("button headings required by the editor cannot be omitted or left blank in samples", () => {
+  const content = { $type: "sh.unset.block.buttons", buttons: [{ $type: "sh.unset.block.buttons#link", uri: "https://example.org" }] };
+  for (const heading of [undefined, "", "   "]) {
+    const card = readme({ content: { ...content, ...(heading === undefined ? {} : { heading }) } });
+    assert.match(checkRecord(ctx, dir, card).join(), /editor requires a heading/);
+  }
+  assert.deepEqual(checkRecord(ctx, dir, readme({ content: { ...content, heading: "Get in touch" } })), []);
+});
+
+test("open unions still reject unknown blocks in these templates", () => {
+  assert.match(checkRecord(ctx, dir, readme({ content: { $type: "com.example.block", text: "Hi" } })).join(), /unsupported template type/);
+});
+
+test("a block's primary type uses the NSID without a main fragment", () => {
+  assert.match(checkRecord(ctx, dir, readme({ content: { $type: "sh.unset.block.text#main", text: "Hi" } })).join(), /must omit #main/);
+});
+
+test("template fields are checked through external and local schema refs", () => {
+  const card = readme({ content: { $type: "sh.unset.block.showcase", items: [{ title: "Project", invented: true }] } });
+  assert.match(checkRecord(ctx, dir, card).join(), /content\.items\[0\]\.invented: not defined/);
+  const sample = JSON.parse(readFileSync(join(dir, "profile.json"), "utf8"));
+  const images = readme({ content: { $type: "sh.unset.block.images", images: [{ image: sample.avatar, alt: "Sample", aspectRatio: { width: 1, height: 1, invented: true } }] } });
+  assert.match(checkRecord(ctx, dir, images).join(), /aspectRatio\.invented: not defined/);
+});
+
+test("a JPEG sample avatar satisfies an upstream image wildcard", () => {
+  const sample = JSON.parse(readFileSync(join(dir, "profile.json"), "utf8"));
+  assert.deepEqual(checkRecord(ctx, dir, profile({ avatar: sample.avatar })), []);
+});
+
+test("sample links follow the HTTPS and no-credentials instructions", () => {
+  for (const website of ["http://example.com", "https://user:password@example.com"]) {
+    assert.match(checkRecord(ctx, dir, profile({ website })).join(), /HTTPS|credentials/);
+  }
+  assert.deepEqual(checkRecord(ctx, dir, profile({ website: "https://example.com" })), []);
+});
+
+test("slots include writing guidance and a rule for unanswered optional fields", () => {
+  const fixture = mkdtempSync(join(tmpdir(), "recipe-check-"));
+  try {
+    cpSync(dir, fixture, { recursive: true });
+    const file = join(fixture, "recipe.json");
+    const manifest = JSON.parse(readFileSync(file, "utf8"));
+    delete manifest.slots[0].write;
+    delete manifest.slots[0].required;
+    delete manifest.slots.find((slot: { required: boolean }) => slot.required === false).ifEmpty;
+    manifest.slots.find((slot: { pointer: string }) => slot.pointer === "/content/heading").required = false;
+    writeFileSync(file, JSON.stringify(manifest));
+    const problems = checkRecipe(ctx, fixture, "journalist").join();
+    assert.match(problems, /slots\[0\]\.write/);
+    assert.match(problems, /slots\[0\]\.required/);
+    assert.match(problems, /\.ifEmpty/);
+    assert.match(problems, /editor requires a button card's heading/);
+  } finally {
+    rmSync(fixture, { recursive: true, force: true });
+  }
 });

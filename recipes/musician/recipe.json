@@ -1,8 +1,8 @@
 {
   "id": "musician",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "title": "Musician or band",
-  "summary": "For musicians and bands: the newest release up top, the catalogue as cover art, tour dates with tickets, and every place to listen.",
+  "summary": "A release-led profile: introduce your sound, feature the current release, then separate the catalogue, live shows and industry enquiries.",
   "persona": {
     "for": [
       "Solo artists and bands",
@@ -15,30 +15,34 @@
   },
   "lexicon": {
     "repository": "https://github.com/Undefined6799/unset",
-    "commit": "4abcada"
+    "commit": "0dd079517074917ebd5217f7ecf15f4984cdd5d3"
   },
   "preview": "preview.png",
   "cards": [
     {
+      "file": "cards/00-intro.json",
+      "purpose": "Introduce the artist or band, sound and current release."
+    },
+    {
       "file": "cards/01-latest.json",
-      "purpose": "The newest release and where to hear it."
+      "purpose": "Listen to the featured release or join the mailing list."
     },
     {
       "file": "cards/02-releases.json",
-      "purpose": "Albums, EPs and singles with cover art, newest first."
+      "purpose": "A short release catalogue with format, year and original artwork proportions."
     },
     {
       "file": "cards/03-tour.json",
-      "purpose": "Upcoming shows with ticket links.",
+      "purpose": "Three or four confirmed forthcoming shows with ticket destinations.",
       "optional": true
     },
     {
       "file": "cards/04-listen.json",
-      "purpose": "Every place to listen and follow."
+      "purpose": "Other listening destinations."
     },
     {
       "file": "cards/05-booking.json",
-      "purpose": "Booking and press contacts."
+      "purpose": "Booking and press enquiries, separate from fan actions."
     }
   ],
   "slots": [
@@ -58,7 +62,111 @@
       "kind": "text",
       "required": true,
       "ask": "In one line, what do you do and for whom?",
-      "write": "One sentence, at most 120 characters, no hashtags or emoji."
+      "write": "One sentence, at most 120 characters, no hashtags or emoji. This appears in the About popover, not beside the name; repeat the essential purpose in the first text card."
+    },
+    {
+      "id": "introduction",
+      "file": "cards/00-intro.json",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": true,
+      "ask": "Who is this page for, what do you make or offer, and what should a new visitor understand first?",
+      "write": "Use a short descriptive heading and two sentences: identify the person or group, the work and the audience. The header shows only the name; this card must explain the purpose. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "latestText",
+      "file": "cards/01-latest.json",
+      "pointer": "/content/text",
+      "kind": "text",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "What should people know before taking this action: who it is for, format, timing, price or reply expectations, only if you want to publish them?",
+      "write": "One or two short sentences, at most 400 characters. Include only facts supplied for this action; do not assume an introductory call is free or that any date, price or reply time is current. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "latest",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 2,
+      "ask": "What is your newest release, and where should people listen to it first?",
+      "write": "Heading = the release and its status (out now, out on a date); first button = Listen now to the link they choose. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/01-latest.json"
+    },
+    {
+      "id": "latestHeading",
+      "file": "cards/01-latest.json",
+      "pointer": "/content/heading",
+      "kind": "text",
+      "required": true,
+      "ask": "What short heading should introduce this action?",
+      "write": "Use a clear heading that describes the action; no unconfirmed availability or promise. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "releases",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 4,
+      "ask": "Which releases should be listed? For each: the type, year and a link. You'll upload the cover art in the editor.",
+      "write": "tag = Single, EP or Album · year; title exactly as released; newest first. Alt text = a description of the cover art from them. Select up to four featured entries for this page; link to the complete archive or catalogue instead of deleting the person’s remaining work. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/02-releases.json"
+    },
+    {
+      "id": "tour",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 4,
+      "ifEmpty": "drop-card",
+      "ask": "Do you have upcoming shows? For each: date, city, venue and ticket link.",
+      "write": "tag = date · city; title = venue; description only for notes such as support acts or sold out. Remove past dates. Select up to four featured entries for this page; link to the complete archive or catalogue instead of deleting the person’s remaining work. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/03-tour.json"
+    },
+    {
+      "id": "listen",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 10,
+      "ask": "Where can people listen and follow you? Paste the artist pages.",
+      "write": "Artist page URLs only; the current app shows the host and path when no label is supplied. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/04-listen.json"
+    },
+    {
+      "id": "bookingText",
+      "file": "cards/05-booking.json",
+      "pointer": "/content/text",
+      "kind": "text",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "What should people know before taking this action: who it is for, format, timing, price or reply expectations, only if you want to publish them?",
+      "write": "One or two short sentences, at most 400 characters. Include only facts supplied for this action; do not assume an introductory call is free or that any date, price or reply time is current. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "booking",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 2,
+      "ifEmpty": "drop-card",
+      "ask": "Who handles booking and press, and which address may be public?",
+      "write": "Email: Only an address they confirm may be public: everyone can see it. Agents' addresses only with the agent's agreement. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/05-booking.json"
+    },
+    {
+      "id": "bookingHeading",
+      "file": "cards/05-booking.json",
+      "pointer": "/content/heading",
+      "kind": "text",
+      "required": true,
+      "ask": "What short heading should introduce this action?",
+      "write": "Use a clear heading that describes the action; no unconfirmed availability or promise. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
     },
     {
       "id": "location",
@@ -87,65 +195,8 @@
       "kind": "image",
       "required": false,
       "ifEmpty": "drop-field",
-      "ask": "Do you have a square photo or logo for your profile picture?",
-      "write": "The member uploads it in the editor; never fetch one from the web."
-    },
-    {
-      "id": "latest",
-      "pointer": "/content/buttons",
-      "kind": "list",
-      "required": true,
-      "min": 1,
-      "max": 2,
-      "ask": "What is your newest release, and where should people listen to it first?",
-      "write": "Heading = the release and its status (out now, out on a date); first button = Listen now to the link they choose.",
-      "file": "cards/01-latest.json"
-    },
-    {
-      "id": "releases",
-      "pointer": "/content/items",
-      "kind": "list",
-      "required": true,
-      "min": 1,
-      "max": 12,
-      "ask": "Which releases should be listed? For each: the type, year and a link. You'll upload the cover art in the editor.",
-      "write": "tag = Single, EP or Album · year; title exactly as released; newest first. Alt text = a description of the cover art from them.",
-      "file": "cards/02-releases.json"
-    },
-    {
-      "id": "tour",
-      "pointer": "/content/items",
-      "kind": "list",
-      "required": false,
-      "min": 1,
-      "max": 30,
-      "ifEmpty": "drop-card",
-      "ask": "Do you have upcoming shows? For each: date, city, venue and ticket link.",
-      "write": "tag = date · city; title = venue; description only for notes such as support acts or sold out. Remove past dates.",
-      "file": "cards/03-tour.json"
-    },
-    {
-      "id": "listen",
-      "pointer": "/content/items",
-      "kind": "list",
-      "required": true,
-      "min": 1,
-      "max": 10,
-      "ask": "Where can people listen and follow you? Paste the artist pages.",
-      "write": "Artist page URLs only; the app shows each platform's icon.",
-      "file": "cards/04-listen.json"
-    },
-    {
-      "id": "booking",
-      "pointer": "/content/buttons",
-      "kind": "list",
-      "required": false,
-      "min": 1,
-      "max": 2,
-      "ifEmpty": "drop-card",
-      "ask": "Who handles booking and press, and which address may be public?",
-      "write": "Email: Only an address they confirm may be public: everyone can see it. Agents' addresses only with the agent's agreement.",
-      "file": "cards/05-booking.json"
+      "ask": "Do you have a photo, artwork or logo you want to upload as the profile picture?",
+      "write": "The person uploads their chosen picture in the editor. Never fetch, generate or infer a personal photo. Use their description for alt text wherever the editor asks for it."
     }
   ]
 }

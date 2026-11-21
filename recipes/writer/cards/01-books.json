@@ -1,14 +1,14 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#collection",
+    "$type": "sh.unset.block.showcase",
     "title": "Books",
-    "layout": "grid",
+    "layout": "carousel",
     "items": [
       {
         "tag": "Novel · May 2026",
         "title": "The Long Table",
-        "description": "Three generations, one Sunday lunch. Pre-order now.",
+        "description": "Three generations, one Sunday lunch. A novel about what families pass around the table.",
         "uri": "https://odile.example.com/the-long-table",
         "image": {
           "image": {
@@ -69,5 +69,7 @@
       }
     ]
   },
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "full",
+  "surface": "plain"
 }

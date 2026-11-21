@@ -1,22 +1,22 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#buttons",
+    "$type": "sh.unset.block.buttons",
     "heading": "Have a story?",
-    "text": "I protect my sources. For anything sensitive, use SecureDrop rather than email.",
+    "text": "For sensitive material, use the SecureDrop destination below. Public email is for general enquiries; it is not a confidential reporting channel.",
     "buttons": [
       {
-        "$type": "sh.unset.section#linkButton",
-        "preset": "custom",
+        "$type": "sh.unset.block.buttons#link",
         "label": "Send a tip securely",
         "uri": "https://rhea.example.com/securedrop"
       },
       {
-        "$type": "sh.unset.section#emailButton",
+        "$type": "sh.unset.block.buttons#email",
         "address": "tips@rhea.example.com"
       }
     ]
   },
   "width": "half",
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "surface": "filled"
 }

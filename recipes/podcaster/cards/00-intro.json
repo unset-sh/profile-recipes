@@ -1,0 +1,10 @@
+{
+  "$type": "sh.unset.card",
+  "content": {
+    "$type": "sh.unset.block.text",
+    "text": "## Signal & Noise\n\nA podcast about the people who keep the internet running. Hosted by Dev Kapoor, with conversations about infrastructure, online communities and the work behind the screen."
+  },
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "half",
+  "surface": "plain"
+}

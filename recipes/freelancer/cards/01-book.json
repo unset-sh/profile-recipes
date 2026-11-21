@@ -1,20 +1,22 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#buttons",
+    "$type": "sh.unset.block.buttons",
     "heading": "Have a product decision to make?",
     "text": "A free 30-minute call is the quickest way to see if I can help.",
     "buttons": [
       {
-        "$type": "sh.unset.section#linkButton",
-        "preset": "bookCall",
+        "$type": "sh.unset.block.buttons#link",
+        "preset": "book-call",
         "uri": "https://maya.example.com/intro"
       },
       {
-        "$type": "sh.unset.section#emailButton",
+        "$type": "sh.unset.block.buttons#email",
         "address": "hello@maya.example.com"
       }
     ]
   },
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "half",
+  "surface": "filled"
 }

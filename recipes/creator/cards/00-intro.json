@@ -1,0 +1,10 @@
+{
+  "$type": "sh.unset.card",
+  "content": {
+    "$type": "sh.unset.block.text",
+    "text": "## Cooking for ordinary weeks\n\nI’m Juno, a cooking creator sharing practical dinners for small kitchens and student budgets. Start with a recipe below, or follow along for the next one."
+  },
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "half",
+  "surface": "filled"
+}

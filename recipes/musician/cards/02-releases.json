@@ -1,7 +1,7 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#collection",
+    "$type": "sh.unset.block.showcase",
     "title": "Releases",
     "layout": "carousel",
     "items": [
@@ -23,7 +23,8 @@
             "width": 1200,
             "height": 1200
           }
-        }
+        },
+        "description": "Our latest single: guitars, coastal air and a restless rhythm."
       },
       {
         "tag": "Album · 2024",
@@ -43,7 +44,8 @@
             "width": 1200,
             "height": 1200
           }
-        }
+        },
+        "description": "The full-length record, available to stream and on vinyl."
       },
       {
         "tag": "EP · 2022",
@@ -63,10 +65,12 @@
             "width": 1200,
             "height": 1200
           }
-        }
+        },
+        "description": "An early collection of songs recorded close to home."
       }
     ]
   },
   "surface": "plain",
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "full"
 }

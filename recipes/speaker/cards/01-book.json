@@ -1,20 +1,22 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#buttons",
-    "heading": "Book me to speak",
-    "text": "Keynotes, panels and workshops, in person or remote. Booking three months ahead.",
+    "$type": "sh.unset.block.buttons",
+    "heading": "Plan a talk for your team",
+    "text": "Keynotes, panels and workshops, in person or remote. Share your audience, topic and proposed date so we can discuss fit.",
     "buttons": [
       {
-        "$type": "sh.unset.section#linkButton",
+        "$type": "sh.unset.block.buttons#link",
         "preset": "hire",
         "uri": "https://priya.example.com/booking"
       },
       {
-        "$type": "sh.unset.section#emailButton",
+        "$type": "sh.unset.block.buttons#email",
         "address": "speaking@priya.example.com"
       }
     ]
   },
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "half",
+  "surface": "filled"
 }

@@ -1,20 +1,22 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#buttons",
+    "$type": "sh.unset.block.buttons",
     "heading": "Not sure where to start?",
     "text": "Book a free 20-minute call. We'll talk about where you are and where you want to be.",
     "buttons": [
       {
-        "$type": "sh.unset.section#linkButton",
-        "preset": "bookCall",
+        "$type": "sh.unset.block.buttons#link",
+        "preset": "book-call",
         "uri": "https://sam.example.com/intro"
       },
       {
-        "$type": "sh.unset.section#emailButton",
+        "$type": "sh.unset.block.buttons#email",
         "address": "coach@sam.example.com"
       }
     ]
   },
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "half",
+  "surface": "filled"
 }

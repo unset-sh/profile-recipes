@@ -1,26 +1,27 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#buttons",
+    "$type": "sh.unset.block.buttons",
     "heading": "Available for commissions",
     "text": "Editorial, NGO and brand work across Europe. I usually book four to six weeks ahead.",
     "buttons": [
       {
-        "$type": "sh.unset.section#linkButton",
+        "$type": "sh.unset.block.buttons#link",
         "preset": "hire",
         "uri": "https://tomas.example.com/hire"
       },
       {
-        "$type": "sh.unset.section#linkButton",
-        "preset": "bookCall",
+        "$type": "sh.unset.block.buttons#link",
+        "preset": "book-call",
         "uri": "https://tomas.example.com/call"
       },
       {
-        "$type": "sh.unset.section#emailButton",
+        "$type": "sh.unset.block.buttons#email",
         "address": "studio@tomas.example.com"
       }
     ]
   },
   "width": "half",
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "surface": "filled"
 }

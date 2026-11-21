@@ -1,8 +1,10 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#readme",
-    "text": "I report on climate and energy for **The Example Post** and freelance for European outlets. My work follows money: subsidies, lobbying and the contracts behind the energy transition.\n\n- **Beat:** energy markets, climate policy, corporate accountability\n- **Languages:** English, Dutch, Swedish\n- **Corrections:** if I got something wrong, tell me at the address below and I will fix it in public.\n\nEverything here is my own reporting; opinions are labelled as such."
+    "$type": "sh.unset.block.text",
+    "text": "## Climate, energy and accountability\n\nI report on the money behind the energy transition for **The Example Post** and European outlets: subsidies, lobbying and public contracts.\n\n**Languages:** English, Dutch and Swedish.\n**Corrections:** if I got something wrong, contact me below; I correct the public record.\n\nEverything listed here is my reporting; opinion is labelled."
   },
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "full",
+  "surface": "plain"
 }

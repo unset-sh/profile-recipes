@@ -1,8 +1,8 @@
 {
   "id": "journalist",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "title": "Journalist",
-  "summary": "For reporters and editors: your beat up front, your best work as a list, and a safe way for sources to reach you.",
+  "summary": "An editorial profile: introduce your beat, show three or four selected reports, then offer approved tip and follow destinations.",
   "persona": {
     "for": [
       "Staff and freelance reporters",
@@ -15,29 +15,29 @@
   },
   "lexicon": {
     "repository": "https://github.com/Undefined6799/unset",
-    "commit": "4abcada"
+    "commit": "0dd079517074917ebd5217f7ecf15f4984cdd5d3"
   },
   "preview": "preview.png",
   "cards": [
     {
       "file": "cards/01-about.json",
-      "purpose": "Beat, outlets, languages and corrections policy. The first thing an editor or source reads."
+      "purpose": "Orient editors and sources with the beat, outlets, languages and corrections policy."
     },
     {
       "file": "cards/02-reporting.json",
-      "purpose": "Three to six stories they are proudest of, newest first."
+      "purpose": "Three or four selected reports with publication, year and a one-line finding."
     },
     {
       "file": "cards/03-tips.json",
-      "purpose": "How sources reach them. The secure channel comes first."
+      "purpose": "An approved sensitive-tip channel first, followed by public email if offered."
     },
     {
       "file": "cards/04-elsewhere.json",
-      "purpose": "Where to follow their work."
+      "purpose": "The complete reporting archive and places to follow the work."
     },
     {
       "file": "cards/05-appearances.json",
-      "purpose": "Optional: talks, panels and podcasts.",
+      "purpose": "Selected talks, panels or podcasts, when relevant.",
       "optional": true
     }
   ],
@@ -58,7 +58,90 @@
       "kind": "text",
       "required": true,
       "ask": "In one line, what do you do and for whom?",
-      "write": "One sentence, at most 120 characters, no hashtags or emoji."
+      "write": "One sentence, at most 120 characters, no hashtags or emoji. This appears in the About popover, not beside the name; repeat the essential purpose in the first text card."
+    },
+    {
+      "id": "about",
+      "file": "cards/01-about.json",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": true,
+      "ask": "What is your beat, which outlets and languages do you work in, and what corrections policy do you want to publish?",
+      "write": "Start with a descriptive heading and two sentences identifying the beat and reporting focus. Add outlets, languages and a corrections policy only as supplied; do not inherit the sample correction promise. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "reporting",
+      "file": "cards/02-reporting.json",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 4,
+      "ask": "Share links to three or four stories you are proudest of.",
+      "write": "Per story: tag = outlet · year; title = the published headline; description = one line on what it found. Newest first. Use only links they give you. Select up to four featured entries for this page; link to the complete archive or catalogue instead of deleting the person’s remaining work. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "tipsChannelText",
+      "file": "cards/03-tips.json",
+      "pointer": "/content/text",
+      "kind": "text",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "What should people know before taking this action: who it is for, format, timing, price or reply expectations, only if you want to publish them?",
+      "write": "One or two short sentences, at most 400 characters. Include only facts supplied for this action; do not assume an introductory call is free or that any date, price or reply time is current. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "tipsChannel",
+      "file": "cards/03-tips.json",
+      "pointer": "/content/buttons/0/uri",
+      "kind": "uri",
+      "required": false,
+      "ifEmpty": "drop-item",
+      "ask": "Do you have a secure way for sources to reach you, such as SecureDrop or a Signal contact page?",
+      "write": "Their URL only. If they have none, remove the button and drop the SecureDrop sentence from the text. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "tipsChannelHeading",
+      "file": "cards/03-tips.json",
+      "pointer": "/content/heading",
+      "kind": "text",
+      "required": true,
+      "ask": "What short heading should introduce this action?",
+      "write": "Use a clear heading that describes the action; no unconfirmed availability or promise. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "tipsEmail",
+      "file": "cards/03-tips.json",
+      "pointer": "/content/buttons/1/address",
+      "kind": "email",
+      "required": false,
+      "ifEmpty": "drop-item",
+      "ask": "Is there an email address you want to publish for tips? It will be visible to everyone.",
+      "write": "Only an address they confirm they want public. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "elsewhere",
+      "file": "cards/04-elsewhere.json",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 6,
+      "ifEmpty": "drop-card",
+      "ask": "Where else can people follow your work (Bluesky, a newsletter, LinkedIn)?",
+      "write": "The URL only for accounts; the current app shows the host and path when no label is supplied. A label and one-line description only for your own pages. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "appearances",
+      "file": "cards/05-appearances.json",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 4,
+      "ifEmpty": "drop-card",
+      "ask": "Any talks, panels or podcast appearances you want to list?",
+      "write": "tag = format · year; title = the talk or episode title; description = event and city. Select up to four featured entries for this page; link to the complete archive or catalogue instead of deleting the person’s remaining work. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
     },
     {
       "id": "location",
@@ -87,72 +170,8 @@
       "kind": "image",
       "required": false,
       "ifEmpty": "drop-field",
-      "ask": "Do you have a square photo or logo for your profile picture?",
-      "write": "The member uploads it in the editor; never fetch one from the web."
-    },
-    {
-      "id": "about",
-      "file": "cards/01-about.json",
-      "pointer": "/content/text",
-      "kind": "markdown",
-      "required": true,
-      "ask": "Which outlets do you work for, what is your beat, and which languages do you report in?",
-      "write": "Two short paragraphs and a short list, as in the sample. Plain facts in the first person; no superlatives."
-    },
-    {
-      "id": "reporting",
-      "file": "cards/02-reporting.json",
-      "pointer": "/content/items",
-      "kind": "list",
-      "required": true,
-      "min": 1,
-      "max": 6,
-      "ask": "Share links to three to six stories you are proudest of.",
-      "write": "Per story: tag = outlet · year; title = the published headline; description = one line on what it found. Newest first. Use only links they give you."
-    },
-    {
-      "id": "tipsChannel",
-      "file": "cards/03-tips.json",
-      "pointer": "/content/buttons/0/uri",
-      "kind": "uri",
-      "required": false,
-      "ifEmpty": "drop-item",
-      "ask": "Do you have a secure way for sources to reach you, such as SecureDrop or a Signal contact page?",
-      "write": "Their URL only. If they have none, remove the button and drop the SecureDrop sentence from the text."
-    },
-    {
-      "id": "tipsEmail",
-      "file": "cards/03-tips.json",
-      "pointer": "/content/buttons/1/address",
-      "kind": "email",
-      "required": false,
-      "ifEmpty": "drop-item",
-      "ask": "Is there an email address you want to publish for tips? It will be visible to everyone.",
-      "write": "Only an address they confirm they want public."
-    },
-    {
-      "id": "elsewhere",
-      "file": "cards/04-elsewhere.json",
-      "pointer": "/content/items",
-      "kind": "list",
-      "required": false,
-      "min": 1,
-      "max": 6,
-      "ifEmpty": "drop-card",
-      "ask": "Where else can people follow your work (Bluesky, a newsletter, LinkedIn)?",
-      "write": "The URL only for accounts; the app shows the site and account name itself. A label and one-line description only for your own pages."
-    },
-    {
-      "id": "appearances",
-      "file": "cards/05-appearances.json",
-      "pointer": "/content/items",
-      "kind": "list",
-      "required": false,
-      "min": 1,
-      "max": 6,
-      "ifEmpty": "drop-card",
-      "ask": "Any talks, panels or podcast appearances you want to list?",
-      "write": "tag = format · year; title = the talk or episode title; description = event and city."
+      "ask": "Do you have a photo, artwork or logo you want to upload as the profile picture?",
+      "write": "The person uploads their chosen picture in the editor. Never fetch, generate or infer a personal photo. Use their description for alt text wherever the editor asks for it."
     }
   ]
 }

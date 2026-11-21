@@ -1,8 +1,8 @@
 {
   "id": "freelancer",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "title": "Freelancer or consultant",
-  "summary": "Sell your expertise: a clear way to book an intro call, what you offer and roughly what it costs, proof from past clients.",
+  "summary": "A focused service profile: who you help, selected case studies, comparable offers and a clear first conversation.",
   "persona": {
     "for": [
       "Independent consultants",
@@ -15,30 +15,35 @@
   },
   "lexicon": {
     "repository": "https://github.com/Undefined6799/unset",
-    "commit": "4abcada"
+    "commit": "0dd079517074917ebd5217f7ecf15f4984cdd5d3"
   },
   "preview": "preview.png",
   "cards": [
     {
+      "file": "cards/00-intro.json",
+      "purpose": "State the specialty, intended client and useful result before asking for a call."
+    },
+    {
       "file": "cards/01-book.json",
-      "purpose": "The one action a prospect should take."
-    },
-    {
-      "file": "cards/02-services.json",
-      "purpose": "What they sell, each with a format and a starting price."
-    },
-    {
-      "file": "cards/03-proof.json",
-      "purpose": "Short testimonials, each attributed."
+      "purpose": "A clear way to discuss a potential project."
     },
     {
       "file": "cards/04-work.json",
-      "purpose": "Case studies, if they can share any.",
+      "purpose": "Selected case studies with the freelancer’s contribution and an approved result.",
+      "optional": true
+    },
+    {
+      "file": "cards/02-services.json",
+      "purpose": "Up to four comparable offers, with format and published pricing when relevant."
+    },
+    {
+      "file": "cards/03-proof.json",
+      "purpose": "Optional approved client words; never retain the demonstration quotes.",
       "optional": true
     },
     {
       "file": "cards/05-elsewhere.json",
-      "purpose": "Professional profiles.",
+      "purpose": "Professional profiles and a longer work or writing archive.",
       "optional": true
     }
   ],
@@ -59,7 +64,91 @@
       "kind": "text",
       "required": true,
       "ask": "In one line, what do you do and for whom?",
-      "write": "One sentence, at most 120 characters, no hashtags or emoji."
+      "write": "One sentence, at most 120 characters, no hashtags or emoji. This appears in the About popover, not beside the name; repeat the essential purpose in the first text card."
+    },
+    {
+      "id": "introduction",
+      "file": "cards/00-intro.json",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": true,
+      "ask": "Who is this page for, what do you make or offer, and what should a new visitor understand first?",
+      "write": "Use a short descriptive heading and two sentences: identify the person or group, the work and the audience. The header shows only the name; this card must explain the purpose. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "bookingText",
+      "file": "cards/01-book.json",
+      "pointer": "/content/text",
+      "kind": "text",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "What should people know before taking this action: who it is for, format, timing, price or reply expectations, only if you want to publish them?",
+      "write": "One or two short sentences, at most 400 characters. Include only facts supplied for this action; do not assume an introductory call is free or that any date, price or reply time is current. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "booking",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 2,
+      "ask": "How should a new client start: a booking link for an intro call, email, or both?",
+      "write": "The first button is the booking link (book-call preset) when they have one. Email: Only an address they confirm may be public: everyone can see it. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/01-book.json"
+    },
+    {
+      "id": "bookingHeading",
+      "file": "cards/01-book.json",
+      "pointer": "/content/heading",
+      "kind": "text",
+      "required": true,
+      "ask": "What short heading should introduce this action?",
+      "write": "Use a clear heading that describes the action; no unconfirmed availability or promise. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "cases",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 4,
+      "ifEmpty": "drop-card",
+      "ask": "Are there case studies or projects you can link to?",
+      "write": "tag = client, only if publicly named with approval; title = the project or result; description = their contribution and a confirmed outcome. Feature up to four, linking to a complete portfolio for the rest. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/04-work.json"
+    },
+    {
+      "id": "services",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 4,
+      "ask": "What do you offer? For each: a name, how long or how often, a starting price if you publish one, and one line on the outcome.",
+      "write": "tag = format · price, only if they publish prices; title = the service name; description = the outcome for the client, not the activity. Select up to four featured entries for this page; link to the complete archive or catalogue instead of deleting the person’s remaining work. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/02-services.json"
+    },
+    {
+      "id": "testimonials",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": false,
+      "ifEmpty": "drop-card",
+      "ask": "Do you have two or three short client quotes you have permission to publish?",
+      "write": "Each quote verbatim, with name and role as the client approved. Never write or polish a quote. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/03-proof.json"
+    },
+    {
+      "id": "elsewhere",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 6,
+      "ifEmpty": "drop-card",
+      "ask": "Which professional profiles or newsletter should be linked?",
+      "write": "Account URLs only; a label and description only for their own pages. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/05-elsewhere.json"
     },
     {
       "id": "location",
@@ -88,64 +177,8 @@
       "kind": "image",
       "required": false,
       "ifEmpty": "drop-field",
-      "ask": "Do you have a square photo or logo for your profile picture?",
-      "write": "The member uploads it in the editor; never fetch one from the web."
-    },
-    {
-      "id": "booking",
-      "pointer": "/content/buttons",
-      "kind": "list",
-      "required": true,
-      "min": 1,
-      "max": 2,
-      "ask": "How should a new client start: a booking link for an intro call, email, or both?",
-      "write": "The first button is the booking link (bookCall preset) when they have one. Email: Only an address they confirm may be public: everyone can see it.",
-      "file": "cards/01-book.json"
-    },
-    {
-      "id": "services",
-      "pointer": "/content/items",
-      "kind": "list",
-      "required": true,
-      "min": 1,
-      "max": 5,
-      "ask": "What do you offer? For each: a name, how long or how often, a starting price if you publish one, and one line on the outcome.",
-      "write": "tag = format · price, only if they publish prices; title = the service name; description = the outcome for the client, not the activity.",
-      "file": "cards/02-services.json"
-    },
-    {
-      "id": "testimonials",
-      "pointer": "/content/text",
-      "kind": "markdown",
-      "required": false,
-      "ifEmpty": "drop-card",
-      "ask": "Do you have two or three short client quotes you have permission to publish?",
-      "write": "Each quote verbatim, with name and role as the client approved. Never write or polish a quote.",
-      "file": "cards/03-proof.json"
-    },
-    {
-      "id": "cases",
-      "pointer": "/content/items",
-      "kind": "list",
-      "required": false,
-      "min": 1,
-      "max": 6,
-      "ifEmpty": "drop-card",
-      "ask": "Are there case studies or projects you can link to?",
-      "write": "tag = client, only if named publicly; title = the result in a few words.",
-      "file": "cards/04-work.json"
-    },
-    {
-      "id": "elsewhere",
-      "pointer": "/content/items",
-      "kind": "list",
-      "required": false,
-      "min": 1,
-      "max": 6,
-      "ifEmpty": "drop-card",
-      "ask": "Which professional profiles or newsletter should be linked?",
-      "write": "Account URLs only; a label and description only for their own pages.",
-      "file": "cards/05-elsewhere.json"
+      "ask": "Do you have a photo, artwork or logo you want to upload as the profile picture?",
+      "write": "The person uploads their chosen picture in the editor. Never fetch, generate or infer a personal photo. Use their description for alt text wherever the editor asks for it."
     }
   ]
 }

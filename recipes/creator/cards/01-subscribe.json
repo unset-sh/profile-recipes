@@ -1,22 +1,23 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#buttons",
+    "$type": "sh.unset.block.buttons",
     "heading": "A new recipe every Thursday",
     "text": "Subscribe so you never miss one. The newsletter has the written recipes and shopping lists.",
     "buttons": [
       {
-        "$type": "sh.unset.section#linkButton",
+        "$type": "sh.unset.block.buttons#link",
         "preset": "subscribe",
         "uri": "https://www.youtube.com/@example-juno"
       },
       {
-        "$type": "sh.unset.section#linkButton",
-        "preset": "custom",
+        "$type": "sh.unset.block.buttons#link",
         "label": "Get the newsletter",
         "uri": "https://juno.example.com/newsletter"
       }
     ]
   },
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "half",
+  "surface": "plain"
 }

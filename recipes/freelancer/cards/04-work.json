@@ -1,22 +1,25 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#collection",
+    "$type": "sh.unset.block.showcase",
     "title": "Case studies",
     "layout": "list",
     "items": [
       {
         "tag": "Example Health",
         "title": "From 3 products to 1",
-        "uri": "https://maya.example.com/cases/example-health"
+        "uri": "https://maya.example.com/cases/example-health",
+        "description": "Product strategy and stakeholder workshops to bring three competing roadmaps into one plan."
       },
       {
         "tag": "Example Care",
         "title": "Launching in a regulated market",
-        "uri": "https://maya.example.com/cases/example-care"
+        "uri": "https://maya.example.com/cases/example-care",
+        "description": "A launch plan connecting customer research, compliance constraints and a staged release."
       }
     ]
   },
-  "width": "half",
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "width": "full",
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "surface": "plain"
 }

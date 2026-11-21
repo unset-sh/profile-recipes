@@ -1,125 +1,109 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#gallery",
-    "title": "Recent work",
+    "$type": "sh.unset.block.images",
+    "title": "Coastlines and working lives — selected photographs",
     "images": [
       {
         "image": {
-          "image": {
-            "$type": "blob",
-            "ref": {
-              "$link": "bafkreidslaq43jph64euhndbdicpf5vl64rfiunfb5vvycyccgzmnl6dmi"
-            },
-            "mimeType": "image/jpeg",
-            "size": 18389
+          "$type": "blob",
+          "ref": {
+            "$link": "bafkreidslaq43jph64euhndbdicpf5vl64rfiunfb5vvycyccgzmnl6dmi"
           },
-          "alt": "Sample picture: a navy-to-amber gradient standing in for a harbour at dawn.",
-          "aspectRatio": {
-            "width": 1600,
-            "height": 1067
-          }
+          "mimeType": "image/jpeg",
+          "size": 18389
         },
-        "caption": "Cascais harbour before the boats go out, 2026",
-        "fit": "fill"
+        "alt": "Sample picture: a navy-to-amber gradient standing in for a harbour at dawn.",
+        "aspectRatio": {
+          "width": 1600,
+          "height": 1067
+        },
+        "caption": "Cascais harbour before the boats go out, 2026"
       },
       {
         "image": {
-          "image": {
-            "$type": "blob",
-            "ref": {
-              "$link": "bafkreiajjnk4w56yveopp5wotujwhd2guxg3jwzh5puef4mxweclouffjy"
-            },
-            "mimeType": "image/jpeg",
-            "size": 24644
+          "$type": "blob",
+          "ref": {
+            "$link": "bafkreiajjnk4w56yveopp5wotujwhd2guxg3jwzh5puef4mxweclouffjy"
           },
-          "alt": "Sample picture: a deep green-to-sage gradient standing in for a portrait.",
-          "aspectRatio": {
-            "width": 1200,
-            "height": 1600
-          }
+          "mimeType": "image/jpeg",
+          "size": 24644
         },
-        "caption": "A net mender in Peniche",
-        "fit": "fill"
+        "alt": "Sample picture: a deep green-to-sage gradient standing in for a portrait.",
+        "aspectRatio": {
+          "width": 1200,
+          "height": 1600
+        },
+        "caption": "A net mender in Peniche"
       },
       {
         "image": {
-          "image": {
-            "$type": "blob",
-            "ref": {
-              "$link": "bafkreiazu4ilpngz7w6yfnx2thcfdtz7c27a5fggc7tfq55njjccz5wgzy"
-            },
-            "mimeType": "image/jpeg",
-            "size": 23013
+          "$type": "blob",
+          "ref": {
+            "$link": "bafkreiazu4ilpngz7w6yfnx2thcfdtz7c27a5fggc7tfq55njjccz5wgzy"
           },
-          "alt": "Sample picture: a plum-to-sand gradient standing in for a street scene.",
-          "aspectRatio": {
-            "width": 1600,
-            "height": 1067
-          }
+          "mimeType": "image/jpeg",
+          "size": 23013
         },
-        "caption": "Alfama, 4 a.m.",
-        "fit": "fill"
+        "alt": "Sample picture: a plum-to-sand gradient standing in for a street scene.",
+        "aspectRatio": {
+          "width": 1600,
+          "height": 1067
+        },
+        "caption": "Alfama, 4 a.m."
       },
       {
         "image": {
-          "image": {
-            "$type": "blob",
-            "ref": {
-              "$link": "bafkreiauy5a6slgx5jpc4q7jxefzcrepdlfbc4oe7dwidiib6gskgmewdi"
-            },
-            "mimeType": "image/jpeg",
-            "size": 23060
+          "$type": "blob",
+          "ref": {
+            "$link": "bafkreiauy5a6slgx5jpc4q7jxefzcrepdlfbc4oe7dwidiib6gskgmewdi"
           },
-          "alt": "Sample picture: a near-black-to-blue gradient standing in for a night skyline.",
-          "aspectRatio": {
-            "width": 1600,
-            "height": 1600
-          }
+          "mimeType": "image/jpeg",
+          "size": 23060
         },
-        "caption": "The bridge from the south bank",
-        "fit": "fill"
+        "alt": "Sample picture: a near-black-to-blue gradient standing in for a night skyline.",
+        "aspectRatio": {
+          "width": 1600,
+          "height": 1600
+        },
+        "caption": "The bridge from the south bank"
       },
       {
         "image": {
-          "image": {
-            "$type": "blob",
-            "ref": {
-              "$link": "bafkreiekthrlu74asoob75j2ofnylw4jwwl3ukhr3yc2u5s6vcq3izkofm"
-            },
-            "mimeType": "image/jpeg",
-            "size": 25011
+          "$type": "blob",
+          "ref": {
+            "$link": "bafkreiekthrlu74asoob75j2ofnylw4jwwl3ukhr3yc2u5s6vcq3izkofm"
           },
-          "alt": "Sample picture: an olive-to-cream gradient standing in for a market stall.",
-          "aspectRatio": {
-            "width": 1600,
-            "height": 1067
-          }
+          "mimeType": "image/jpeg",
+          "size": 25011
         },
-        "caption": "Saturday at the Ribeira market",
-        "fit": "fill"
+        "alt": "Sample picture: an olive-to-cream gradient standing in for a market stall.",
+        "aspectRatio": {
+          "width": 1600,
+          "height": 1067
+        },
+        "caption": "Saturday at the Ribeira market"
       },
       {
         "image": {
-          "image": {
-            "$type": "blob",
-            "ref": {
-              "$link": "bafkreihqh42klek3xd3dchpi2uplpnhdfyakd33dpi7sn66vzxhiknoodm"
-            },
-            "mimeType": "image/jpeg",
-            "size": 21576
+          "$type": "blob",
+          "ref": {
+            "$link": "bafkreihqh42klek3xd3dchpi2uplpnhdfyakd33dpi7sn66vzxhiknoodm"
           },
-          "alt": "Sample picture: a navy-to-rose gradient standing in for a dancer.",
-          "aspectRatio": {
-            "width": 1200,
-            "height": 1600
-          }
+          "mimeType": "image/jpeg",
+          "size": 21576
         },
-        "caption": "Rehearsal, Teatro Example",
-        "fit": "fill"
+        "alt": "Sample picture: a navy-to-rose gradient standing in for a dancer.",
+        "aspectRatio": {
+          "width": 1200,
+          "height": 1600
+        },
+        "caption": "Rehearsal, Teatro Example"
       }
-    ]
+    ],
+    "fit": "contain"
   },
   "surface": "plain",
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "full"
 }

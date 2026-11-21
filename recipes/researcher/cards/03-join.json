@@ -1,22 +1,22 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#buttons",
+    "$type": "sh.unset.block.buttons",
     "heading": "Join the lab",
-    "text": "One funded PhD position from autumn 2026. Postdoc enquiries welcome.",
+    "text": "Interested in forest recovery, remote sensing or ecological modelling? Current funded openings and application details are on the lab’s positions page.",
     "buttons": [
       {
-        "$type": "sh.unset.section#linkButton",
-        "preset": "custom",
+        "$type": "sh.unset.block.buttons#link",
         "uri": "https://lena.example.org/positions",
         "label": "Open positions"
       },
       {
-        "$type": "sh.unset.section#emailButton",
+        "$type": "sh.unset.block.buttons#email",
         "address": "lena.brandt@example.org"
       }
     ]
   },
   "width": "half",
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "surface": "outlined"
 }

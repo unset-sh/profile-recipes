@@ -1,23 +1,23 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#buttons",
-    "heading": "Help us feed 400 families a week",
-    "text": "Every €10 covers a family's fresh produce for a week.",
+    "$type": "sh.unset.block.buttons",
+    "heading": "Support the next collection",
+    "text": "Help cover fresh food and deliveries, or join a volunteer shift. The links explain how each contribution is used.",
     "buttons": [
       {
-        "$type": "sh.unset.section#linkButton",
-        "preset": "custom",
+        "$type": "sh.unset.block.buttons#link",
         "uri": "https://riversidefood.example.org/donate",
         "label": "Donate"
       },
       {
-        "$type": "sh.unset.section#linkButton",
-        "preset": "custom",
+        "$type": "sh.unset.block.buttons#link",
         "uri": "https://riversidefood.example.org/volunteer",
         "label": "Volunteer"
       }
     ]
   },
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "half",
+  "surface": "filled"
 }

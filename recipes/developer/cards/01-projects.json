@@ -1,29 +1,31 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#collection",
+    "$type": "sh.unset.block.showcase",
     "title": "Projects",
-    "layout": "grid",
+    "layout": "list",
     "items": [
       {
         "tag": "Rust · MIT",
         "title": "tidequeue",
-        "description": "A small, durable job queue on top of Postgres.",
+        "description": "A durable PostgreSQL-backed job queue. I maintain the worker model, retries and recovery tooling.",
         "uri": "https://github.com/example-ari/tidequeue"
       },
       {
         "tag": "Go · Apache-2.0",
         "title": "certwatch",
-        "description": "Alerts before your TLS certificates expire.",
+        "description": "Certificate expiry monitoring for small teams. I built the checks, notifications and deployment tooling.",
         "uri": "https://github.com/example-ari/certwatch"
       },
       {
         "tag": "TypeScript",
         "title": "atproto-feed-kit",
-        "description": "Helpers for writing atproto feed generators.",
+        "description": "Helpers for atproto feed generators, with examples for authentication, storage and deployment.",
         "uri": "https://github.com/example-ari/feed-kit"
       }
     ]
   },
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "full",
+  "surface": "outlined"
 }

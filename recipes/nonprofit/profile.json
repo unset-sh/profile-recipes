@@ -2,7 +2,7 @@
   "$type": "sh.unset.profile",
   "displayName": "Riverside Food Collective",
   "headline": "Volunteer-run food bank and community kitchen in Riverside since 2018.",
-  "avatarShape": "roundedSquare",
+  "avatarShape": "rounded-square",
   "location": "Riverside",
   "website": "https://riversidefood.example.org",
   "avatar": {

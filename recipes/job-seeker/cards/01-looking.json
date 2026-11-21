@@ -1,8 +1,10 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#readme",
-    "text": "**What I'm looking for:** a senior product design role in a health or care company, where design sits close to research.\n\n**Where:** Amsterdam or remote within CET ±2.\n**When:** available from April 2026.\n**Best at:** turning messy clinical workflows into calm interfaces."
+    "$type": "sh.unset.block.text",
+    "text": "## Product design for health and care\n\nI’m Jordan, a product designer turning complex clinical workflows into clear, usable services. I’m looking for a senior role where design stays close to research.\n\n**Location:** Amsterdam or remote within CET ±2.\n**Availability:** January 2027.\n**Focus:** patient access and the everyday work of care teams."
   },
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "full",
+  "surface": "plain"
 }

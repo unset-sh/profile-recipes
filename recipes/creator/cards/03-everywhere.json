@@ -1,9 +1,9 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#links",
+    "$type": "sh.unset.block.links",
     "title": "Where I post",
-    "layout": "grid",
+    "layout": "list",
     "items": [
       {
         "uri": "https://www.youtube.com/@example-juno"
@@ -23,5 +23,7 @@
       }
     ]
   },
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "half",
+  "surface": "plain"
 }

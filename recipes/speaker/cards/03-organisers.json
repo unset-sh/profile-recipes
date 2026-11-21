@@ -1,9 +1,10 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#readme",
-    "text": "**For organisers**\n\nFormats: 20–45 min keynote, panel, half-day workshop.\nSpeaker kit with bio, photos and tech rider at priya.example.com/kit.\nFee on request; reduced for non-profits."
+    "$type": "sh.unset.block.text",
+    "text": "## For organisers\n\n**Formats:** 20–45 minute keynote, panel or half-day workshop.\n**Planning:** share the audience, location or online format, and proposed date.\n**Materials:** [speaker kit, approved bio and technical notes](https://priya.example.com/kit).\n**Fees:** on request; ask about nonprofit events."
   },
   "width": "half",
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "surface": "outlined"
 }

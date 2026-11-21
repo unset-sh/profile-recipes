@@ -1,9 +1,8 @@
 # Photographer
 
-A profile that puts the pictures first. The gallery has no card around it, so the work reads edge to edge; the text
-comes after, short, and ends with one clear way to commission them.
+Introduce your photographic practice, present a coherent picture series and named projects, then explain how to commission you.
 
-Read [AGENTS.md](../../AGENTS.md) first: it holds the rules for every recipe. This guide adds what is specific here.
+Read [AGENTS.md](../../AGENTS.md) first for the interview, public-email and upload rules. This guide adds the choices specific to this recipe.
 
 ## Who this is for
 
@@ -14,23 +13,33 @@ images. Videographers whose work lives on a video platform should start from [cr
 
 | # | Card | Kind | Width | Surface | Why it is here |
 | --- | --- | --- | --- | --- | --- |
-| 1 | Recent work | gallery | full | plain | Six to twelve pictures, cropped to fill |
-| 2 | Projects | collection, grid | full | filled | Series and commissions, each with a cover |
-| 3 | About | readme | half | filled | Base, kind of work, clients, prints |
-| 4 | Available for commissions | buttons | half | filled | Hire, book a call, email |
-| 5 | Elsewhere | links, grid | full | outlined | Optional: portfolio and social accounts |
+| 1 | Practice and commissions | text | full | plain | Identify the photographic practice, working area and commission scope before any media. |
+| 2 | Coastlines and working lives — selected photographs | images | full | plain | A coherent selection of photographs, shown whole with descriptive alt text and captions. |
+| 3 | Projects | showcase, grid | full | plain | Three or four named series or commissions with context and portfolio destinations. |
+| 4 | Available for commissions | buttons | half | filled | The next step for a commission, using only confirmed availability. |
+| 5 | Elsewhere | links, list | half | plain | Optional: The complete portfolio and selected professional channels. |
 
-The avatar uses `roundedSquare`, which suits a logo or a tightly cropped self-portrait.
+The table and `recipe.json` give the same reading order; filenames are stable identifiers, not display order. Half-width neighbors share a row on wide screens and stack in this order on small screens. If an optional half-width card is omitted, make its remaining neighbor full width.
+
+## Design notes
+
+Organize photographs into a coherent series and named projects; orientation and commission details keep the page useful when images are unavailable. References: [Nadav Kander’s series-led portfolio](https://www.nadavkander.com/); [Adobe Portfolio’s collection guidance](https://help.myportfolio.com/hc/en-us/articles/50072031736731-Anatomy-of-an-Adobe-Portfolio-website).
+
+Use only the existing full/half widths, filled/outlined/plain surfaces and list/grid/carousel layouts. The current app shows an avatar and name above the cards; headline, location and website are in the About popover. Images blocks and showcase artwork are schema-supported media, but the current app does not render that media yet: keep the introduction and text links complete, and treat any illustrated preview as a media study. On mobile, check the stacked reading order, long titles and button labels; do not depend on side-by-side comparison.
 
 ## Interview
 
-1. `displayName`, `headline`: their name and what they photograph, in one line.
-2. `gallery`: ask them to choose the pictures. They upload them in the editor; you never fetch pictures from the web.
-   For each one ask what it shows and where it was taken, then write the alt text and caption from their answer.
-3. `projects`: series or commissions, with a title and one line each.
-4. `about`: where they are based, what work they take, which clients they may name.
-5. `hireButtons`: booking page, call link, email. Say plainly that an email address on the profile is public.
-6. `elsewhere`, `location`, `website`, `avatar`.
+Ask one or two questions at a time. The exact questions and unanswered-slot rules are in `recipe.json`. Ask card questions in this page order, including the pitch heading and text before retaining an action’s timing, price or other promise.
+
+1. `displayName`, `headline`.
+2. `about`.
+3. `seriesTitle`, `gallery`.
+4. `projects`.
+5. `hireButtonsText`, `hireButtons`, `hireButtonsHeading`.
+6. `elsewhere`.
+7. `location`, `website`, `avatar`, if wanted.
+
+Before filling any card, clear its demonstration fields and populate only answered slots. If a required answer is missing, ask once more and then omit that card; follow each optional slot’s `ifEmpty` rule. Never leave example URLs, sample quotes or invented availability in a personalized result.
 
 ## Writing rules
 
@@ -40,6 +49,9 @@ The avatar uses `roundedSquare`, which suits a logo or a tightly cropped self-po
 - Name only clients they say they may name.
 - Six pictures is the floor for a gallery that reads as a body of work; twelve is the most the card holds.
 - If they have fewer than three projects, drop the Projects card rather than padding it.
+- All names, claims, prices, quotations, dates and links in the sample are invented demonstration content. Replace or remove them; an unanswered slot never authorizes retaining a sample fact.
+- The first text card must identify the work and audience; do not rely on the headline, location or website in the About popover.
+- Feature three or four items per showcase where possible. Keep the remaining work in a linked archive; do not delete or silently rewrite the person’s history.
 
 ## Before publishing
 
@@ -47,3 +59,8 @@ The avatar uses `roundedSquare`, which suits a logo or a tightly cropped self-po
 - [ ] The person has the right to publish every picture (their own work, and model releases where needed).
 - [ ] Pictures are JPEG, with no location or camera metadata; the editor removes it on upload.
 - [ ] The main button is the one they most want people to press.
+- [ ] Every retained sample field has been replaced or explicitly removed, including button pitches and headings.
+- [ ] The first card explains the profile without opening About.
+- [ ] Any upcoming dates, availability, prices and account links have been checked with the person.
+- [ ] Optional-card removal leaves a sensible reading order on wide and narrow screens.
+- [ ] Pictures are the person’s uploads with approved descriptions, and the page remains useful without media rendering.

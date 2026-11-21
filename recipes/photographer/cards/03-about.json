@@ -1,9 +1,10 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#readme",
-    "text": "Photographer based in Lisbon, working across Portugal and Spain for magazines, NGOs and a few brands I believe in.\n\n**Clients:** Example Magazine, The Example Post, Example Foundation\n**Prints:** limited editions of each series are available on request."
+    "$type": "sh.unset.block.text",
+    "text": "## People, places and the working day\n\nI’m Tomás, a Lisbon-based photographer making documentary and editorial work across Portugal and Spain. **The Last Fishing Towns** follows coastal communities as their working lives change.\n\n**Commissions:** magazines, NGOs and selected brands.\n**Selected clients:** Example Magazine, The Example Post and Example Foundation.\n**Prints:** ask about editions from each series."
   },
-  "width": "half",
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "width": "full",
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "surface": "plain"
 }

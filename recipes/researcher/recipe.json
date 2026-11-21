@@ -1,8 +1,8 @@
 {
   "id": "researcher",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "title": "Researcher or academic",
-  "summary": "For researchers: what you work on in plain words, selected publications, your identifiers, and how to collaborate or apply to work with you.",
+  "summary": "A compact research index: explain the question, show selected publications with context, and link to the complete scholarly record.",
   "persona": {
     "for": [
       "Academics and postdocs",
@@ -15,30 +15,30 @@
   },
   "lexicon": {
     "repository": "https://github.com/Undefined6799/unset",
-    "commit": "4abcada"
+    "commit": "0dd079517074917ebd5217f7ecf15f4984cdd5d3"
   },
   "preview": "preview.png",
   "cards": [
     {
       "file": "cards/01-research.json",
-      "purpose": "What they work on, in words a non-specialist understands."
+      "purpose": "Explain the research question and affiliation before the specialist record."
     },
     {
       "file": "cards/02-publications.json",
-      "purpose": "Five to ten selected publications."
+      "purpose": "Three or four selected papers with authors, venue, year and contribution."
     },
     {
       "file": "cards/03-join.json",
-      "purpose": "Optional: openings and supervision.",
+      "purpose": "Official openings and collaboration enquiries, if current.",
       "optional": true
     },
     {
       "file": "cards/04-ids.json",
-      "purpose": "Scholarly identifiers and profiles."
+      "purpose": "The complete scholarly record and identifiers."
     },
     {
       "file": "cards/05-talks.json",
-      "purpose": "Optional: talks and teaching.",
+      "purpose": "Selected talks and teaching.",
       "optional": true
     }
   ],
@@ -59,7 +59,81 @@
       "kind": "text",
       "required": true,
       "ask": "In one line, what do you do and for whom?",
-      "write": "One sentence, at most 120 characters, no hashtags or emoji."
+      "write": "One sentence, at most 120 characters, no hashtags or emoji. This appears in the About popover, not beside the name; repeat the essential purpose in the first text card."
+    },
+    {
+      "id": "research",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": true,
+      "ask": "What do you study, in a sentence a curious non-specialist would understand? What is your position and group?",
+      "write": "One plain-language paragraph, then bold-labelled affiliation and group lines exactly as the institution lists them. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/01-research.json"
+    },
+    {
+      "id": "publications",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 4,
+      "ask": "Which three or four publications should visitors see first? Share their titles, authors, venue, year, DOI or link, and a plain-language line about each contribution.",
+      "write": "tag = venue and year, or Preprint and year; title exactly as published; description = authors in the venue’s order plus a one-line contribution supplied by the researcher, within 300 characters. Use their DOI or publication link. Keep the full record behind a scholarly-profile link; never invent missing bibliographic details. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/02-publications.json"
+    },
+    {
+      "id": "joinText",
+      "file": "cards/03-join.json",
+      "pointer": "/content/text",
+      "kind": "text",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "What should people know before taking this action: who it is for, format, timing, price or reply expectations, only if you want to publish them?",
+      "write": "One or two short sentences, at most 400 characters. Include only facts supplied for this action; do not assume an introductory call is free or that any date, price or reply time is current. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "join",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 2,
+      "ifEmpty": "drop-card",
+      "ask": "Are you recruiting students or postdocs, or open to collaboration?",
+      "write": "Text = what is open and from when, as on the official advert. Institutional email only if they want it shown. Only an address they confirm may be public: everyone can see it. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/03-join.json"
+    },
+    {
+      "id": "joinHeading",
+      "file": "cards/03-join.json",
+      "pointer": "/content/heading",
+      "kind": "text",
+      "required": true,
+      "ask": "What short heading should introduce this action?",
+      "write": "Use a clear heading that describes the action; no unconfirmed availability or promise. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "ids",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 8,
+      "ask": "Which scholarly profiles should be linked: ORCID, Google Scholar, institutional page, code?",
+      "write": "Profile URLs only. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/04-ids.json"
+    },
+    {
+      "id": "talks",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 4,
+      "ifEmpty": "drop-card",
+      "ask": "Any talks or courses you want to list?",
+      "write": "tag = type · year; title as given; description = event and city. Select up to four featured entries for this page; link to the complete archive or catalogue instead of deleting the person’s remaining work. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/05-talks.json"
     },
     {
       "id": "location",
@@ -88,63 +162,8 @@
       "kind": "image",
       "required": false,
       "ifEmpty": "drop-field",
-      "ask": "Do you have a square photo or logo for your profile picture?",
-      "write": "The member uploads it in the editor; never fetch one from the web."
-    },
-    {
-      "id": "research",
-      "pointer": "/content/text",
-      "kind": "markdown",
-      "required": true,
-      "ask": "What do you study, in a sentence a curious non-specialist would understand? What is your position and group?",
-      "write": "One plain-language paragraph, then bold-labelled affiliation and group lines exactly as the institution lists them.",
-      "file": "cards/01-research.json"
-    },
-    {
-      "id": "publications",
-      "pointer": "/content/items",
-      "kind": "list",
-      "required": true,
-      "min": 1,
-      "max": 10,
-      "ask": "Which five to ten publications should be listed? DOIs or links are enough; I'll copy the details.",
-      "write": "tag = venue · year (or Preprint · year); title exactly as published; description = authors in the venue's format, theirs included. Link the DOI.",
-      "file": "cards/02-publications.json"
-    },
-    {
-      "id": "join",
-      "pointer": "/content/buttons",
-      "kind": "list",
-      "required": false,
-      "min": 1,
-      "max": 2,
-      "ifEmpty": "drop-card",
-      "ask": "Are you recruiting students or postdocs, or open to collaboration?",
-      "write": "Text = what is open and from when, as on the official advert. Institutional email only if they want it shown. Only an address they confirm may be public: everyone can see it.",
-      "file": "cards/03-join.json"
-    },
-    {
-      "id": "ids",
-      "pointer": "/content/items",
-      "kind": "list",
-      "required": true,
-      "min": 1,
-      "max": 8,
-      "ask": "Which scholarly profiles should be linked: ORCID, Google Scholar, institutional page, code?",
-      "write": "Profile URLs only.",
-      "file": "cards/04-ids.json"
-    },
-    {
-      "id": "talks",
-      "pointer": "/content/items",
-      "kind": "list",
-      "required": false,
-      "min": 1,
-      "max": 8,
-      "ifEmpty": "drop-card",
-      "ask": "Any talks or courses you want to list?",
-      "write": "tag = type · year; title as given; description = event and city.",
-      "file": "cards/05-talks.json"
+      "ask": "Do you have a photo, artwork or logo you want to upload as the profile picture?",
+      "write": "The person uploads their chosen picture in the editor. Never fetch, generate or infer a personal photo. Use their description for alt text wherever the editor asks for it."
     }
   ]
 }

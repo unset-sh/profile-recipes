@@ -1,9 +1,9 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#collection",
+    "$type": "sh.unset.block.showcase",
     "title": "Latest videos",
-    "layout": "carousel",
+    "layout": "grid",
     "items": [
       {
         "tag": "Video · 12 min",
@@ -23,7 +23,8 @@
             "width": 1280,
             "height": 720
           }
-        }
+        },
+        "description": "A practical batch-cooking session: three ways to turn a basic ingredient into dinner."
       },
       {
         "tag": "Video · 9 min",
@@ -43,7 +44,8 @@
             "width": 1280,
             "height": 720
           }
-        }
+        },
+        "description": "Comparing quick lunches by cost, preparation and what keeps well."
       },
       {
         "tag": "Short · 1 min",
@@ -63,10 +65,12 @@
             "width": 1280,
             "height": 720
           }
-        }
+        },
+        "description": "A quick stovetop snack for a small kitchen."
       }
     ]
   },
   "surface": "plain",
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "full"
 }

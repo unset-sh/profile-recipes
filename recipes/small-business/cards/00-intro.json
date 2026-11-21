@@ -1,0 +1,10 @@
+{
+  "$type": "sh.unset.card",
+  "content": {
+    "$type": "sh.unset.block.text",
+    "text": "## Fern & Clay\n\nSmall-batch ceramics from our studio in Ghent. We make mugs, serving pieces and planters for everyday use, with a shop online and studio visits on Saturdays."
+  },
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "half",
+  "surface": "plain"
+}

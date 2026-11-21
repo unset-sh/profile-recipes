@@ -10,7 +10,7 @@
     "mimeType": "image/jpeg",
     "size": 10312
   },
-  "avatarShape": "roundedSquare",
+  "avatarShape": "rounded-square",
   "location": "Lisbon",
   "website": "https://tomas.example.com",
   "visibility": "public",

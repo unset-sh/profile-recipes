@@ -1,8 +1,8 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#links",
-    "layout": "grid",
+    "$type": "sh.unset.block.links",
+    "layout": "list",
     "items": [
       {
         "uri": "https://bsky.app/profile/odile.example.com"
@@ -13,8 +13,10 @@
       {
         "uri": "https://www.goodreads.com/author/example-odile"
       }
-    ]
+    ],
+    "title": "Elsewhere"
   },
-  "surface": "outlined",
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "surface": "plain",
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "full"
 }

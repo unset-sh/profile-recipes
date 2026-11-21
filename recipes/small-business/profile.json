@@ -2,7 +2,7 @@
   "$type": "sh.unset.profile",
   "displayName": "Fern & Clay",
   "headline": "Handmade stoneware from a two-person studio. Shop online or visit us on Saturdays.",
-  "avatarShape": "roundedSquare",
+  "avatarShape": "rounded-square",
   "location": "Ghent",
   "website": "https://fernandclay.example.com",
   "avatar": {

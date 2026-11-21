@@ -1,7 +1,7 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#links",
+    "$type": "sh.unset.block.links",
     "title": "Elsewhere",
     "layout": "list",
     "items": [
@@ -19,5 +19,6 @@
     ]
   },
   "surface": "plain",
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "half"
 }

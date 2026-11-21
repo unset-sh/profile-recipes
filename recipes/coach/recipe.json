@@ -1,8 +1,8 @@
 {
   "id": "coach",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "title": "Coach or teacher",
-  "summary": "For coaches and teachers: a free intro call first, the ways to work with you and what they cost, the weekly schedule, and what students say.",
+  "summary": "A clear coaching offer: who it helps, how to start, what each format includes, and when recurring sessions take place.",
   "persona": {
     "for": [
       "Coaches (career, fitness, life)",
@@ -15,30 +15,34 @@
   },
   "lexicon": {
     "repository": "https://github.com/Undefined6799/unset",
-    "commit": "4abcada"
+    "commit": "0dd079517074917ebd5217f7ecf15f4984cdd5d3"
   },
   "preview": "preview.png",
   "cards": [
     {
+      "file": "cards/00-intro.json",
+      "purpose": "Explain who the coaching is for and how the work is approached."
+    },
+    {
       "file": "cards/01-start.json",
-      "purpose": "The main ask: a free intro."
+      "purpose": "A first conversation with its real format and price, if any."
     },
     {
       "file": "cards/02-offers.json",
-      "purpose": "Ways to work with them, each with a format and price."
+      "purpose": "Three or four engagement formats with what the participant receives."
     },
     {
       "file": "cards/03-schedule.json",
-      "purpose": "The regular schedule."
+      "purpose": "Confirmed recurring sessions and public meeting places."
     },
     {
       "file": "cards/04-voices.json",
-      "purpose": "Optional: what students say.",
+      "purpose": "Optional verbatim participant quotes with permission.",
       "optional": true
     },
     {
       "file": "cards/05-elsewhere.json",
-      "purpose": "Where to follow them.",
+      "purpose": "Resources and professional channels.",
       "optional": true
     }
   ],
@@ -59,7 +63,89 @@
       "kind": "text",
       "required": true,
       "ask": "In one line, what do you do and for whom?",
-      "write": "One sentence, at most 120 characters, no hashtags or emoji."
+      "write": "One sentence, at most 120 characters, no hashtags or emoji. This appears in the About popover, not beside the name; repeat the essential purpose in the first text card."
+    },
+    {
+      "id": "introduction",
+      "file": "cards/00-intro.json",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": true,
+      "ask": "Who is this page for, what do you make or offer, and what should a new visitor understand first?",
+      "write": "Use a short descriptive heading and two sentences: identify the person or group, the work and the audience. The header shows only the name; this card must explain the purpose. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "startText",
+      "file": "cards/01-start.json",
+      "pointer": "/content/text",
+      "kind": "text",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "What should people know before taking this action: who it is for, format, timing, price or reply expectations, only if you want to publish them?",
+      "write": "One or two short sentences, at most 400 characters. Include only facts supplied for this action; do not assume an introductory call is free or that any date, price or reply time is current. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "start",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 2,
+      "ask": "How should a new student start: a free call, a trial class, a booking page?",
+      "write": "Heading = a question their student would ask; first button = the booking link. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/01-start.json"
+    },
+    {
+      "id": "startHeading",
+      "file": "cards/01-start.json",
+      "pointer": "/content/heading",
+      "kind": "text",
+      "required": true,
+      "ask": "What short heading should introduce this action?",
+      "write": "Use a clear heading that describes the action; no unconfirmed availability or promise. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "offers",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 4,
+      "ask": "What are the ways to work with you? For each: format, length, price if public, and who it is for.",
+      "write": "tag = length or frequency · price; title = the offer; description = what the student gets. Select up to four featured entries for this page; link to the complete archive or catalogue instead of deleting the person’s remaining work. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/02-offers.json"
+    },
+    {
+      "id": "schedule",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": false,
+      "ifEmpty": "drop-card",
+      "ask": "Do you have regular classes or sessions? When and where?",
+      "write": "A bulleted list: day time: session, place. Public places only. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/03-schedule.json"
+    },
+    {
+      "id": "voices",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": false,
+      "ifEmpty": "drop-card",
+      "ask": "Do you have short quotes from students you may publish?",
+      "write": "Verbatim, attributed as each student agreed (first name only is fine). Never write a quote. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/04-voices.json"
+    },
+    {
+      "id": "elsewhere",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 6,
+      "ifEmpty": "drop-card",
+      "ask": "Where else do you post?",
+      "write": "Account URLs only. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/05-elsewhere.json"
     },
     {
       "id": "location",
@@ -88,62 +174,8 @@
       "kind": "image",
       "required": false,
       "ifEmpty": "drop-field",
-      "ask": "Do you have a square photo or logo for your profile picture?",
-      "write": "The member uploads it in the editor; never fetch one from the web."
-    },
-    {
-      "id": "start",
-      "pointer": "/content/buttons",
-      "kind": "list",
-      "required": true,
-      "min": 1,
-      "max": 2,
-      "ask": "How should a new student start: a free call, a trial class, a booking page?",
-      "write": "Heading = a question their student would ask; first button = the booking link.",
-      "file": "cards/01-start.json"
-    },
-    {
-      "id": "offers",
-      "pointer": "/content/items",
-      "kind": "list",
-      "required": true,
-      "min": 1,
-      "max": 6,
-      "ask": "What are the ways to work with you? For each: format, length, price if public, and who it is for.",
-      "write": "tag = length or frequency · price; title = the offer; description = what the student gets.",
-      "file": "cards/02-offers.json"
-    },
-    {
-      "id": "schedule",
-      "pointer": "/content/text",
-      "kind": "markdown",
-      "required": false,
-      "ifEmpty": "drop-card",
-      "ask": "Do you have regular classes or sessions? When and where?",
-      "write": "A bulleted list: day time: session, place. Public places only.",
-      "file": "cards/03-schedule.json"
-    },
-    {
-      "id": "voices",
-      "pointer": "/content/text",
-      "kind": "markdown",
-      "required": false,
-      "ifEmpty": "drop-card",
-      "ask": "Do you have short quotes from students you may publish?",
-      "write": "Verbatim, attributed as each student agreed (first name only is fine). Never write a quote.",
-      "file": "cards/04-voices.json"
-    },
-    {
-      "id": "elsewhere",
-      "pointer": "/content/items",
-      "kind": "list",
-      "required": false,
-      "min": 1,
-      "max": 6,
-      "ifEmpty": "drop-card",
-      "ask": "Where else do you post?",
-      "write": "Account URLs only.",
-      "file": "cards/05-elsewhere.json"
+      "ask": "Do you have a photo, artwork or logo you want to upload as the profile picture?",
+      "write": "The person uploads their chosen picture in the editor. Never fetch, generate or infer a personal photo. Use their description for alt text wherever the editor asks for it."
     }
   ]
 }

@@ -2,7 +2,7 @@
   "$type": "sh.unset.profile",
   "displayName": "Signal & Noise",
   "headline": "A weekly show about the people who keep the internet running. Hosted by Dev Kapoor.",
-  "avatarShape": "roundedSquare",
+  "avatarShape": "rounded-square",
   "website": "https://signal.example.com",
   "avatar": {
     "$type": "blob",

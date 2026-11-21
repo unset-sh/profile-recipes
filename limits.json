@@ -1,11 +1,12 @@
 {
-  "$comment": "The unset.sh editor's own limits, stricter than the lexicon's (ADR 0051 point 5). From Undefined6799/unset @ 4abcada: domains/profile/profile.ts APP_LIMITS and domains/profile/card-edit.ts CARD_EDIT_LIMITS. sampleHosts are platforms a sample link may point at, with 'example' in its path.",
+  "$comment": "Editor limits derived from Undefined6799/unset @ 0dd079517074917ebd5217f7ecf15f4984cdd5d3: domains/profile/profile.ts APP_LIMITS; domains/profile/card-edit.ts CARD_EDIT_LIMITS and TEXT_EDIT_BYTES. Schema bounds are in schemas/upstream. Keys use block names (showcase is called collection in app code). sampleHosts is this repository's sample-data policy, not an upstream editor setting: a permitted platform must have 'example' in its path or query.",
   "profile": {
     "headlineGraphemes": 120
   },
+  "textBytes": 10000,
   "cardListItems": {
     "links": 30,
-    "collection": 30
+    "showcase": 30
   },
   "sampleHosts": [
     "bsky.app",

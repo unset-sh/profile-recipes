@@ -14,4 +14,4 @@ if (problems.length > 0) {
   console.error(`\n${problems.length} problem(s) in ${ids.length} recipe(s).`);
   process.exit(1);
 }
-console.log(`✓ ${ids.length} recipe(s) valid against sh.unset lexicons @ ${ctx.lexiconCommit}`);
+console.log(`✓ ${ids.length} recipe(s) valid against vendored upstream schemas @ ${ctx.lexiconCommit}`);

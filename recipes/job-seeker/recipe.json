@@ -1,8 +1,8 @@
 {
   "id": "job-seeker",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "title": "Job seeker",
-  "summary": "A résumé that reads in ten seconds: what you're looking for, your experience as a timeline, selected work, and a way to reach you.",
+  "summary": "A compact résumé: state the role you want, pair relevant experience with contact, and support it with public work.",
   "persona": {
     "for": [
       "People looking for a new role",
@@ -15,29 +15,29 @@
   },
   "lexicon": {
     "repository": "https://github.com/Undefined6799/unset",
-    "commit": "4abcada"
+    "commit": "0dd079517074917ebd5217f7ecf15f4984cdd5d3"
   },
   "preview": "preview.png",
   "cards": [
     {
       "file": "cards/01-looking.json",
-      "purpose": "What role they want, where, and from when."
+      "purpose": "State the target role, strongest capability and current availability."
     },
     {
       "file": "cards/02-experience.json",
-      "purpose": "Roles as a timeline, newest first."
-    },
-    {
-      "file": "cards/03-work.json",
-      "purpose": "Two to four case studies with a picture."
+      "purpose": "Three or four relevant roles with a concrete contribution, newest first."
     },
     {
       "file": "cards/04-contact.json",
-      "purpose": "How a recruiter gets in touch."
+      "purpose": "Résumé and an approved contact destination near the experience."
+    },
+    {
+      "file": "cards/03-work.json",
+      "purpose": "A few public projects that demonstrate the target role."
     },
     {
       "file": "cards/05-profiles.json",
-      "purpose": "Professional profiles."
+      "purpose": "Professional profiles that support the application."
     }
   ],
   "slots": [
@@ -57,7 +57,81 @@
       "kind": "text",
       "required": true,
       "ask": "In one line, what do you do and for whom?",
-      "write": "One sentence, at most 120 characters, no hashtags or emoji."
+      "write": "One sentence, at most 120 characters, no hashtags or emoji. This appears in the About popover, not beside the name; repeat the essential purpose in the first text card."
+    },
+    {
+      "id": "looking",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": true,
+      "ask": "What role are you looking for, where, and from when? What are you best at?",
+      "write": "Start with the role and strongest relevant capability in two sentences. Add location preference and availability only as they state them. Do not ask for or add salary, age, health, family or immigration details. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/01-looking.json"
+    },
+    {
+      "id": "experience",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 4,
+      "ask": "What roles have you had? For each: years, title, employer and one result you're proud of.",
+      "write": "tag = years; title = role · employer; description = one result, with a number only if they give it. Newest first. No links needed. Select up to four featured entries for this page; link to the complete archive or catalogue instead of deleting the person’s remaining work. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/02-experience.json"
+    },
+    {
+      "id": "contactText",
+      "file": "cards/04-contact.json",
+      "pointer": "/content/text",
+      "kind": "text",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "What should people know before taking this action: who it is for, format, timing, price or reply expectations, only if you want to publish them?",
+      "write": "One or two short sentences, at most 400 characters. Include only facts supplied for this action; do not assume an introductory call is free or that any date, price or reply time is current. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "contact",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 2,
+      "ask": "How should recruiters reach you? Do you have a CV link?",
+      "write": "Email: Only an address they confirm may be public: everyone can see it. A CV link only to a file they host and are happy to make public. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/04-contact.json"
+    },
+    {
+      "id": "contactHeading",
+      "file": "cards/04-contact.json",
+      "pointer": "/content/heading",
+      "kind": "text",
+      "required": true,
+      "ask": "What short heading should introduce this action?",
+      "write": "Use a clear heading that describes the action; no unconfirmed availability or promise. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "work",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 4,
+      "ifEmpty": "drop-card",
+      "ask": "Do you have case studies or work samples you can share publicly?",
+      "write": "Only work cleared for public sharing. They upload any pictures. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/03-work.json"
+    },
+    {
+      "id": "profiles",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 4,
+      "ifEmpty": "drop-card",
+      "ask": "Which professional profiles should be linked?",
+      "write": "Account URLs only. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/05-profiles.json"
     },
     {
       "id": "location",
@@ -86,63 +160,8 @@
       "kind": "image",
       "required": false,
       "ifEmpty": "drop-field",
-      "ask": "Do you have a square photo or logo for your profile picture?",
-      "write": "The member uploads it in the editor; never fetch one from the web."
-    },
-    {
-      "id": "looking",
-      "pointer": "/content/text",
-      "kind": "markdown",
-      "required": true,
-      "ask": "What role are you looking for, where, and from when? What are you best at?",
-      "write": "Bold-labelled lines as in the sample. Never mention salary, health, family or immigration status unless they insist.",
-      "file": "cards/01-looking.json"
-    },
-    {
-      "id": "experience",
-      "pointer": "/content/items",
-      "kind": "list",
-      "required": true,
-      "min": 1,
-      "max": 10,
-      "ask": "What roles have you had? For each: years, title, employer and one result you're proud of.",
-      "write": "tag = years; title = role · employer; description = one result, with a number only if they give it. Newest first. No links needed.",
-      "file": "cards/02-experience.json"
-    },
-    {
-      "id": "work",
-      "pointer": "/content/items",
-      "kind": "list",
-      "required": false,
-      "min": 1,
-      "max": 4,
-      "ifEmpty": "drop-card",
-      "ask": "Do you have case studies or work samples you can share publicly?",
-      "write": "Only work cleared for public sharing. They upload any pictures.",
-      "file": "cards/03-work.json"
-    },
-    {
-      "id": "contact",
-      "pointer": "/content/buttons",
-      "kind": "list",
-      "required": true,
-      "min": 1,
-      "max": 2,
-      "ask": "How should recruiters reach you? Do you have a CV link?",
-      "write": "Email: Only an address they confirm may be public: everyone can see it. A CV link only to a file they host and are happy to make public.",
-      "file": "cards/04-contact.json"
-    },
-    {
-      "id": "profiles",
-      "pointer": "/content/items",
-      "kind": "list",
-      "required": false,
-      "min": 1,
-      "max": 4,
-      "ifEmpty": "drop-card",
-      "ask": "Which professional profiles should be linked?",
-      "write": "Account URLs only.",
-      "file": "cards/05-profiles.json"
+      "ask": "Do you have a photo, artwork or logo you want to upload as the profile picture?",
+      "write": "The person uploads their chosen picture in the editor. Never fetch, generate or infer a personal photo. Use their description for alt text wherever the editor asks for it."
     }
   ]
 }

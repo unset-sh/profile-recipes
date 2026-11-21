@@ -2,7 +2,7 @@
   "$type": "sh.unset.profile",
   "displayName": "Ines Kowal",
   "headline": "Illustrator. Books, editorial and the occasional mural.",
-  "avatarShape": "roundedSquare",
+  "avatarShape": "rounded-square",
   "location": "Kraków",
   "website": "https://ines.example.com",
   "avatar": {

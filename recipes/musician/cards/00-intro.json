@@ -1,0 +1,10 @@
+{
+  "$type": "sh.unset.card",
+  "content": {
+    "$type": "sh.unset.block.text",
+    "text": "## The Low Tides\n\nWe’re The Low Tides, a four-piece indie band from Glasgow. **Undertow** is our latest single; explore the records or find a live show below."
+  },
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "half",
+  "surface": "plain"
+}
