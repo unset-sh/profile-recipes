@@ -3,6 +3,24 @@
 Thanks for helping. A good recipe is opinionated: it says what a profile for this kind of person should do, in which
 order, and why, and it teaches an assistant to ask the right questions.
 
+## Sign off your commits
+
+Recipes are released under [CC0](LICENSE-CONTENT), so anyone can copy them freely. Each commit you add carries a
+sign-off line, `Signed-off-by: Your Name <you@example.com>`. With it you certify the
+[Developer Certificate of Origin](https://developercertificate.org): the work is yours to give under that licence.
+There is nothing else to sign.
+
+- In GitHub's web editor the line is added for you.
+- On your computer, commit with `git commit -s`. Forgot? `git commit --amend --no-edit -s` fixes the last commit,
+  `git rebase --signoff origin/main` fixes them all; then push again with `--force-with-lease`.
+
+The DCO check on your pull request says which commits still need it.
+
+Recipes are what this repository takes from outside. The tooling (scripts, site, workflows) is
+[AGPL-3.0-only](LICENSE) and takes no outside pull requests for now: open an issue and we will make the change. The
+rules for every unset-sh repository, security reports included, are in the
+[organisation's contributing guide](https://github.com/unset-sh/.github/blob/main/CONTRIBUTING.md).
+
 ## Before you start
 
 Open a [recipe idea](../../issues/new?template=recipe-idea.yml) issue first, so two people don't build the same one.

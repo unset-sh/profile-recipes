@@ -1,0 +1,42 @@
+# The DCO check: every commit a pull request adds must carry a "Signed-off-by:" line, the contributor's statement
+# under the Developer Certificate of Origin (https://developercertificate.org) that the work is theirs to give.
+# Pull requests from the owner and from bots are exempt. The rules are in scripts/dco.ts; CONTRIBUTING.md says what
+# contributors do.
+#
+# It runs on `pull_request`, so a fork's run gets a read-only token and no secrets, installs no package and uses only
+# GitHub's own actions. The job name "DCO" is the check to require in the "Protect main" ruleset.
+
+name: dco
+
+on:
+  pull_request:
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  dco:
+    name: DCO
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      # Full history, so both the base and the head commit of the pull request are present.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          package-manager-cache: false
+      - name: Check every commit is signed off
+        run: node scripts/dco-check.ts
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
