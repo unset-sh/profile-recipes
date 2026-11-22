@@ -1,30 +1,31 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#collection",
+    "$type": "sh.unset.block.showcase",
     "title": "Selected publications",
     "layout": "list",
     "items": [
       {
         "tag": "Example Journal of Ecology · 2026",
         "title": "Burn severity predicts recovery pathways in boreal forests",
-        "description": "Brandt L, Sample A, Sample B",
+        "description": "Brandt L, Sample A, Sample B. Links burn severity to different regrowth pathways.",
         "uri": "https://doi.example.org/10.0000/example.2026.001"
       },
       {
         "tag": "Example Remote Sensing · 2024",
         "title": "A decade of post-fire regrowth from Landsat time series",
-        "description": "Sample C, Brandt L",
+        "description": "Sample C, Brandt L. Tracks post-fire recovery over ten years of satellite observations.",
         "uri": "https://doi.example.org/10.0000/example.2024.017"
       },
       {
         "tag": "Preprint · 2025",
         "title": "Shrubland traps after repeated fires",
-        "description": "Brandt L et al.",
+        "description": "Brandt L et al.. Explores how repeated fires can keep landscapes in shrubland.",
         "uri": "https://preprints.example.org/2025.03.112"
       }
     ]
   },
-  "surface": "outlined",
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "surface": "plain",
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "full"
 }

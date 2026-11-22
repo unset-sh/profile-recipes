@@ -2,7 +2,7 @@
   "$type": "sh.unset.profile",
   "displayName": "Ari Novak",
   "headline": "Backend engineer. I build boring, reliable systems and the tools around them.",
-  "avatarShape": "roundedSquare",
+  "avatarShape": "rounded-square",
   "location": "Berlin",
   "website": "https://ari.example.com",
   "avatar": {

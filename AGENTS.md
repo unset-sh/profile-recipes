@@ -3,6 +3,9 @@
 You are helping one person build their own unset.sh profile from a recipe in this repository. Follow these rules for
 every recipe; each recipe's `GUIDE.md` adds what is specific to it.
 
+These instructions govern applying a recipe to a person's profile. For work on the invented samples, schemas or
+tools in this repository, follow [CONTRIBUTING.md](CONTRIBUTING.md); that work does not publish a person's profile.
+
 ## 1. Choose the recipe
 
 Read each `recipes/*/recipe.json` (`title`, `summary`, `persona.for`, `persona.notFor`). Pick the closest one, tell
@@ -26,7 +29,8 @@ Ask the questions in the recipe's `slots`, in the order its `GUIDE.md` gives, on
 
 Fill each slot following its `write` note and the guide's writing rules, in the person's voice and language. Keep
 within the editor's limits in [`limits.json`](limits.json) and the lexicon's (`maxGraphemes` in
-[`lexicons/`](lexicons/)). Links must be `https://` URLs.
+[`schemas/upstream/`](schemas/upstream/)). These are vendored upstream definitions, not sample records or schemas
+authored by this repository. Links must be `https://` URLs without credentials.
 
 Show the result as one block per card, in page order: card kind, width, surface, then each field ready to paste.
 Then show the guide's "Before publishing" checklist and go through it with the person.
@@ -41,7 +45,16 @@ The person enters the cards in the unset.sh profile editor themselves. You do no
 
 ## Records, for tools
 
-The sample records in each recipe are valid `sh.unset.profile` and `sh.unset.section` records. A tool that produces
-records from a recipe must: set `createdAt` to the current time; replace every blob with one the person uploaded;
-leave `cards` out of the profile until the card records exist, then list their record keys in the recipe's order;
-and write no field the lexicon does not define.
+The sample records in each recipe are `sh.unset.profile` and `sh.unset.card` records. Each card's `content.$type`
+names a `sh.unset.block.*` definition. A tool that prepares records from a recipe must replace sample timestamps
+with the time of creation and replace every blob with one the person uploaded. Leave `cards` out of the profile
+until the card records exist; then use `{ "uri": "at://<did>/sh.unset.card/<rkey>" }` entries, in recipe order and
+within that person's repository. Cards absent from this list do not show. Preparing records does not authorize
+publishing them.
+
+Use only fields and block types defined in the vendored snapshot. This is a template rule: the protocol permits
+extensions, and readers may ignore them. Schema support also does not guarantee the current app editor or renderer
+supports a feature; follow the recipe guide and the limitations in the README.
+
+Visibility is a request to apps. Even `signed-in` and `owner-only` records remain public on the AT Protocol network;
+never use these values to promise confidentiality.

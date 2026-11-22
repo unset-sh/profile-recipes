@@ -1,6 +1,6 @@
 ## What this changes
 
-<!-- A new recipe, a change to one, or tooling. One recipe per pull request. -->
+<!-- A new recipe, a change to one, or tooling. For a shared schema/tooling migration, explain why multiple recipes change together. -->
 
 ## Recipe checklist
 
@@ -8,5 +8,5 @@
 - [ ] All sample data is invented: names, links on `example.com`/`.org`/`.net` (or a listed platform with "example" in the path or query), no real person's account.
 - [ ] Sample pictures are my own work or generated, JPEG, no metadata, and I release them under CC0.
 - [ ] `GUIDE.md` has every required section, and every slot in `recipe.json` has a question.
-- [ ] `preview.png` was regenerated with `npm run previews`.
+- [ ] All desktop/mobile current-app and media-study previews were regenerated with `npm run previews`.
 - [ ] The version in `recipe.json` is bumped (patch: wording; minor: new card or slot; major: a card or slot removed).

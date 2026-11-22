@@ -1,22 +1,23 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#collection",
+    "$type": "sh.unset.block.showcase",
     "title": "Events",
     "layout": "list",
     "items": [
       {
-        "tag": "12 May 2026 · Bristol",
-        "title": "Launch of The Long Table",
+        "tag": "12 May 2027 · Bristol",
+        "title": "An evening with The Long Table",
         "uri": "https://events.example.org/long-table-launch"
       },
       {
-        "tag": "6 Jun 2026 · Hay",
+        "tag": "6 Jun 2027 · Hay",
         "title": "In conversation at Example Festival",
         "uri": "https://festival.example.org/odile"
       }
     ]
   },
   "width": "half",
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "surface": "outlined"
 }

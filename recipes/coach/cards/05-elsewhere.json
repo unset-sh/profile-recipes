@@ -1,8 +1,8 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#links",
-    "layout": "grid",
+    "$type": "sh.unset.block.links",
+    "layout": "list",
     "items": [
       {
         "uri": "https://www.instagram.com/example.samruns"
@@ -10,8 +10,10 @@
       {
         "uri": "https://www.youtube.com/@example-samruns"
       }
-    ]
+    ],
+    "title": "Resources and channels"
   },
   "surface": "plain",
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "full"
 }

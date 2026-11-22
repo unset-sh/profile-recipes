@@ -1,8 +1,8 @@
 {
   "id": "creator",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "title": "Creator",
-  "summary": "For creators and influencers: one clear subscribe action, the latest work as a carousel, every platform in one place, and a door for brands.",
+  "summary": "A channel hub: explain what you make, pair it with one subscribe action, and give selected work more room than platform links.",
   "persona": {
     "for": [
       "Video creators and streamers",
@@ -15,30 +15,34 @@
   },
   "lexicon": {
     "repository": "https://github.com/Undefined6799/unset",
-    "commit": "4abcada"
+    "commit": "0dd079517074917ebd5217f7ecf15f4984cdd5d3"
   },
   "preview": "preview.png",
   "cards": [
     {
+      "file": "cards/00-intro.json",
+      "purpose": "Explain the subject and audience so a new visitor understands the channel."
+    },
+    {
       "file": "cards/01-subscribe.json",
-      "purpose": "The one action they most want from a visitor."
+      "purpose": "One primary subscribe destination and a complementary newsletter."
     },
     {
       "file": "cards/02-latest.json",
-      "purpose": "Their three to six latest pieces, with thumbnails."
-    },
-    {
-      "file": "cards/03-everywhere.json",
-      "purpose": "Every platform they post on."
+      "purpose": "Three or four selected videos with a useful topic, duration and description."
     },
     {
       "file": "cards/04-partnerships.json",
-      "purpose": "Optional: how brands reach them.",
+      "purpose": "Partnership fit and an approved business contact.",
       "optional": true
     },
     {
+      "file": "cards/03-everywhere.json",
+      "purpose": "Other channels, without competing with the main subscription."
+    },
+    {
       "file": "cards/05-about.json",
-      "purpose": "A short story and their house rules (sponsorship disclosure)."
+      "purpose": "The making process and disclosure policy, if the creator wants to share them."
     }
   ],
   "slots": [
@@ -58,7 +62,108 @@
       "kind": "text",
       "required": true,
       "ask": "In one line, what do you do and for whom?",
-      "write": "One sentence, at most 120 characters, no hashtags or emoji."
+      "write": "One sentence, at most 120 characters, no hashtags or emoji. This appears in the About popover, not beside the name; repeat the essential purpose in the first text card."
+    },
+    {
+      "id": "introduction",
+      "file": "cards/00-intro.json",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": true,
+      "ask": "Who is this page for, what do you make or offer, and what should a new visitor understand first?",
+      "write": "Use a short descriptive heading and two sentences: identify the person or group, the work and the audience. The header shows only the name; this card must explain the purpose. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "mainActionText",
+      "file": "cards/01-subscribe.json",
+      "pointer": "/content/text",
+      "kind": "text",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "What should people know before taking this action: who it is for, format, timing, price or reply expectations, only if you want to publish them?",
+      "write": "One or two short sentences, at most 400 characters. Include only facts supplied for this action; do not assume an introductory call is free or that any date, price or reply time is current. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "mainAction",
+      "file": "cards/01-subscribe.json",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 2,
+      "ask": "What is the one thing you most want a visitor to do: subscribe, join a newsletter, support you?",
+      "write": "The first button is the main action. Use preset=subscribe for a channel or newsletter; otherwise leave preset absent and supply a two-to-four-word label. Keep the pitch heading and text tied to the separate answered slots. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "mainActionHeading",
+      "file": "cards/01-subscribe.json",
+      "pointer": "/content/heading",
+      "kind": "text",
+      "required": true,
+      "ask": "What short heading should introduce this action?",
+      "write": "Use a clear heading that describes the action; no unconfirmed availability or promise. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "latest",
+      "file": "cards/02-latest.json",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 4,
+      "ask": "Which three or four recent pieces should visitors see first?",
+      "write": "tag = format · length; title = the published title; the member uploads each thumbnail in the editor. Use only links they give you. Select up to four featured entries for this page; link to the complete archive or catalogue instead of deleting the person’s remaining work. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "partnershipsText",
+      "file": "cards/04-partnerships.json",
+      "pointer": "/content/text",
+      "kind": "text",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "What should people know before taking this action: who it is for, format, timing, price or reply expectations, only if you want to publish them?",
+      "write": "One or two short sentences, at most 400 characters. Include only facts supplied for this action; do not assume an introductory call is free or that any date, price or reply time is current. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "partnerships",
+      "file": "cards/04-partnerships.json",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 2,
+      "ifEmpty": "drop-card",
+      "ask": "Do you want brands to contact you? If so, which email address may be public?",
+      "write": "Publish an email only if they confirm it may be public. Text = what kind of brands they work with. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "partnershipsHeading",
+      "file": "cards/04-partnerships.json",
+      "pointer": "/content/heading",
+      "kind": "text",
+      "required": true,
+      "ask": "What short heading should introduce this action?",
+      "write": "Use a clear heading that describes the action; no unconfirmed availability or promise. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "platforms",
+      "file": "cards/03-everywhere.json",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 12,
+      "ask": "Which platforms do you post on? Paste your profile links.",
+      "write": "The URL only; add a label only where the URL names no account. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "about",
+      "file": "cards/05-about.json",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": true,
+      "ask": "How did you start, and is there anything every viewer should know (how you disclose sponsorships, for example)?",
+      "write": "Two or three short lines, in their voice. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
     },
     {
       "id": "location",
@@ -87,62 +192,8 @@
       "kind": "image",
       "required": false,
       "ifEmpty": "drop-field",
-      "ask": "Do you have a square photo or logo for your profile picture?",
-      "write": "The member uploads it in the editor; never fetch one from the web."
-    },
-    {
-      "id": "mainAction",
-      "file": "cards/01-subscribe.json",
-      "pointer": "/content/buttons",
-      "kind": "list",
-      "required": true,
-      "min": 1,
-      "max": 2,
-      "ask": "What is the one thing you most want a visitor to do: subscribe, join a newsletter, support you?",
-      "write": "The first button is that action. Use the subscribe preset for a channel or newsletter; custom with a two-to-four-word label otherwise. Heading = their schedule or promise."
-    },
-    {
-      "id": "latest",
-      "file": "cards/02-latest.json",
-      "pointer": "/content/items",
-      "kind": "list",
-      "required": true,
-      "min": 1,
-      "max": 6,
-      "ask": "Which three to six recent pieces should visitors see first?",
-      "write": "tag = format · length; title = the published title; the member uploads each thumbnail in the editor. Use only links they give you."
-    },
-    {
-      "id": "platforms",
-      "file": "cards/03-everywhere.json",
-      "pointer": "/content/items",
-      "kind": "list",
-      "required": true,
-      "min": 1,
-      "max": 12,
-      "ask": "Which platforms do you post on? Paste your profile links.",
-      "write": "The URL only; add a label only where the URL names no account."
-    },
-    {
-      "id": "partnerships",
-      "file": "cards/04-partnerships.json",
-      "pointer": "/content/buttons",
-      "kind": "list",
-      "required": false,
-      "min": 1,
-      "max": 2,
-      "ifEmpty": "drop-card",
-      "ask": "Do you want brands to contact you? If so, which email address may be public?",
-      "write": "Publish an email only if they confirm it may be public. Text = what kind of brands they work with."
-    },
-    {
-      "id": "about",
-      "file": "cards/05-about.json",
-      "pointer": "/content/text",
-      "kind": "markdown",
-      "required": true,
-      "ask": "How did you start, and is there anything every viewer should know (how you disclose sponsorships, for example)?",
-      "write": "Two or three short lines, in their voice."
+      "ask": "Do you have a photo, artwork or logo you want to upload as the profile picture?",
+      "write": "The person uploads their chosen picture in the editor. Never fetch, generate or infer a personal photo. Use their description for alt text wherever the editor asks for it."
     }
   ]
 }

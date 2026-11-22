@@ -1,9 +1,10 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#readme",
-    "text": "**What we do**\n\nWe collect surplus food from local shops and farms and share it, free, with anyone who needs it. On Fridays we cook a community dinner.\n\nRegistered charity no. 0000000 (sample)."
+    "$type": "sh.unset.block.text",
+    "text": "## Good food, shared locally\n\nRiverside Food shares surplus produce from local shops and farms with anyone who needs it. Our volunteers also cook a free community dinner each Friday.\n\nVisit a food session, help with a shift or support the next collection.\n\n**Registered charity:** no. 0000000 (demonstration only)."
   },
-  "width": "half",
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "width": "full",
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "surface": "plain"
 }

@@ -1,8 +1,10 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#readme",
-    "text": "I study how forests recover after wildfire, combining satellite data with field plots to predict which stands regrow and which turn to shrubland.\n\n**Affiliation:** Associate Professor, Department of Ecology, Example University\n**Group:** Fire & Forest Lab (four PhD students, two postdocs)"
+    "$type": "sh.unset.block.text",
+    "text": "## How forests recover after fire\n\nI’m Lena Brandt. I combine satellite data with field observations to understand which forests regrow after wildfire and which become shrubland. Our work helps explain where recovery needs support.\n\n**Affiliation:** Associate Professor of Ecology, Example University.\n**Group:** Fire & Forest Lab, with four PhD students and two postdocs."
   },
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "full",
+  "surface": "plain"
 }

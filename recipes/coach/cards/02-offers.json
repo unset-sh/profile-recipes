@@ -1,7 +1,7 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#collection",
+    "$type": "sh.unset.block.showcase",
     "title": "Ways to work with me",
     "layout": "list",
     "items": [
@@ -26,5 +26,6 @@
     ]
   },
   "surface": "outlined",
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "full"
 }

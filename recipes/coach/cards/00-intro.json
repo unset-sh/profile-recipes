@@ -1,0 +1,10 @@
+{
+  "$type": "sh.unset.card",
+  "content": {
+    "$type": "sh.unset.block.text",
+    "text": "## Running, at your pace\n\nI’m Sam, a running coach for beginners and people returning to a regular routine. We build a plan around your week, with steady progress and time to talk about how it feels."
+  },
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "half",
+  "surface": "plain"
+}

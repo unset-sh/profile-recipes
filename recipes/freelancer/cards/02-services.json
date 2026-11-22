@@ -1,9 +1,9 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#collection",
+    "$type": "sh.unset.block.showcase",
     "title": "How I can help",
-    "layout": "list",
+    "layout": "grid",
     "items": [
       {
         "tag": "2 weeks · from €6,000",
@@ -26,5 +26,6 @@
     ]
   },
   "surface": "outlined",
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "full"
 }

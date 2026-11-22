@@ -1,29 +1,31 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#collection",
+    "$type": "sh.unset.block.showcase",
     "title": "On tour",
     "layout": "list",
     "items": [
       {
-        "tag": "14 Mar 2026 · Glasgow",
+        "tag": "14 Mar 2027 · Glasgow",
         "title": "Example Ballroom",
-        "description": "Album launch. Support from Sample Band.",
+        "description": "A live set with support from Sample Band.",
         "uri": "https://tickets.example.com/lowtides-glasgow"
       },
       {
-        "tag": "21 Mar 2026 · Manchester",
+        "tag": "21 Mar 2027 · Manchester",
         "title": "The Example Rooms",
-        "uri": "https://tickets.example.com/lowtides-manchester"
+        "uri": "https://tickets.example.com/lowtides-manchester",
+        "description": "Doors and access information on the venue’s ticket page."
       },
       {
-        "tag": "28 Mar 2026 · London",
+        "tag": "28 Mar 2027 · London",
         "title": "Example Hall",
-        "description": "Sold out. Returns only.",
+        "description": "Check the ticket page for current availability and access details.",
         "uri": "https://tickets.example.com/lowtides-london"
       }
     ]
   },
   "surface": "outlined",
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "full"
 }

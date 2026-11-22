@@ -1,9 +1,9 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#collection",
+    "$type": "sh.unset.block.showcase",
     "title": "Selected work",
-    "layout": "grid",
+    "layout": "list",
     "items": [
       {
         "tag": "Case study",
@@ -44,9 +44,12 @@
             "width": 1600,
             "height": 1000
           }
-        }
+        },
+        "description": "Simplifying the patient appointment flow. My role covered interaction design and usability testing."
       }
     ]
   },
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "full",
+  "surface": "plain"
 }

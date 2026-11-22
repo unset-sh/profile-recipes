@@ -1,21 +1,22 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#buttons",
+    "$type": "sh.unset.block.buttons",
     "heading": "Open to contract work",
-    "text": "Backend and infrastructure, from Q2.",
+    "text": "Backend and infrastructure projects. Tell me what you need to build or make more reliable, and we can discuss fit and timing.",
     "buttons": [
       {
-        "$type": "sh.unset.section#linkButton",
+        "$type": "sh.unset.block.buttons#link",
         "preset": "hire",
         "uri": "https://ari.example.com/work"
       },
       {
-        "$type": "sh.unset.section#emailButton",
+        "$type": "sh.unset.block.buttons#email",
         "address": "ari@ari.example.com"
       }
     ]
   },
   "width": "half",
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "surface": "filled"
 }

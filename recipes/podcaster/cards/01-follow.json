@@ -1,28 +1,28 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#buttons",
+    "$type": "sh.unset.block.buttons",
     "heading": "New episodes every Tuesday",
     "text": "Follow in your podcast app so you never miss one.",
     "buttons": [
       {
-        "$type": "sh.unset.section#linkButton",
+        "$type": "sh.unset.block.buttons#link",
         "preset": "subscribe",
         "uri": "https://open.spotify.com/show/example-signal"
       },
       {
-        "$type": "sh.unset.section#linkButton",
-        "preset": "custom",
+        "$type": "sh.unset.block.buttons#link",
         "uri": "https://music.apple.com/podcast/example-signal",
         "label": "Apple Podcasts"
       },
       {
-        "$type": "sh.unset.section#linkButton",
-        "preset": "custom",
+        "$type": "sh.unset.block.buttons#link",
         "uri": "https://signal.example.com/rss",
         "label": "RSS feed"
       }
     ]
   },
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "half",
+  "surface": "filled"
 }

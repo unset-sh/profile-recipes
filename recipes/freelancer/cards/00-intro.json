@@ -1,0 +1,10 @@
+{
+  "$type": "sh.unset.card",
+  "content": {
+    "$type": "sh.unset.block.text",
+    "text": "## Product decisions, made together\n\nI’m Maya, an independent product consultant for early-stage health teams deciding what to build next. I help founders turn competing ideas into a focused plan they can test."
+  },
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "half",
+  "surface": "plain"
+}

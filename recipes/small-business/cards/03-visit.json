@@ -1,9 +1,10 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#readme",
+    "$type": "sh.unset.block.text",
     "text": "**Visit the studio**\n\nSaturdays 10:00–16:00, or by appointment.\nExample Street 12, Ghent\n\nWorkshops on the first Sunday of each month."
   },
   "width": "half",
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "surface": "outlined"
 }

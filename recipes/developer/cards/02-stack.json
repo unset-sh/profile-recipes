@@ -1,9 +1,10 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#readme",
-    "text": "**Day to day:** Rust, Go, PostgreSQL, Kubernetes\n**Comfortable with:** TypeScript, Terraform, observability\n**Learning:** formal methods with TLA+\n\nMaintainer of tidequeue. Contributor to a few database drivers."
+    "$type": "sh.unset.block.text",
+    "text": "## Engineering focus\n\nI’m Ari, a backend and infrastructure developer building dependable systems around PostgreSQL. I maintain **tidequeue** and contribute to database drivers.\n\n**Day to day:** Rust, Go, PostgreSQL and Kubernetes.\n**Also work with:** TypeScript, Terraform and observability.\n**Exploring:** formal methods with TLA+."
   },
-  "width": "half",
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "width": "full",
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "surface": "plain"
 }

@@ -1,8 +1,8 @@
 {
   "id": "speaker",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "title": "Speaker",
-  "summary": "For speakers: a booking button first, the topics you speak on, recent talks with video, and what organisers need.",
+  "summary": "An organizer-focused profile: establish topics and audience fit, offer an enquiry route, then support it with practical details and recordings.",
   "persona": {
     "for": [
       "Keynote and conference speakers",
@@ -15,29 +15,29 @@
   },
   "lexicon": {
     "repository": "https://github.com/Undefined6799/unset",
-    "commit": "4abcada"
+    "commit": "0dd079517074917ebd5217f7ecf15f4984cdd5d3"
   },
   "preview": "preview.png",
   "cards": [
     {
-      "file": "cards/01-book.json",
-      "purpose": "The main ask: book them."
+      "file": "cards/02-topics.json",
+      "purpose": "Introduce the speaker’s audience, useful outcome and signature subjects."
     },
     {
-      "file": "cards/02-topics.json",
-      "purpose": "Two to four topics, one line each."
+      "file": "cards/01-book.json",
+      "purpose": "An organizer’s route to a speaking enquiry."
     },
     {
       "file": "cards/03-organisers.json",
-      "purpose": "What organisers need: bio, photo, formats."
+      "purpose": "Formats, speaker kit and practical planning information."
     },
     {
       "file": "cards/04-talks.json",
-      "purpose": "Recent talks, with video where it exists."
+      "purpose": "Three or four recordings or appearances that demonstrate the work."
     },
     {
       "file": "cards/05-elsewhere.json",
-      "purpose": "Optional: where to follow them.",
+      "purpose": "The press kit and selected professional channels.",
       "optional": true
     }
   ],
@@ -58,7 +58,79 @@
       "kind": "text",
       "required": true,
       "ask": "In one line, what do you do and for whom?",
-      "write": "One sentence, at most 120 characters, no hashtags or emoji."
+      "write": "One sentence, at most 120 characters, no hashtags or emoji. This appears in the About popover, not beside the name; repeat the essential purpose in the first text card."
+    },
+    {
+      "id": "topics",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": true,
+      "ask": "Who are your talks for, what should the audience take away, and what two to four subjects do you speak on? Give one line on your angle for each.",
+      "write": "Start with a heading and two sentences identifying the speaker, intended audience and useful outcome. Follow with two to four bold topic titles and a one-line angle. Use the speaker’s own scope and claims. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/02-topics.json"
+    },
+    {
+      "id": "bookText",
+      "file": "cards/01-book.json",
+      "pointer": "/content/text",
+      "kind": "text",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "What should people know before taking this action: who it is for, format, timing, price or reply expectations, only if you want to publish them?",
+      "write": "One or two short sentences, at most 400 characters. Include only facts supplied for this action; do not assume an introductory call is free or that any date, price or reply time is current. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "book",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 2,
+      "ask": "How should organisers book you: a booking page, an agent, email?",
+      "write": "First button = the booking page (hire preset). Agent addresses only with the agent's agreement. Only an address they confirm may be public: everyone can see it. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/01-book.json"
+    },
+    {
+      "id": "bookHeading",
+      "file": "cards/01-book.json",
+      "pointer": "/content/heading",
+      "kind": "text",
+      "required": true,
+      "ask": "What short heading should introduce this action?",
+      "write": "Use a clear heading that describes the action; no unconfirmed availability or promise. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "organisers",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": false,
+      "ifEmpty": "drop-card",
+      "ask": "What formats do you offer, do you have a speaker kit, and how do you handle fees?",
+      "write": "Formats, kit link and fee policy as they state them. Never publish a fee figure unless they ask. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/03-organisers.json"
+    },
+    {
+      "id": "talks",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 4,
+      "ask": "Which recent talks should be listed? Links to video are best.",
+      "write": "tag = event · year; title as delivered; description = format and whether video exists. Audience numbers only if the event published them. Select up to four featured entries for this page; link to the complete archive or catalogue instead of deleting the person’s remaining work. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/04-talks.json"
+    },
+    {
+      "id": "elsewhere",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 6,
+      "ifEmpty": "drop-card",
+      "ask": "Where else should organisers look you up?",
+      "write": "Account URLs only. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/05-elsewhere.json"
     },
     {
       "id": "location",
@@ -87,61 +159,8 @@
       "kind": "image",
       "required": false,
       "ifEmpty": "drop-field",
-      "ask": "Do you have a square photo or logo for your profile picture?",
-      "write": "The member uploads it in the editor; never fetch one from the web."
-    },
-    {
-      "id": "book",
-      "pointer": "/content/buttons",
-      "kind": "list",
-      "required": true,
-      "min": 1,
-      "max": 2,
-      "ask": "How should organisers book you: a booking page, an agent, email?",
-      "write": "First button = the booking page (hire preset). Agent addresses only with the agent's agreement. Only an address they confirm may be public: everyone can see it.",
-      "file": "cards/01-book.json"
-    },
-    {
-      "id": "topics",
-      "pointer": "/content/text",
-      "kind": "markdown",
-      "required": true,
-      "ask": "What two to four topics do you speak on? One line each on the angle you take.",
-      "write": "A list: bold topic title, then the angle in one line.",
-      "file": "cards/02-topics.json"
-    },
-    {
-      "id": "organisers",
-      "pointer": "/content/text",
-      "kind": "markdown",
-      "required": false,
-      "ifEmpty": "drop-card",
-      "ask": "What formats do you offer, do you have a speaker kit, and how do you handle fees?",
-      "write": "Formats, kit link and fee policy as they state them. Never publish a fee figure unless they ask.",
-      "file": "cards/03-organisers.json"
-    },
-    {
-      "id": "talks",
-      "pointer": "/content/items",
-      "kind": "list",
-      "required": true,
-      "min": 1,
-      "max": 10,
-      "ask": "Which recent talks should be listed? Links to video are best.",
-      "write": "tag = event · year; title as delivered; description = format and whether video exists. Audience numbers only if the event published them.",
-      "file": "cards/04-talks.json"
-    },
-    {
-      "id": "elsewhere",
-      "pointer": "/content/items",
-      "kind": "list",
-      "required": false,
-      "min": 1,
-      "max": 6,
-      "ifEmpty": "drop-card",
-      "ask": "Where else should organisers look you up?",
-      "write": "Account URLs only.",
-      "file": "cards/05-elsewhere.json"
+      "ask": "Do you have a photo, artwork or logo you want to upload as the profile picture?",
+      "write": "The person uploads their chosen picture in the editor. Never fetch, generate or infer a personal photo. Use their description for alt text wherever the editor asks for it."
     }
   ]
 }

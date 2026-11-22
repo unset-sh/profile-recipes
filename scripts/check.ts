@@ -1,6 +1,6 @@
 // The checks every recipe must pass. validate.ts runs them over recipes/; check.test.ts proves each one fails when it
-// should. Records are checked as the app writes them: valid for the lexicon, no fields the lexicon does not define
-// (the app refuses those on save), and within the editor's stricter limits (limits.json).
+// should. Samples use the vendored upstream schemas and the editor's stricter limits (limits.json).
+// Rejecting unknown fields and union members is this repository's template policy, not an AT Protocol rule.
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { jsonToLex, Lexicons, type LexiconDoc } from "@atproto/lexicon";
@@ -23,13 +23,15 @@ type Def = {
 
 export type Limits = {
   profile: { headlineGraphemes: number };
+  textBytes: number;
   cardListItems: Record<string, number>;
   sampleHosts: string[];
 };
 
-export type Context = { lexicons: Lexicons; docs: Map<string, LexiconDoc>; limits: Limits; lexiconCommit: string };
+export type Context = { lexicons: Lexicons; docs: Map<string, LexiconDoc>; limits: Limits; lexiconCommit: string; lexiconRepository: string };
 
 const SLOT_KINDS = ["text", "markdown", "uri", "email", "image", "list"];
+const EMPTY_RULES = ["drop-field", "drop-item", "drop-card"];
 const GUIDE_HEADINGS = ["## Who this is for", "## The layout", "## Interview", "## Writing rules", "## Before publishing"];
 const SEMVER = /^\d+\.\d+\.\d+$/;
 const ID = /^[a-z][a-z0-9-]{1,40}$/;
@@ -38,14 +40,14 @@ const EXAMPLE_DOMAIN = /(^|\.)example\.(com|org|net)$/;
 export function loadContext(root: string): Context {
   const lexicons = new Lexicons();
   const docs = new Map<string, LexiconDoc>();
-  const dir = join(root, "lexicons");
+  const dir = join(root, "schemas", "upstream");
   for (const file of readdirSync(dir).filter((f) => f.startsWith("sh.unset.") && f.endsWith(".json"))) {
     const doc = readJson(join(dir, file)) as unknown as LexiconDoc;
     docs.set(doc.id, structuredClone(doc)); // Lexicons.add rewrites refs to absolute lex: URIs in place.
     lexicons.add(doc);
   }
-  const source = readJson(join(dir, "source.json")) as { commit: string };
-  return { lexicons, docs, limits: readJson(join(root, "limits.json")) as unknown as Limits, lexiconCommit: source.commit };
+  const source = readJson(join(dir, "source.json")) as { commit: string; repository: string };
+  return { lexicons, docs, limits: readJson(join(root, "limits.json")) as unknown as Limits, lexiconCommit: source.commit, lexiconRepository: source.repository };
 }
 
 /** Every problem with the recipe in `dir`, each prefixed with the file it is in. Empty means it passes. */
@@ -76,8 +78,9 @@ function checkManifest(ctx: Context, m: Obj, id: string): Problem[] {
   }
   const lexicon = m.lexicon;
   if (!isObj(lexicon) || lexicon.commit !== ctx.lexiconCommit) {
-    problems.push(`lexicon.commit must be "${ctx.lexiconCommit}", the commit lexicons/ was copied from`);
+    problems.push(`lexicon.commit must be "${ctx.lexiconCommit}", the commit schemas/upstream/ was copied from`);
   }
+  if (!isObj(lexicon) || lexicon.repository !== ctx.lexiconRepository) problems.push(`lexicon.repository must be "${ctx.lexiconRepository}"`);
   if (!Array.isArray(m.cards) || m.cards.length === 0) problems.push("cards must list at least one card");
   return problems;
 }
@@ -109,8 +112,8 @@ function loadRecords(dir: string, m: Obj, problems: Problem[], id: string): Map<
 
 export function checkRecord(ctx: Context, dir: string, record: Obj): Problem[] {
   const nsid = record.$type;
-  if (nsid !== "sh.unset.profile" && nsid !== "sh.unset.section") {
-    return ['$type must be "sh.unset.profile" or "sh.unset.section"'];
+  if (nsid !== "sh.unset.profile" && nsid !== "sh.unset.card") {
+    return ['$type must be "sh.unset.profile" or "sh.unset.card"'];
   }
   const problems: Problem[] = [];
   try {
@@ -140,7 +143,13 @@ function checkProfile(ctx: Context, record: Obj): Problem[] {
 function checkCardLimits(ctx: Context, record: Obj): Problem[] {
   const content = record.content;
   if (!isObj(content) || typeof content.$type !== "string") return [];
-  const kind = content.$type.replace("sh.unset.section#", "");
+  const kind = content.$type.replace("sh.unset.block.", "").replace(/#main$/, "");
+  // Upstream domains/profile/card-edit.ts readButtons at the pinned source commit:
+  // heading is optional in the schema, but required when a person saves in this editor.
+  if (kind === "buttons" && !nonEmpty(content.heading)) return ["$.content.heading: the editor requires a heading"];
+  if (kind === "text" && typeof content.text === "string" && Buffer.byteLength(content.text, "utf8") > ctx.limits.textBytes) {
+    return [`$.content.text: the editor allows ${ctx.limits.textBytes} UTF-8 bytes`];
+  }
   const max = ctx.limits.cardListItems[kind];
   const items = content.items;
   if (max !== undefined && Array.isArray(items) && items.length > max) {
@@ -151,14 +160,23 @@ function checkCardLimits(ctx: Context, record: Obj): Problem[] {
 
 /**
  * Fields the lexicon does not define, and blobs that do not match a file in assets/. Follows refs within the record's
- * lexicon and into sh.unset.defs, and union members through the `$type` they name.
+ * lexicon and into the block schemas, and union members through the `$type` they name.
  */
 function walk(ctx: Context, dir: string, nsid: string, def: Def | undefined, value: Json, path: string): Problem[] {
   if (def === undefined) return [];
-  if (def.type === "ref" && def.ref !== undefined) return walk(ctx, dir, nsid, resolve(ctx, nsid, def.ref), value, path);
+  if (def.type === "ref" && def.ref !== undefined) {
+    const target = resolve(ctx, nsid, def.ref);
+    return walk(ctx, dir, target.nsid, target.def, value, path);
+  }
   if (def.type === "union" && isObj(value) && typeof value.$type === "string") {
-    const ref = value.$type.startsWith(`${nsid}#`) ? value.$type.slice(nsid.length) : value.$type;
-    return def.refs?.includes(ref) ? walk(ctx, dir, nsid, resolve(ctx, nsid, ref), value, path) : [];
+    // https://atproto.com/specs/lexicon#lexicon-files: data $type uses a bare NSID for a main definition.
+    if (value.$type.endsWith("#main")) return [`${path}.$type: must omit #main`];
+    const target = resolve(ctx, nsid, value.$type);
+    const supported = def.refs?.some((ref) => {
+      const candidate = resolve(ctx, nsid, ref);
+      return candidate.nsid === target.nsid && candidate.name === target.name;
+    });
+    return supported ? walk(ctx, dir, target.nsid, target.def, value, path) : [`${path}.$type: unsupported template type ${value.$type}`];
   }
   if (def.type === "array" && Array.isArray(value)) {
     return value.flatMap((item, i) => walk(ctx, dir, nsid, def.items, item, `${path}[${i}]`));
@@ -169,14 +187,14 @@ function walk(ctx: Context, dir: string, nsid: string, def: Def | undefined, val
   return Object.entries(value).flatMap(([key, child]) => {
     if (key === "$type") return [];
     const prop = Object.hasOwn(props, key) ? props[key] : undefined;
-    if (prop === undefined) return [`${path}.${key}: not defined by the lexicon; the app refuses it on save`];
+    if (prop === undefined) return [`${path}.${key}: not defined by the vendored schema; omit from templates`];
     return walk(ctx, dir, nsid, prop, child, `${path}.${key}`);
   });
 }
 
-function resolve(ctx: Context, nsid: string, ref: string): Def | undefined {
+function resolve(ctx: Context, nsid: string, ref: string): { nsid: string; name: string; def: Def | undefined } {
   const [docId, name] = ref.startsWith("#") ? [nsid, ref.slice(1)] : (ref.split("#") as [string, string]);
-  return ctx.docs.get(docId)?.defs[name ?? "main"] as unknown as Def | undefined;
+  return { nsid: docId, name: name ?? "main", def: ctx.docs.get(docId)?.defs[name ?? "main"] as unknown as Def | undefined };
 }
 
 function checkBlob(dir: string, def: Def, value: Json, path: string): Problem[] {
@@ -185,12 +203,14 @@ function checkBlob(dir: string, def: Def, value: Json, path: string): Problem[] 
   if (asset === undefined) return [`${path}: names no file in assets/ (run npm run blob-ref)`];
   const problems: Problem[] = [];
   if (value.size !== asset.bytes.length) problems.push(`${path}.size: ${asset.name} is ${asset.bytes.length} bytes`);
-  if (typeof value.mimeType !== "string" || !(def.accept ?? []).includes(value.mimeType)) {
+  const mimeType = value.mimeType;
+  if (typeof mimeType !== "string" || !(def.accept ?? []).some((accept) => accept === mimeType || (accept.endsWith("/*") && mimeType.startsWith(accept.slice(0, -1))))) {
     problems.push(`${path}.mimeType: must be one of ${(def.accept ?? []).join(", ")}`);
   }
   if (def.maxSize !== undefined && asset.bytes.length > def.maxSize) problems.push(`${path}: over ${def.maxSize} bytes`);
   const facts = jpegFacts(asset.bytes);
   if (facts === undefined) return [...problems, `${path}: ${asset.name} is not a JPEG`];
+  if (value.mimeType !== "image/jpeg") problems.push(`${path}.mimeType: a JPEG sample must declare image/jpeg`);
   if (facts.hasMetadata) problems.push(`${path}: ${asset.name} carries metadata; strip it`);
   if (Math.max(facts.width, facts.height) > 2560) problems.push(`${path}: ${asset.name} is over 2560 px`);
   return problems;
@@ -234,7 +254,8 @@ function sampleUri(ctx: Context, uri: string): Problem[] {
   } catch {
     return [`${uri} is not a URL`];
   }
-  if (url.protocol !== "https:" && url.protocol !== "http:") return [`${uri}: only http and https links show`];
+  if (url.protocol !== "https:") return [`${uri}: sample links must use HTTPS`];
+  if (url.username !== "" || url.password !== "") return [`${uri}: sample links must not contain credentials`];
   if (EXAMPLE_DOMAIN.test(url.hostname)) return [];
   if (ctx.limits.sampleHosts.includes(url.hostname) && `${url.pathname}${url.search}`.toLowerCase().includes("example")) return [];
   return [`${uri}: sample links use an example domain, or a listed platform with "example" in the path or query`];
@@ -256,10 +277,18 @@ function checkSlots(m: Obj, records: Map<string, Obj>): Problem[] {
       problems.push(`${at}.kind: one of ${SLOT_KINDS.join(", ")}`);
     }
     if (!nonEmpty(slot.ask)) problems.push(`${at}.ask: the question to put to the member`);
+    if (!nonEmpty(slot.write)) problems.push(`${at}.write: explain how to word the answer`);
+    if (typeof slot.required !== "boolean") problems.push(`${at}.required: must be true or false`);
+    if ((slot.required === false || slot.ifEmpty !== undefined) && (typeof slot.ifEmpty !== "string" || !EMPTY_RULES.includes(slot.ifEmpty))) {
+      problems.push(`${at}.ifEmpty: one of ${EMPTY_RULES.join(", ")}`);
+    }
     const record = typeof slot.file === "string" ? records.get(slot.file) : undefined;
     if (record === undefined) problems.push(`${at}.file: names no record of this recipe`);
     else if (typeof slot.pointer !== "string" || pointerGet(record, slot.pointer) === undefined) {
       problems.push(`${at}.pointer: ${String(slot.pointer)} points at nothing in ${String(slot.file)}`);
+    }
+    if (record && isObj(record.content) && record.content.$type === "sh.unset.block.buttons" && slot.pointer === "/content/heading" && slot.required !== true) {
+      problems.push(`${at}.required: the editor requires a button card's heading; an unanswered heading drops the card`);
     }
   }
   return problems;
@@ -278,14 +307,18 @@ function checkFiles(dir: string, m: Obj): Problem[] {
   return problems;
 }
 
-/** RFC 6901 JSON Pointer lookup. */
+/** RFC 6901 §§3–4: https://www.rfc-editor.org/rfc/rfc6901; invalid syntax or a missing value returns undefined. */
 export function pointerGet(value: Json, pointer: string): Json | undefined {
   if (pointer === "") return value;
   if (!pointer.startsWith("/")) return undefined;
   let current: Json | undefined = value;
   for (const raw of pointer.slice(1).split("/")) {
+    if (/~(?:[^01]|$)/.test(raw)) return undefined;
     const key = raw.replaceAll("~1", "/").replaceAll("~0", "~");
-    if (Array.isArray(current)) current = current[Number(key)];
+    if (Array.isArray(current)) {
+      if (!/^(0|[1-9]\d*)$/.test(key)) return undefined;
+      current = current[Number(key)];
+    }
     else if (isObj(current)) current = Object.hasOwn(current, key) ? current[key] : undefined;
     else return undefined;
   }

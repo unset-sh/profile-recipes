@@ -1,9 +1,10 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#readme",
-    "text": "Odile Marsh writes about families and the rooms they gather in. Her stories have appeared in Example Review and on Example Radio.\n\n**Agent:** Sample Agent, Example Literary Agency\n**Rights and permissions:** via the agency."
+    "$type": "sh.unset.block.text",
+    "text": "## Stories about the rooms we gather in\n\nI’m Odile Marsh. I write fiction about families, the things they leave unsaid and the places that bring them back together. My stories have appeared in Example Review and on Example Radio.\n\n**Agent:** Sample Agent at Example Literary Agency.\n**Rights and permissions:** enquiries through the agency."
   },
   "surface": "plain",
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "full"
 }

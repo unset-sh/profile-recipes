@@ -1,8 +1,10 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#readme",
-    "text": "I work in gouache, ink and digital, mostly for books and magazines.\n\n**Clients:** Example Books, Example Magazine, Example Festival\n**Commissions:** from €400 for a spot illustration, €1,500 for a book cover. Usually four to six weeks."
+    "$type": "sh.unset.block.text",
+    "text": "## Illustration in gouache, ink and digital\n\nI’m Inès, an illustrator making images for books, magazines and independent editions. This selection moves between imagined places, characters and quiet landscapes.\n\n**Selected clients:** Example Books, Example Magazine and Example Festival.\n**Commissions:** spot illustrations from €400; book covers from €1,500. Ask about the scope and timing before booking."
   },
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "full",
+  "surface": "plain"
 }

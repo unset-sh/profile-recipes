@@ -1,7 +1,7 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#collection",
+    "$type": "sh.unset.block.showcase",
     "title": "Come along",
     "layout": "list",
     "items": [
@@ -18,12 +18,14 @@
         "uri": "https://riversidefood.example.org/foodbank"
       },
       {
-        "tag": "18 Apr 2026",
+        "tag": "18 Apr 2027",
         "title": "Spring fundraiser quiz",
-        "uri": "https://riversidefood.example.org/quiz"
+        "uri": "https://riversidefood.example.org/quiz",
+        "description": "A community quiz to support the next season of food collections."
       }
     ]
   },
-  "surface": "outlined",
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "surface": "plain",
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "full"
 }

@@ -1,7 +1,7 @@
 {
-  "$type": "sh.unset.section",
+  "$type": "sh.unset.card",
   "content": {
-    "$type": "sh.unset.section#collection",
+    "$type": "sh.unset.block.showcase",
     "title": "Latest episodes",
     "layout": "list",
     "items": [
@@ -20,10 +20,12 @@
       {
         "tag": "Ep. 110 · 39 min",
         "title": "Who moderates the moderators?",
-        "uri": "https://signal.example.com/110"
+        "uri": "https://signal.example.com/110",
+        "description": "A conversation about the judgement and support behind community moderation."
       }
     ]
   },
-  "surface": "outlined",
-  "createdAt": "2026-01-01T00:00:00.000Z"
+  "surface": "plain",
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "width": "full"
 }

@@ -1,8 +1,8 @@
 {
   "id": "developer",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "title": "Developer",
-  "summary": "For software developers: projects first, the stack you work in, talks and writing, and where to find your code.",
+  "summary": "An engineering profile: explain your focus, show selected projects with your contribution, and connect code, writing and contact.",
   "persona": {
     "for": [
       "Software engineers",
@@ -15,31 +15,31 @@
   },
   "lexicon": {
     "repository": "https://github.com/Undefined6799/unset",
-    "commit": "4abcada"
+    "commit": "0dd079517074917ebd5217f7ecf15f4984cdd5d3"
   },
   "preview": "preview.png",
   "cards": [
     {
-      "file": "cards/01-projects.json",
-      "purpose": "Three to six projects they want to be known for."
+      "file": "cards/02-stack.json",
+      "purpose": "Explain the engineering focus, current work and technical interests in ordinary words."
     },
     {
-      "file": "cards/02-stack.json",
-      "purpose": "What they work in and what they are learning."
+      "file": "cards/01-projects.json",
+      "purpose": "Selected projects with the problem solved, contribution and source or demo."
     },
     {
       "file": "cards/03-contact.json",
-      "purpose": "Optional: how to reach them for work.",
-      "optional": true
-    },
-    {
-      "file": "cards/04-writing.json",
-      "purpose": "Talks and posts.",
+      "purpose": "How to discuss relevant work, without a stale availability promise.",
       "optional": true
     },
     {
       "file": "cards/05-code.json",
-      "purpose": "Code hosts and social accounts."
+      "purpose": "Source code and professional profiles."
+    },
+    {
+      "file": "cards/04-writing.json",
+      "purpose": "Selected technical writing and talks as supporting evidence.",
+      "optional": true
     }
   ],
   "slots": [
@@ -59,7 +59,81 @@
       "kind": "text",
       "required": true,
       "ask": "In one line, what do you do and for whom?",
-      "write": "One sentence, at most 120 characters, no hashtags or emoji."
+      "write": "One sentence, at most 120 characters, no hashtags or emoji. This appears in the About popover, not beside the name; repeat the essential purpose in the first text card."
+    },
+    {
+      "id": "stack",
+      "pointer": "/content/text",
+      "kind": "markdown",
+      "required": true,
+      "ask": "What kind of engineering work do you do, for whom, and what are you building or maintaining now? Which tools are central, and what are you learning?",
+      "write": "Begin with a short heading and two sentences about their engineering focus and current contribution. Follow with a few bold-labelled tool and learning lines. No skill ratings, percentages or unsupported maintainer claims. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/02-stack.json"
+    },
+    {
+      "id": "projects",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 4,
+      "ask": "Which three or four projects do you want to be known for? Paste their links.",
+      "write": "tag = main language and licence, if known; title = project name; description = the problem solved and their own contribution, as they describe it. Include source or demo destinations they supply. Feature up to four and link to the full project archive for the rest. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/01-projects.json"
+    },
+    {
+      "id": "contactText",
+      "file": "cards/03-contact.json",
+      "pointer": "/content/text",
+      "kind": "text",
+      "required": false,
+      "ifEmpty": "drop-field",
+      "ask": "What should people know before taking this action: who it is for, format, timing, price or reply expectations, only if you want to publish them?",
+      "write": "One or two short sentences, at most 400 characters. Include only facts supplied for this action; do not assume an introductory call is free or that any date, price or reply time is current. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "contact",
+      "pointer": "/content/buttons",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 2,
+      "ifEmpty": "drop-card",
+      "ask": "Do you want people to contact you about work? If so, how?",
+      "write": "Heading = their availability in a few words. Email: Only an address they confirm may be public: everyone can see it. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/03-contact.json"
+    },
+    {
+      "id": "contactHeading",
+      "file": "cards/03-contact.json",
+      "pointer": "/content/heading",
+      "kind": "text",
+      "required": true,
+      "ask": "What short heading should introduce this action?",
+      "write": "Use a clear heading that describes the action; no unconfirmed availability or promise. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback."
+    },
+    {
+      "id": "code",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": true,
+      "min": 1,
+      "max": 6,
+      "ask": "Where is your code, and which other accounts should be linked?",
+      "write": "Account URLs only; the current app shows the host and path when no label is supplied. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/05-code.json"
+    },
+    {
+      "id": "writing",
+      "pointer": "/content/items",
+      "kind": "list",
+      "required": false,
+      "min": 1,
+      "max": 4,
+      "ifEmpty": "drop-card",
+      "ask": "Any talks or posts you want to list?",
+      "write": "tag = Talk or Post · year; title = the published title; description = event and city for talks. Select up to four featured entries for this page; link to the complete archive or catalogue instead of deleting the person’s remaining work. Use only their confirmed information; replace or remove every demonstration name, claim, number, price, quote, date and URL in this field. Never keep sample copy as a fallback.",
+      "file": "cards/04-writing.json"
     },
     {
       "id": "location",
@@ -88,63 +162,8 @@
       "kind": "image",
       "required": false,
       "ifEmpty": "drop-field",
-      "ask": "Do you have a square photo or logo for your profile picture?",
-      "write": "The member uploads it in the editor; never fetch one from the web."
-    },
-    {
-      "id": "projects",
-      "pointer": "/content/items",
-      "kind": "list",
-      "required": true,
-      "min": 1,
-      "max": 6,
-      "ask": "Which three to six projects do you want to be known for? Paste their links.",
-      "write": "tag = main language · licence; title = the project name; description = what it does in one line, from the project's own README if they agree.",
-      "file": "cards/01-projects.json"
-    },
-    {
-      "id": "stack",
-      "pointer": "/content/text",
-      "kind": "markdown",
-      "required": true,
-      "ask": "What do you work in day to day, what are you comfortable with, and what are you learning?",
-      "write": "Bold-labelled lines as in the sample; no skill ratings or percentages.",
-      "file": "cards/02-stack.json"
-    },
-    {
-      "id": "contact",
-      "pointer": "/content/buttons",
-      "kind": "list",
-      "required": false,
-      "min": 1,
-      "max": 2,
-      "ifEmpty": "drop-card",
-      "ask": "Do you want people to contact you about work? If so, how?",
-      "write": "Heading = their availability in a few words. Email: Only an address they confirm may be public: everyone can see it.",
-      "file": "cards/03-contact.json"
-    },
-    {
-      "id": "writing",
-      "pointer": "/content/items",
-      "kind": "list",
-      "required": false,
-      "min": 1,
-      "max": 8,
-      "ifEmpty": "drop-card",
-      "ask": "Any talks or posts you want to list?",
-      "write": "tag = Talk or Post · year; title = the published title; description = event and city for talks.",
-      "file": "cards/04-writing.json"
-    },
-    {
-      "id": "code",
-      "pointer": "/content/items",
-      "kind": "list",
-      "required": true,
-      "min": 1,
-      "max": 6,
-      "ask": "Where is your code, and which other accounts should be linked?",
-      "write": "Account URLs only; the app shows the site and account name.",
-      "file": "cards/05-code.json"
+      "ask": "Do you have a photo, artwork or logo you want to upload as the profile picture?",
+      "write": "The person uploads their chosen picture in the editor. Never fetch, generate or infer a personal photo. Use their description for alt text wherever the editor asks for it."
     }
   ]
 }
