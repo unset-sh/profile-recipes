@@ -137,5 +137,5 @@ Draft **0.2** migrates every recipe from the old `sh.unset.section` format to th
 not compatible with consumers expecting the old records. The upstream publication lock is empty at the pinned
 commit; the schema snapshot is not evidence of network publication or complete editor support.
 
-Recipes under `recipes/` are [CC0 1.0](LICENSE-CONTENT). Tooling is [MIT](LICENSE). Copied schemas carry their
-[upstream MIT notice](schemas/upstream/LICENSE). Local fonts retain their SIL Open Font License files in `site/fonts/`.
+Recipes under `recipes/` are [CC0 1.0](LICENSE-CONTENT). The tooling (scripts, site, workflows) is
+[AGPL-3.0-only](LICENSE). Copied schemas carry their [upstream MIT notice](schemas/upstream/LICENSE). Local fonts retain their SIL Open Font License files in `site/fonts/`.
