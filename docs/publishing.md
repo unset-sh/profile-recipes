@@ -29,7 +29,8 @@ source pull request -> validation and dry export -> merge to main
 2. **Prepare.** On relevant `main` changes, or a manual run on `main`, `docs-mirror` repeats the checks. The exporter
    requires a clean committed checkout, rejects links and special files, and writes a new temporary folder.
 3. **Publish the section.** The protected `docs-mirror` environment supplies `DOCS_DEPLOY_KEY`. The workflow checks out
-   `unset-sh/docs`, replaces only `profile-recipes/`, verifies its staged paths and makes a normal Git push.
+   `unset-sh/docs`, replaces only `profile-recipes/` and verifies its staged paths. Before every normal Git push, it
+   checks that all outgoing changes stay in that section and its files still match the generated export exactly.
 4. **Build the site.** The docs repository owns Hugo, the shared theme and its deployment checks. A successful export
    is not by itself a successful site deployment; inspect that repository's build too.
 
@@ -50,8 +51,9 @@ for the setup and cutover checks.
 ## Failures and recovery
 
 Validation or export failure stops before destination changes. A missing key stops before destination checkout. A
-concurrent destination update gets up to three normal push attempts, with a rebase between attempts; conflicts stop
-the job for review. The workflow never force-pushes.
+concurrent destination update gets up to three normal push attempts, with a rebase between attempts. Conflicts stop
+the job for review. A clean rebase also stops if it moves an edit outside the section or changes the generated tree,
+including a rename within the section. The workflow never force-pushes.
 
 Fix the source through a pull request and rerun from current `main`. To undo bad content, revert its source change
 through a pull request and export the corrected state. If the docs build fails, the previous successful site deployment

@@ -105,6 +105,35 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git commit -s -m "docs: sync profile-recipes from $SOURCE_COMMIT"
           for attempt in 1 2 3; do
+            # A clean rebase can follow a remote rename. Recheck both the outgoing paths
+            # and the entire generated section before every push, including retries.
+            test -z "$(git status --porcelain)"
+            git diff --no-renames --name-only -z origin/main HEAD > "$RUNNER_TEMP/docs-outgoing-paths"
+            python3 - <<'PY'
+          import os
+          import stat
+          from pathlib import Path
+          temporary = Path(os.environ['RUNNER_TEMP'])
+          paths = (temporary / 'docs-outgoing-paths').read_bytes().split(b'\0')
+          if any(path and not path.startswith(b'profile-recipes/') for path in paths):
+              raise SystemExit('Refusing to push a path outside profile-recipes/')
+
+          def snapshot(root):
+              if root.is_symlink() or not root.is_dir():
+                  raise SystemExit('Export section must be a regular directory')
+              files = {}
+              for path in root.rglob('*'):
+                  metadata = path.lstat()
+                  if stat.S_ISDIR(metadata.st_mode):
+                      continue
+                  if not stat.S_ISREG(metadata.st_mode) or metadata.st_nlink != 1:
+                      raise SystemExit('Export section must contain only regular files')
+                  files[path.relative_to(root).as_posix()] = path.read_bytes()
+              return files
+
+          if snapshot(Path('profile-recipes')) != snapshot(temporary / 'docs-export/profile-recipes'):
+              raise SystemExit('Refusing to push: profile-recipes differs from the generated export')
+          PY
             if git push origin HEAD:main; then
               exit 0
             fi

@@ -55,7 +55,7 @@ function fixture() {
     git(other, "push", "origin", "main");
     return git(other, "rev-parse", "HEAD");
   };
-  return { base, target, remote, git, run, readRemote, advance,
+  return { base, target, remote, runner, git, run, readRemote, advance,
     calls: () => readFileSync(env.GIT_CALL_LOG, "utf8"), cleanup: () => rmSync(base, { recursive: true, force: true }) };
 }
 
@@ -125,6 +125,35 @@ test("publisher stops on a rebase conflict without replacing the concurrent targ
     assert.doesNotMatch(f.calls(), /--force|\+HEAD/);
   } finally { f.cleanup(); }
 });
+
+for (const destination of ["framework-moved.md", "profile-recipes/moved.md"]) {
+  test(`publisher refuses a rebased rename to ${destination} and leaves the remote unchanged`, () => {
+    const f = fixture();
+    try {
+      const article = "Original first line\n" + Array.from({ length: 20 }, (_, i) => `Stable line ${i}\n`).join("");
+      writeFileSync(join(f.target, "profile-recipes", "article.md"), article);
+      f.git(f.target, "add", "--", "profile-recipes/article.md");
+      f.git(f.target, "commit", "-m", "Add article");
+      f.git(f.target, "push", "origin", "main");
+      writeFileSync(join(f.runner, "docs-export", "profile-recipes", "article.md"), article.replace("Original first line", "Changed by exporter"));
+
+      const other = join(f.base, "rename");
+      f.git(f.base, "clone", f.remote, other);
+      f.git(other, "mv", "profile-recipes/article.md", destination);
+      f.git(other, "commit", "-m", "Move article");
+      f.git(other, "push", "origin", "main");
+      const concurrent = f.git(other, "rev-parse", "HEAD");
+
+      const result = f.run();
+      assert.notEqual(result.status, 0, "A clean rebase must not authorize publishing a renamed export");
+      assert.match(result.stderr, destination.startsWith("profile-recipes/") ? /differs from the generated export/ : /outside profile-recipes/);
+      assert.equal(f.git(f.remote, "rev-parse", "main"), concurrent);
+      assert.equal(f.readRemote(destination), article.trim());
+      assert.match(f.calls(), /pull --rebase origin main/);
+      assert.equal((f.calls().match(/^push origin HEAD:main/gm) ?? []).length, 1, "Do not push after the unsafe rebase");
+    } finally { f.cleanup(); }
+  });
+}
 
 test("workflow confines publication to current main, its protected environment and pinned actions", () => {
   assert.match(workflow, /branches: \[main\]/);
