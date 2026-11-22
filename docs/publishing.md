@@ -44,9 +44,11 @@ Changes to these pages or their checked inputs trigger the mirror after merging 
 new explanations when code changes. Changes to recipe behavior, schemas, limits or previews must include the relevant
 documentation review in the source pull request. Keep the app-support revision explicit until that support is rechecked.
 
-The mirror requires owner setup before its first successful run. Its existence alone does not mean the key is installed
-or that this section is live. See the [publishing runbook](https://github.com/unset-sh/profile-recipes/blob/main/.github/DOCS-PUBLISHING.md)
-for the setup and cutover checks.
+The mirror requires authorized setup before its first successful run. Its existence alone does not mean the key is
+installed or that this section is live. Follow the central [Manage a documentation publishing key](https://github.com/unset-sh/.github/blob/main/docs/site/manage-docs-publishing-key.md)
+guide for key creation on a Mac, installation, rotation and retirement. This source's
+[publishing runbook](https://github.com/unset-sh/profile-recipes/blob/main/.github/DOCS-PUBLISHING.md) supplies the exact
+repository, environment and secret names, plus exporter verification and recovery steps.
 
 ## Failures and recovery
 

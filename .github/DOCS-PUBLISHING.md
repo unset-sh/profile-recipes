@@ -4,48 +4,27 @@
 licence notices. `.github/workflows/docs-mirror.yml` replaces that section in `unset-sh/docs`; the docs repository
 builds and deploys the site. This workflow does not change the framework, other sections or repository settings.
 
-## Before the first run
+## Publishing access
 
-Alex configures the publishing credential and environment. Do this before merging or manually running the mirror.
-The settings are not created by this pull request, and a workflow file is not evidence that they exist.
+Follow the organisation's [Manage a documentation publishing key](https://github.com/unset-sh/.github/blob/main/docs/site/manage-docs-publishing-key.md)
+guide for authorized Mac key creation, installation, verification, rotation and retirement. It also explains the
+exception for explicitly approved key reuse. Keep the shared credential procedure there.
 
-1. In `unset-sh/profile-recipes` → **Settings → Environments**, create `docs-mirror`. Set **Deployment branches and
-   tags → Selected branches and tags** to the branch `main` only. Keep any required-reviewer policy chosen by the owner.
-   The job's `if` guard also requires `refs/heads/main` and a push or manual event.
-2. Prefer a dedicated Ed25519 key for this source, so the retiring app mirror's key can be revoked independently.
-   Generate it on the owner's machine; never use an account key. Keep the private key out of the repository, logs
-   and chat. For example:
+Use these values for this publisher:
 
-   ```sh
-   docs_key_dir="$(mktemp -d)"
-   chmod 700 "$docs_key_dir"
-   ssh-keygen -t ed25519 -N '' -C 'profile-recipes docs-mirror' -f "$docs_key_dir/docs-mirror"
-   ```
+| Setting | Value |
+| --- | --- |
+| Source repository | `unset-sh/profile-recipes` |
+| Destination repository | `unset-sh/docs` |
+| Exported section | `profile-recipes/` |
+| Source environment | `docs-mirror` |
+| Allowed deployment branch | `main` only |
+| Environment secret | `DOCS_DEPLOY_KEY` |
 
-   The owner may instead explicitly reuse the existing `unset-sh/docs` deploy key if they still hold its private
-   half. GitHub cannot return that private half from the old secret. Configure it in the new source environment,
-   then remove the app's secret and any remaining app access before cutover. Do not delete the shared target key
-   in this reuse case, because the new source needs it too.
-
-3. In `unset-sh/docs` → **Settings → Deploy keys**, add the `.pub` file as **profile-recipes docs-mirror**, with
-   **Allow write access** enabled. The target is `unset-sh/docs`, not this source repository. Skip adding a new key
-   if the owner explicitly reuses one already registered there with write access.
-4. In the source's `docs-mirror` environment, add the private key as the environment secret **`DOCS_DEPLOY_KEY`**.
-   This is the only publishing secret name used. The existing app's secret is not inherited. If using `gh`, this
-   reads the dedicated key file directly rather than putting its contents in command arguments; for an explicitly
-   reused key, point the input at the owner's existing private-key file instead:
-
-   ```sh
-   gh secret set DOCS_DEPLOY_KEY --repo unset-sh/profile-recipes --env docs-mirror < "$docs_key_dir/docs-mirror"
-   ```
-
-5. Confirm the destination's rules permit this dedicated key to push `main`. Do not weaken unrelated rules. A deploy
-   key grants repository access, not a server-enforced path restriction; the reviewed exporter and staged-path check
-   enforce this workflow's `profile-recipes/` boundary. Keep the environment restricted and review workflow changes.
-6. Retain or remove the local key files according to the owner's secret-storage policy. Do not print the private key.
-
-References: [GitHub deploy keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys)
-and [environment protection](https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments).
+Configure the protected environment before supplying its secret, and preserve the owner's required-reviewer policy.
+The job also requires `refs/heads/main` and a push or manual event. The destination must permit the publishing key to
+push `main`. The key grants repository access; this source's staged-path, outgoing-path and export-content checks
+enforce the `profile-recipes/` boundary. A workflow file alone does not prove access is configured.
 
 ## Verify and release
 
@@ -79,9 +58,8 @@ After the first push:
 - Check the target commit changes only `profile-recipes/` and that `source.json.commit` matches the checked source.
 - Confirm the docs repository's build and Pages deployment succeed. The first source push does not prove the site is live.
 - Open `https://docs.unset.sh/profile-recipes/` and its example page. Confirm HTTPS and the current source citation.
-- Before the site cutover, retire the old app mirror and remove its writable access, including access available to
-  reruns of its old workflow. With a separate source key, revoke the old app's target key after checking its uses.
-  With an explicitly reused target key, remove the old app's secret/access and retain the shared target key.
+- When replacing a publisher, complete the central guide's [old-access retirement steps](https://github.com/unset-sh/.github/blob/main/docs/site/manage-docs-publishing-key.md#5-retire-old-access-before-the-framework-merge)
+  before the framework merge, including access available to historical workflow reruns.
 
 ## Keeping the section current
 
