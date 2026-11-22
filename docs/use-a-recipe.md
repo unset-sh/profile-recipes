@@ -49,7 +49,7 @@ the editor and provide their descriptions for alt text. The assistant does not n
 Use the supported cards in the unset.sh editor, then work through the guide's “Before publishing” checklist. You enter
 and publish the result yourself. Preparing text or records gives an assistant no permission to write to your account.
 
-Profile visibility preferences do not make AT Protocol repository records confidential. Keep private information out
+Page visibility preferences do not make AT Protocol repository records confidential. Keep private information out
 of records intended for a public repository. Read [the record boundaries](understand-a-recipe.md#where-the-boundaries-are)
 before building an integration.
 

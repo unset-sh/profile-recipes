@@ -29,10 +29,11 @@ For new contributions, keep one recipe per pull request. A shared schema or prev
 ## Make one
 
 1. Copy the closest recipe: `cp -r recipes/journalist recipes/<your-id>`. The id is lowercase with hyphens.
-2. Edit `profile.json` and the files in `cards/`. Use only fields in the vendored upstream definitions under
-   [`schemas/upstream/`](schemas/upstream/): `sh.unset.profile`, `sh.unset.card` and `sh.unset.block.*`.
+2. Edit `profile.json`, `page.json` and the files in `cards/`. Use only fields in the vendored upstream definitions under
+   [`schemas/upstream/`](schemas/upstream/): `sh.unset.profile`, `sh.unset.page`, `sh.unset.card` and `sh.unset.block.*`.
    These schema files are copied dependencies, not examples. The recipe JSON files are the examples.
-   List the cards in `recipe.json` in page order, each with a one-line `purpose`.
+   Keep identity on the profile and visibility on the page. Leave page card references absent until real
+   record keys are assigned. List the cards in `recipe.json` in page order, each with a one-line `purpose`.
 3. Use invented sample data only: names you made up, links on `example.com`, `example.org` or `example.net`, or a
    platform listed in `limits.json` with "example" in the path or query. Never a real person's account.
 4. Sample pictures go in `assets/` as JPEG with no metadata, at most 2560 px on the longest side, your own work or
@@ -49,20 +50,31 @@ For new contributions, keep one recipe per pull request. A shared schema or prev
 
 Each recipe has its own `version`. Bump the patch for wording, the minor for a new card or slot, the major when a
 card or slot is removed or its meaning changes. During 0.x, a minor bump also marks a draft upstream contract migration;
-0.2 migrates all examples to card/block records and is incompatible with the old section format.
+0.2 migrated examples from sections to cards/blocks; 0.3 separates profile identity from page visibility and ordering.
+These are recipe-format versions, not permission to make breaking changes to an existing NSID.
 
 ## When the app changes
 
-`schemas/upstream/` contains unmodified Lexicon documents from the unset.sh app at the full commit in
-[`source.json`](schemas/upstream/source.json). The definitions and NSIDs belong to upstream; this repository does
-not publish or redefine them. Their publication status is recorded at that commit, not inferred from schema validity.
+`schemas/upstream/` contains unmodified documents from [unset-sh/lexicons](https://github.com/unset-sh/lexicons)
+at the full commit in [`source.json`](schemas/upstream/source.json). That contract is the target: update recipes and
+tools to it, never edit copied schemas to make a sample pass. The recipe snapshot needs the profile, page, card and
+six block definitions; the OAuth permission set is not a recipe record dependency.
 
-To update the snapshot, copy the relevant files and all referenced definitions from upstream's
-`shared/lexicons/schemas/`, preserving their bytes, together with its license. Update `source.json` and every recipe's
-`lexicon.commit`; migrate records and slot pointers if the format changed. Derive the editor limits in
-`limits.json` from `APP_LIMITS`, `CARD_EDIT_LIMITS` and `TEXT_EDIT_BYTES`. The `sampleHosts` list is repository
-policy, not copied app configuration. Review the actual editor and renderer before updating support claims, then
-regenerate previews and run `npm run check`.
+Copy every required schema and its referenced definitions byte for byte, retaining the MIT notice. Update the
+source manifest's commit, paths and hashes and every recipe's `lexicon` pin. Migrate records and slot pointers to the
+new contract, regenerate previews and run `npm run check`. A matching hash proves the copy matches its manifest;
+review it against the actual source commit too.
+
+The app's editor limits and display support are a separate dependency. Derive `limits.json` from `APP_LIMITS`,
+`CARD_EDIT_LIMITS` and `TEXT_EDIT_BYTES`; `sampleHosts` remains repository policy. Review the actual editor and
+reader at a named app commit. Exercise recipe loading and both preview modes, including omitted or empty optional
+content. A schema-valid record can still be hidden by an app that does not support its block type.
+
+For future changes to an existing NSID, follow the
+[Lexicon evolution rules](https://atproto.com/specs/lexicon#lexicon-evolution): added fields must be optional, and
+existing names, types, required fields, closed unions and size or length limits must stay compatible. Retaining
+field names alone is insufficient. Breaking changes require a new NSID. This migration updates consumers of an
+already-selected contract; it does not change that contract or establish a new schema authority.
 
 The checks deliberately reject unknown fields and block types in samples to catch typos. AT Protocol itself allows
 extensions; do not describe this stricter template policy as an upstream write rule.

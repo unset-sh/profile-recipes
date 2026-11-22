@@ -1,5 +1,5 @@
 // Static review pages, not a second app renderer. Pinned app behavior and theme:
-// https://github.com/Undefined6799/unset/tree/0dd079517074917ebd5217f7ecf15f4984cdd5d3/apps/web/lib/components/profile
+// https://github.com/Undefined6799/unset/tree/9817f1e7ed51fdd5989d6bad6261a9e167d97b80/apps/web/lib/components/profile
 // Current mode reflects the shipped text/link/button renderer; media mode demonstrates schema-supported imagery.
 import { copyFileSync, cpSync, existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -8,7 +8,7 @@ import { cidOf } from "./blob.ts";
 
 type Obj = Record<string, any>;
 export type Mode = "current" | "media";
-export type Recipe = { id: string; dir: string; manifest: Obj; profile: Obj; cards: Obj[]; assets: Map<string, string> };
+export type Recipe = { id: string; dir: string; manifest: Obj; profile: Obj; page: Obj; cards: Obj[]; assets: Map<string, string> };
 const root = join(import.meta.dirname, "..");
 const out = join(root, "dist");
 const PRESET: Record<string, string> = { "book-call": "Book a call", hire: "Hire me", subscribe: "Subscribe" };
@@ -29,14 +29,14 @@ const rel = 'rel="nofollow ugc noopener noreferrer"';
 const layoutOf = (layout: unknown, fallback: string) => ["list", "grid", "carousel"].includes(String(layout)) ? String(layout) : fallback;
 const linkText = (uri: unknown) => { try { const u = new URL(String(uri)); return `${host(uri)}${u.pathname.replace(/\/+$/, "")}`; } catch { return ""; } };
 
-function loadRecipes(): Recipe[] {
-  return readdirSync(join(root, "recipes")).filter(id => statSync(join(root, "recipes", id)).isDirectory()).map(id => {
-    const dir = join(root, "recipes", id);
+export function loadRecipes(recipeRoot = root): Recipe[] {
+  return readdirSync(join(recipeRoot, "recipes")).filter(id => statSync(join(recipeRoot, "recipes", id)).isDirectory()).map(id => {
+    const dir = join(recipeRoot, "recipes", id);
     const read = (f: string) => JSON.parse(readFileSync(join(dir, f), "utf8"));
     const manifest = read("recipe.json");
     const assets = new Map<string, string>();
     if (existsSync(join(dir, "assets"))) for (const f of readdirSync(join(dir, "assets"))) assets.set(cidOf(readFileSync(join(dir, "assets", f))), f);
-    return { id, dir, manifest, profile: read("profile.json"), cards: manifest.cards.map((c: Obj) => read(c.file)), assets };
+    return { id, dir, manifest, profile: read("profile.json"), page: read("page.json"), cards: manifest.cards.map((c: Obj) => read(c.file)), assets };
   });
 }
 function picture(r: Recipe, blob: Obj | undefined, alt: unknown, cls: string, ratio?: Obj): string {
@@ -82,7 +82,9 @@ export function cardBody(r: Recipe, c: Obj, mode: Mode): string {
   if (kind === "sh.unset.block.links" || kind === "sh.unset.block.showcase") {
     const links = kind.endsWith(".links");
     const layout = layoutOf(c.layout, links ? "list" : "carousel");
-    const items: Obj[] = links ? c.items.filter((item: Obj) => webHref(item.uri)) : c.items;
+    const rows: Obj[] = Array.isArray(c.items) ? c.items.filter((item: unknown) => typeof item === "object" && item !== null && !Array.isArray(item)) : [];
+    const items = links ? rows.filter(item => webHref(item.uri)) : rows;
+    if (items.length === 0) return "";
     const entries = items.map(e => {
       const href = webHref(e.uri);
       const cover = mode === "media" && e.image ? picture(r, e.image.image, e.image.alt, "entry-image", e.image.aspectRatio) : "";
@@ -95,7 +97,9 @@ export function cardBody(r: Recipe, c: Obj, mode: Mode): string {
   }
   if (kind === "sh.unset.block.buttons") {
     const addresses: string[] = [];
-    const buttons = c.buttons.flatMap((b: Obj) => {
+    const rows: Obj[] = Array.isArray(c.buttons) ? c.buttons : [];
+    const buttons = rows.flatMap((b: Obj) => {
+      if (typeof b !== "object" || b === null || Array.isArray(b)) return [];
       if (b.$type === "sh.unset.block.buttons#email") {
         if (typeof b.address !== "string" || !/^[\w.+-]+@(?:[\w-]+\.)+[\w-]+$/.test(b.address)) return [];
         addresses.push(b.address);
@@ -106,6 +110,7 @@ export function cardBody(r: Recipe, c: Obj, mode: Mode): string {
       const label = Object.hasOwn(PRESET, b.preset) ? PRESET[b.preset] : typeof b.label === "string" && b.label.trim() ? b.label : "Open link";
       return href ? [{ href, label }] : [];
     });
+    if (buttons.length === 0) return "";
     return `<span class="eyebrow">Contact</span>${c.heading ? `<h2>${esc(c.heading)}</h2>` : ""}${c.text ? `<p class="pitch">${esc(c.text)}</p>` : ""}<div class="buttons">${buttons.map((b: Obj, i: number) => `<a class="btn${i === 0 ? " primary" : ""}" href="${b.href}" ${rel}>${esc(b.label)}</a>`).join("")}</div>${addresses.length ? `<p class="addresses">${addresses.map(esc).join(" · ")}</p>` : ""}`;
   }
   return "";

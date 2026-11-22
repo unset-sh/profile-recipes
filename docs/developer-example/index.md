@@ -12,7 +12,7 @@ All people, projects and claims in this example are invented demonstration conte
 ![Developer profile mockup: engineering focus, project list, contract-work action and code links, followed by talks and writing.](../../recipes/developer/preview.png)
 
 This is the repository's desktop **current-app approximation**, not a deployed profile. It reflects the support review
-at app commit `0dd0795`; navigation, the full Markdown renderer and owner controls are outside the mockup.
+at app commit `9817f1e`; navigation, the full Markdown renderer and owner controls are outside the mockup.
 
 ## 1. Read the order
 
@@ -26,6 +26,12 @@ The [manifest](https://github.com/unset-sh/profile-recipes/blob/main/recipes/dev
 
 This is also the interview and reading order. If the person omits the contract-work action, widen “Find me” to fill
 the row. On small screens, the retained cards stack in this same order.
+
+The separate [profile template](https://github.com/unset-sh/profile-recipes/blob/main/recipes/developer/profile.json)
+holds the name, headline and other identity details. The
+[page template](https://github.com/unset-sh/profile-recipes/blob/main/recipes/developer/page.json) holds visibility.
+When preparing records, assign the retained cards their keys and fill `sh.unset.page/self.cards` in the order above.
+The template leaves these addresses absent; it does not invent record keys or put the order on the profile.
 
 ## 2. Inspect the first card
 
@@ -58,7 +64,8 @@ omit the card. Do not turn “Ari maintains tidequeue” into a claim about the 
 
 ## 4. Check your understanding
 
-- Moving a card changes manifest order; renaming its file is not required.
+- Moving a card changes manifest order; the prepared page’s references must follow that order.
+- Identity belongs on the profile; visibility and card references belong on the page.
 - A missing optional answer follows that slot's `ifEmpty` rule.
 - Passing validation proves the sample follows the pinned contract and repository policy, not that every field is rendered.
 - The person reviews and enters the result; this exercise does not publish records.

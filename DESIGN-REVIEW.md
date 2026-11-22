@@ -1,14 +1,38 @@
 # Give every profile a distinct purpose
 
-The fifteen revised recipes help different visitors make different decisions: read reporting, assess a project, discover a release, book an engagement, or support a mission. **Each profession now has a distinct reading sequence**, using the app’s existing card widths, surfaces and block layouts. A shared visual language supports that variety without recipe-specific fonts, colors or custom widgets. The review also uncovered a contract migration: the original package copied genuine upstream schemas, but its `section` model has since been replaced by composable `card` records. Image blocks exist in the schema while the inspected web renderer still exposes text, links, showcase and buttons. The delivered mockups therefore separate current-renderer views from a labeled media study. Rich media begins with useful static cards; loading a provider player remains a later privacy and platform decision.
+The fifteen revised recipes help different visitors make different decisions: read reporting, assess a project, discover a release, book an engagement, or support a mission. **Each profession now has a distinct reading sequence**, using the app’s existing card widths, surfaces and block layouts. A shared visual language supports that variety without recipe-specific fonts, colors or custom widgets. The current update reconciles the recipe snapshot with the profile/page/card contract, retaining the earlier section-to-card migration as history. Image blocks exist in the schema while the inspected web renderer still exposes text, links, showcase and buttons. The delivered mockups therefore separate current-renderer views from a labeled media study. Rich media begins with useful static cards; loading a provider player remains a later privacy and platform decision.
 
-## The copied schemas need updating, not relabeling
+## Reconcile the recipe snapshot with the current contract
 
-The original `lexicons/` files were **real schema copies from app commit `4abcada`**, not “example lexicons.” The examples are the profile and card records inside each recipe. By the inspected upstream commit **`0dd079517074917ebd5217f7ecf15f4984cdd5d3`**, the source set comprises `sh.unset.profile`, `sh.unset.card`, and `sh.unset.block.{text,links,showcase,buttons,images,defs}`. The revised package vendors these eight inputs byte-for-byte under `schemas/upstream/`, with provenance and the upstream license. Profile ordering now uses own-repository AT URI objects rather than record-key strings, so migration must update references as well as type names. Recipes describe content, ordering and interview prompts; they do not independently define a competing protocol. ([Upstream schemas](https://github.com/Undefined6799/unset/tree/0dd079517074917ebd5217f7ecf15f4984cdd5d3/shared/lexicons/schemas); [profile card references](https://github.com/Undefined6799/unset/blob/0dd079517074917ebd5217f7ecf15f4984cdd5d3/shared/lexicons/schemas/sh.unset.profile.json))
+The earlier 0.2 recipes followed app commit `0dd0795`, where the profile also carried visibility and card order.
+The current contract separates those responsibilities: `sh.unset.profile` holds identity and `sh.unset.page` holds
+visibility and card references. The recipe mismatch came from retaining the earlier snapshot after that migration.
+Version 0.3 updates all fifteen recipes, their validator and their instructions to follow
+[`unset-sh/lexicons` at `52cfb69`](https://github.com/unset-sh/lexicons/tree/52cfb6990f3833e4bdd260cd5bb520fc4446e122/lexicons).
+The nine consumed schemas are copied byte for byte with their source paths and hashes. No schema is changed here.
 
-Schema validity and visible behavior are separate gates. At this commit, the renderer’s exposed types contain four visible block kinds and no image on showcase entries. A schema-valid image is therefore **supported by the contract, pending display support**. The header offers the name, an avatar fallback and an About disclosure; the current route does not supply its avatar prop. Portraits in the media study are illustrative. Each recipe now starts with text that establishes purpose without relying on a visible headline or identity sidebar. ([Renderer types](https://github.com/Undefined6799/unset/blob/0dd079517074917ebd5217f7ecf15f4984cdd5d3/apps/web/lib/profile/types.ts); [profile header](https://github.com/Undefined6799/unset/blob/0dd079517074917ebd5217f7ecf15f4984cdd5d3/apps/web/lib/components/profile/profile-header.svelte))
+Each recipe now has `profile.json`, `page.json` and `cards/`. The manifest remains the preparation order; a writer
+places the retained cards’ DID-based AT URI references on the main page under record key `self`. The page template
+leaves those references absent until record keys are assigned. Sample visibility moves off the profile and onto the
+page. Existing account choices must be preserved unless the person deliberately changes them.
 
-For network authority, Lexicon is AT Protocol’s schema language, and authority derives from the NSID’s DNS controller. Published schemas use `com.atproto.lexicon.schema` records with DNS delegation; `sh.unset.*` names are unset’s application schemas. Local vendoring does not publish a schema or confer that authority. Although the inspected publication lock is empty, the protocol also treats third-party public adoption as a compatibility boundary: “draft” is not unlimited permission to break adopted data. ([Lexicon specification](https://atproto.com/specs/lexicon); [upstream lock](https://github.com/Undefined6799/unset/blob/0dd079517074917ebd5217f7ecf15f4984cdd5d3/shared/lexicons/published.lock.json))
+The earlier section-to-card migration remains history: the original `lexicons/` files were real schema copies,
+while sample records lived under `recipes/`. Recipes consume a protocol contract; they do not define competing NSIDs.
+Future changes to an existing NSID follow [compatible evolution](https://atproto.com/specs/lexicon#lexicon-evolution):
+new fields must be optional, and existing names, types, required fields, closed unions and size or length limits
+must remain compatible. Retaining names alone is insufficient. Public adoption creates compatibility obligations
+even before DNS publication.
+
+Schema validity and consumer behavior are checked separately. At
+[app commit `9817f1e`](https://github.com/Undefined6799/unset/tree/9817f1e7ed51fdd5989d6bad6261a9e167d97b80), the public reader takes card ordering and
+visibility from the page. A missing page shows no cards; invalid pages are kept closed. Only known, nonempty card
+content is displayed. Current mockups still cover text, links, showcase and buttons; image cards and showcase
+pictures remain media studies. The route uses an avatar fallback and About disclosure. Recipe-loader and renderer
+regressions cover the new page input, manifest order and empty content. These checks do not publish a live account.
+
+GitHub distribution and DNS/PDS publication are separate. The canonical repo’s
+[publication guide](https://github.com/unset-sh/lexicons/blob/52cfb6990f3833e4bdd260cd5bb520fc4446e122/docs/publication.md) explains the authority and
+compatibility boundary. The schema pin and copied hashes establish which contract these recipes consume.
 
 ## Fifteen recipes can share controls without sharing a template
 
@@ -50,11 +74,17 @@ Uploaded, licensed media served through the approved media origin is the cleares
 
 ## Ship the editorial improvements before the player framework
 
-The completed first priority is contract accuracy and renderer fidelity: schema copies and example records migrated together, slot pointers and guides updated, placeholder link behavior removed, and current views made coherent. Validation includes editor limits: Text permits 10,000 UTF-8 bytes despite the schema’s 20,000-byte cap. Strict unknown-field rejection is a template-maintenance policy; upstream writes preserve unknown fields for compatibility. Passing a schema alone cannot prove an image appears. ([Card limits](https://github.com/Undefined6799/unset/blob/0dd079517074917ebd5217f7ecf15f4984cdd5d3/domains/profile/card-edit.ts); [profile preservation](https://github.com/Undefined6799/unset/blob/0dd079517074917ebd5217f7ecf15f4984cdd5d3/domains/profile/profile.ts))
+The first priority remains contract accuracy and renderer fidelity: schema copies and example records migrated together, slot pointers and guides updated, placeholder link behavior removed, and current views made coherent. Validation includes editor limits: Text permits 10,000 UTF-8 bytes despite the schema’s 20,000-byte cap. Strict unknown-field rejection is a template-maintenance policy; upstream writes preserve unknown fields for compatibility. Passing a schema alone cannot prove an image appears. ([Card limits](https://github.com/Undefined6799/unset/blob/9817f1e7ed51fdd5989d6bad6261a9e167d97b80/domains/profile/card-edit.ts); [profile preservation](https://github.com/Undefined6799/unset/blob/9817f1e7ed51fdd5989d6bad6261a9e167d97b80/domains/profile/profile.ts))
 
-The [preview gallery](dist/index.html) delivers **15 recipes and 60 screenshots**: desktop/mobile versions of both current and media-study views. `npm run check` passed typechecking, 25 tests and all 15 recipe validations. The screenshot run checked page overflow, broken images, zero third-party HTTP requests and keyboard operation of About; dark-mode checks at 320 pixels also passed. These results verify the local static package, not production app parity or future provider-player traffic. ([Preview tooling](scripts/previews.ts))
+The [preview gallery](dist/index.html) delivers **15 recipes and 60 screenshots**: desktop/mobile versions of both current and media-study views. The 0.3 verification passed typechecking, 62 tests and all 15 recipe validations. Regenerated screenshots passed overflow, image, zero third-party request and About keyboard checks, plus dark-mode checks at 320 pixels. ([Preview tooling](scripts/previews.ts))
 
-The next priority is the bounded media work already implied by the contract: accessible image display, whole-image treatment where appropriate, approved storage/proxy handling, and explicit distinction between user-uploaded assets and remote provider artwork. The later player proposal should be narrowly typed—known provider plus validated identifier/canonical URL and optional caption—with no raw HTML, arbitrary scripts or author-controlled iframe attributes. Introduce one integration when there is demonstrated need, rather than an all-provider framework. Consent UX, CSP, the zero-script public route, provider terms and traffic testing must be settled together. ([Current block schemas](https://github.com/Undefined6799/unset/tree/0dd079517074917ebd5217f7ecf15f4984cdd5d3/shared/lexicons/schemas); [existing security requirements](https://github.com/Undefined6799/unset/blob/0bb11e951abf2d6ffdb89b733f66c69837c47e80/CLAUDE.md))
+A separate check used the actual reader, visibility, view and index-planning modules from app `9817f1e`, with their
+real pinned dependencies. It accepted all 110 prepared records (15 profiles, 15 pages and 80 cards), retained manifest
+order through page references, and displayed 78 cards; two image cards remained hidden as expected. Missing pages,
+duplicate or foreign references, unknown visibility and invalid main-page records followed the documented consumer
+behavior. These checks cover local consumers and previews, not HTTP/PDS publishing or a deployed account.
+
+The next priority is the bounded media work already implied by the contract: accessible image display, whole-image treatment where appropriate, approved storage/proxy handling, and explicit distinction between user-uploaded assets and remote provider artwork. The later player proposal should be narrowly typed—known provider plus validated identifier/canonical URL and optional caption—with no raw HTML, arbitrary scripts or author-controlled iframe attributes. Introduce one integration when there is demonstrated need, rather than an all-provider framework. Consent UX, CSP, the zero-script public route, provider terms and traffic testing must be settled together. ([Current block schemas](https://github.com/Undefined6799/unset/tree/9817f1e7ed51fdd5989d6bad6261a9e167d97b80/shared/lexicons/schemas); [existing security requirements](https://github.com/Undefined6799/unset/blob/0bb11e951abf2d6ffdb89b733f66c69837c47e80/CLAUDE.md))
 
 The references establish usable precedents, not evidence of higher donations, bookings, subscriptions or hiring. Some image-heavy reference pages did not fully display during inspection. Local responsive checks do not establish the references’ behavior or audit third-party players. Real app behavior must still be verified independently of these static studies.
 

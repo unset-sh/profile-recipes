@@ -50,7 +50,7 @@ reference, and enter supported cards in the editor. Keep media slots for when th
 ## Current app and media studies
 
 Support was inspected at app commit
-[`0dd0795`](https://github.com/Undefined6799/unset/tree/0dd079517074917ebd5217f7ecf15f4984cdd5d3), not inferred from
+[`9817f1e`](https://github.com/Undefined6799/unset/tree/9817f1e7ed51fdd5989d6bad6261a9e167d97b80), not inferred from
 schema validation. This is a dated snapshot; check upstream before applying it to a later release.
 
 | Capability | Current-app mockup | Media study |
@@ -80,7 +80,8 @@ and catalogue styles are not profile settings.
 recipes/<id>/
 ├── recipe.json             audience, card order, questions and writing guidance
 ├── GUIDE.md                layout, interview, references and publishing checklist
-├── profile.json            example sh.unset.profile record
+├── profile.json            identity-only sh.unset.profile template
+├── page.json               sh.unset.page template for the main page (self)
 ├── cards/                  example sh.unset.card records
 ├── assets/                 abstract sample JPEGs referenced by CID (CC0)
 ├── preview.png             desktop, current-app approximation
@@ -91,15 +92,19 @@ schemas/upstream/           exact copied upstream Lexicon definitions, provenanc
 ```
 
 `schemas/upstream/` contains **actual vendored schemas, not example Lexicons**. They define `sh.unset.profile`,
-`sh.unset.card`, and the `sh.unset.block.*` types. The sample *records* live under `recipes/`. Definitions and
+`sh.unset.page`, `sh.unset.card`, and the `sh.unset.block.*` types. The sample *records* live under `recipes/`. Definitions and
 publication belong to the upstream AT Protocol authority; this repository does not publish or redefine them.
-The [source manifest](schemas/upstream/source.json) records the full commit. Never rename an NSID to describe an
+The [source manifest](schemas/upstream/source.json) pins
+[unset-sh/lexicons](https://github.com/unset-sh/lexicons) at its full commit and records copied-file hashes. Never rename an NSID to describe an
 example, or change a copied schema to make a recipe pass.
 
-Each slot points at a record field using [JSON Pointer](https://www.rfc-editor.org/rfc/rfc6901). A profile template
-omits `cards` until records exist; a preparing tool later builds `{ "uri": "at://<did>/sh.unset.card/<rkey>" }`
-references in manifest order. Only the owner's own card addresses belong there. This does not authorize automatic
-publishing. Profile visibility preferences are not network access control: repository records remain public.
+Each slot points at a record field using [JSON Pointer](https://www.rfc-editor.org/rfc/rfc6901). `profile.json`
+holds identity; `page.json` holds the main page's visibility. The page template omits `cards` until record keys
+exist. A preparing tool fills **the page's** `cards` with `{ "uri": "at://<did>/sh.unset.card/<rkey>" }` references
+in manifest order, after optional cards are dropped, using only that owner's DID and repository. Neither `cards`
+nor `visibility` belongs on the profile. Existing page visibility and unrelated fields must be preserved unless
+the person chooses to change them. This does not authorize automatic publishing. Visibility requests do not make
+repository records confidential.
 
 ## Checks and previews
 
@@ -112,7 +117,8 @@ npm run check      # typecheck, tests, validate all fifteen recipes
 npm run previews   # build dist/, capture all sixty PNGs, then refresh catalogue thumbnails
 ```
 
-The checks verify schema fields and supported block types, editor limits, sample URLs, CID/file matches, JPEG
+The checks verify the schema inventory and hashes, profile/page/card placement, supported block types, editor limits,
+sample URLs, CID/file matches, JPEG
 metadata and dimensions, manifest/card/slot references, and guide sections. Unknown fields are rejected as a
 **template quality rule**, not a claim that upstream forbids extensions. Text uses the editor's 10,000-byte UTF-8
 cap; schema ceilings can be higher. [limits.json](limits.json) separates editor limits from repository sample policy.
@@ -137,9 +143,14 @@ newly resolved vulnerability or a runtime dependency of the static pages. See th
 
 ## Status and license
 
-Draft **0.2** migrates every recipe from the old `sh.unset.section` format to the current card/block contract. It is
-not compatible with consumers expecting the old records. The upstream publication lock is empty at the pinned
-commit; the schema snapshot is not evidence of network publication or complete editor support.
+Draft **0.3** aligns all fifteen recipes with
+[`unset-sh/lexicons` at `52cfb69`](https://github.com/unset-sh/lexicons/tree/52cfb6990f3833e4bdd260cd5bb520fc4446e122).
+It adds `page.json` and moves the samples' visibility there; profile records contain identity only. This reconciles
+the earlier 0.2 recipe format with the current profile/page/card contract. No upstream schema is changed.
+
+Future updates must follow [compatible Lexicon evolution](https://atproto.com/specs/lexicon#lexicon-evolution):
+new fields are optional; existing names, types, required fields and size or length limits stay compatible. A recipe
+version does not version an NSID. Verify the app's consumer behavior as well as schema validity when updating a pin.
 
 Recipes under `recipes/` are [CC0 1.0](LICENSE-CONTENT). The documentation and tooling (scripts, site, workflows) are
 [AGPL-3.0-only](LICENSE). Copied schemas carry their [upstream MIT notice](schemas/upstream/LICENSE). Local fonts retain their SIL Open Font License files in `site/fonts/`.

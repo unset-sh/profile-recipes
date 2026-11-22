@@ -31,8 +31,8 @@ writing guidance and a checklist. You replace the invented sample details with y
 This repository owns recipes, their application instructions, validation and these explanations. The app owns its
 editor and renderer. The copied schema definitions retain their upstream authority; recipes do not publish schemas.
 
-The recipes use the draft **0.2 card/block format**. App support was checked at
-[`0dd0795`](https://github.com/Undefined6799/unset/tree/0dd079517074917ebd5217f7ecf15f4984cdd5d3).
+The recipes use the draft **0.3 profile/page/card format**. App support was checked at
+[`9817f1e`](https://github.com/Undefined6799/unset/tree/9817f1e7ed51fdd5989d6bad6261a9e167d97b80).
 That snapshot is evidence about that revision, not a promise about a later release. The example preview is a layout
 mockup, not a deployed profile.
 
