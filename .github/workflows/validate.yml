@@ -30,3 +30,5 @@ jobs:
       - run: npm run check
       - name: Render the showcase pages
         run: npm run render
+      - name: Prepare the documentation export without publishing
+        run: node scripts/docs-export.ts "$RUNNER_TEMP/docs-export"

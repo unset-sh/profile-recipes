@@ -1,0 +1,145 @@
+name: docs-mirror
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - docs/**
+      - recipes/**
+      - scripts/**
+      - schemas/**
+      - limits.json
+      - README.md
+      - AGENTS.md
+      - CONTRIBUTING.md
+      - CLAUDE.md
+      - LICENSE
+      - LICENSE-CONTENT
+      - package.json
+      - package-lock.json
+      - tsconfig.json
+      - .nvmrc
+      - .github/workflows/docs-mirror.yml
+      - .github/workflows/validate.yml
+      - .github/DOCS-PUBLISHING.md
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: docs-mirror
+  cancel-in-progress: false
+
+jobs:
+  mirror:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    # Alex configures this environment to allow only main before adding its secret.
+    environment: docs-mirror
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Queued/manual runs always publish current main, not an older event revision.
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          package-manager-cache: false
+      - run: npm ci --ignore-scripts
+      - run: npm run check
+      - name: Render the recipe catalogue
+        run: npm run render
+      - name: Prepare an isolated export from the checked source
+        id: export
+        run: |
+          node scripts/docs-export.ts "$RUNNER_TEMP/docs-export"
+          echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Require the configured publishing key
+        env:
+          DOCS_DEPLOY_KEY: ${{ secrets.DOCS_DEPLOY_KEY }}
+        run: |
+          if [ -z "$DOCS_DEPLOY_KEY" ]; then
+            echo '::error::Configure the docs-mirror environment and DOCS_DEPLOY_KEY before publishing. See .github/DOCS-PUBLISHING.md.'
+            exit 1
+          fi
+      - name: Check out the destination
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: unset-sh/docs
+          ref: main
+          path: docs-repo
+          ssh-key: ${{ secrets.DOCS_DEPLOY_KEY }}
+          # Required for this job's push; checkout removes credentials in its post step.
+          persist-credentials: true
+          fetch-depth: 0
+      - name: Replace only profile-recipes and push without rewriting history
+        working-directory: docs-repo
+        env:
+          SOURCE_COMMIT: ${{ steps.export.outputs.commit }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s "$RUNNER_TEMP/docs-export/profile-recipes/_index.md"
+          test -z "$(git status --porcelain)"
+          # The destination and staged path are literals, never workflow inputs.
+          rm -rf -- profile-recipes
+          cp -R "$RUNNER_TEMP/docs-export/profile-recipes" profile-recipes
+          git add -A -- profile-recipes/
+          if git diff --cached --quiet; then
+            echo 'The source export is already current.'
+            exit 0
+          fi
+          git diff --cached --name-only -z > "$RUNNER_TEMP/docs-changed-paths"
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          paths = Path(os.environ['RUNNER_TEMP'], 'docs-changed-paths').read_bytes().split(b'\0')
+          if any(path and not path.startswith(b'profile-recipes/') for path in paths):
+              raise SystemExit('Refusing to commit a path outside profile-recipes/')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -s -m "docs: sync profile-recipes from $SOURCE_COMMIT"
+          for attempt in 1 2 3; do
+            # A clean rebase can follow a remote rename. Recheck both the outgoing paths
+            # and the entire generated section before every push, including retries.
+            test -z "$(git status --porcelain)"
+            git diff --no-renames --name-only -z origin/main HEAD > "$RUNNER_TEMP/docs-outgoing-paths"
+            python3 - <<'PY'
+          import os
+          import stat
+          from pathlib import Path
+          temporary = Path(os.environ['RUNNER_TEMP'])
+          paths = (temporary / 'docs-outgoing-paths').read_bytes().split(b'\0')
+          if any(path and not path.startswith(b'profile-recipes/') for path in paths):
+              raise SystemExit('Refusing to push a path outside profile-recipes/')
+
+          def snapshot(root):
+              if root.is_symlink() or not root.is_dir():
+                  raise SystemExit('Export section must be a regular directory')
+              files = {}
+              for path in root.rglob('*'):
+                  metadata = path.lstat()
+                  if stat.S_ISDIR(metadata.st_mode):
+                      continue
+                  if not stat.S_ISREG(metadata.st_mode) or metadata.st_nlink != 1:
+                      raise SystemExit('Export section must contain only regular files')
+                  files[path.relative_to(root).as_posix()] = path.read_bytes()
+              return files
+
+          if snapshot(Path('profile-recipes')) != snapshot(temporary / 'docs-export/profile-recipes'):
+              raise SystemExit('Refusing to push: profile-recipes differs from the generated export')
+          PY
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            if [ "$attempt" -lt 3 ]; then
+              git pull --rebase origin main
+            fi
+          done
+          echo '::error::Could not publish after three attempts; inspect the destination and rerun from main.'
+          exit 1

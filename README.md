@@ -7,6 +7,10 @@ and mobile mockups. Each has a different reading order and purpose within the sa
 findings, and privacy-preserving media options. Run `npm run previews` and open `dist/index.html` for the local
 browsable catalogue; it needs no server or external assets.
 
+The [human documentation](docs/_index.md) explains how to use a recipe, its architecture boundaries and the developer
+example. It is source-owned here and exported to the docs site; the [publishing runbook](.github/DOCS-PUBLISHING.md)
+describes setup, verification and recovery.
+
 ## Choose a recipe
 
 Thumbnails below are **media studies**, including imagery the current app does not yet display. The Current and
@@ -137,5 +141,5 @@ Draft **0.2** migrates every recipe from the old `sh.unset.section` format to th
 not compatible with consumers expecting the old records. The upstream publication lock is empty at the pinned
 commit; the schema snapshot is not evidence of network publication or complete editor support.
 
-Recipes under `recipes/` are [CC0 1.0](LICENSE-CONTENT). The tooling (scripts, site, workflows) is
+Recipes under `recipes/` are [CC0 1.0](LICENSE-CONTENT). The documentation and tooling (scripts, site, workflows) are
 [AGPL-3.0-only](LICENSE). Copied schemas carry their [upstream MIT notice](schemas/upstream/LICENSE). Local fonts retain their SIL Open Font License files in `site/fonts/`.
