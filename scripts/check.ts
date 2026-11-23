@@ -200,7 +200,7 @@ function resolve(ctx: Context, nsid: string, ref: string): { nsid: string; name:
 function checkBlob(dir: string, def: Def, value: Json, path: string): Problem[] {
   if (!isObj(value) || !isObj(value.ref) || typeof value.ref.$link !== "string") return [];
   const asset = findAsset(dir, value.ref.$link);
-  if (asset === undefined) return [`${path}: names no file in assets/ (run npm run blob-ref)`];
+  if (asset === undefined) return [`${path}: names no file in assets/ (run bun run blob-ref)`];
   const problems: Problem[] = [];
   if (value.size !== asset.bytes.length) problems.push(`${path}.size: ${asset.name} is ${asset.bytes.length} bytes`);
   const mimeType = value.mimeType;
@@ -303,7 +303,7 @@ function checkFiles(dir: string, m: Obj): Problem[] {
     for (const heading of GUIDE_HEADINGS) if (!guide.includes(`\n${heading}\n`)) problems.push(`GUIDE.md: needs "${heading}"`);
   }
   const preview = typeof m.preview === "string" ? m.preview : "preview.png";
-  if (!existsSync(join(dir, preview))) problems.push(`${preview}: missing (run npm run previews)`);
+  if (!existsSync(join(dir, preview))) problems.push(`${preview}: missing (run bun run previews)`);
   return problems;
 }
 

@@ -16,9 +16,10 @@ on:
       - LICENSE
       - LICENSE-CONTENT
       - package.json
-      - package-lock.json
+      - bun.lock
+      - bunfig.toml
       - tsconfig.json
-      - .nvmrc
+      - .bun-version
       - .github/workflows/docs-mirror.yml
       - .github/workflows/validate.yml
       - .github/DOCS-PUBLISHING.md
@@ -45,18 +46,17 @@ jobs:
           # Queued/manual runs always publish current main, not an older event revision.
           ref: main
           persist-credentials: false
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
         with:
-          node-version-file: .nvmrc
-          package-manager-cache: false
-      - run: npm ci --ignore-scripts
-      - run: npm run check
+          bun-version-file: .bun-version
+      - run: bun install --frozen-lockfile --ignore-scripts
+      - run: bun run check
       - name: Render the recipe catalogue
-        run: npm run render
+        run: bun run render
       - name: Prepare an isolated export from the checked source
         id: export
         run: |
-          node scripts/docs-export.ts "$RUNNER_TEMP/docs-export"
+          bun scripts/docs-export.ts "$RUNNER_TEMP/docs-export"
           echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
       - name: Require the configured publishing key
         env:

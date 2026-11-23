@@ -165,9 +165,9 @@ test("workflow confines publication to current main, its protected environment a
   assert.equal((workflow.match(/ref: main/g) ?? []).length, 2);
   const actions = [...workflow.matchAll(/uses: ([^\s]+)/g)].map((match) => match[1]!);
   assert.equal(actions.length, 3);
-  for (const action of actions) assert.match(action, /^actions\/(?:checkout|setup-node)@[a-f0-9]{40}$/);
+  for (const action of actions) assert.match(action, /^(?:actions\/checkout|oven-sh\/setup-bun)@[a-f0-9]{40}$/);
   assert.deepEqual([...new Set([...workflow.matchAll(/secrets\.([A-Z_]+)/g)].map((match) => match[1]))], ["DOCS_DEPLOY_KEY"]);
   assert.match(workflow, /SOURCE_COMMIT: \$\{\{ steps\.export\.outputs\.commit \}\}/);
-  assert.ok(workflow.indexOf("npm run check") < workflow.indexOf("ssh-key:"));
-  assert.ok(workflow.indexOf("node scripts/docs-export.ts") < workflow.indexOf("ssh-key:"));
+  assert.ok(workflow.indexOf("bun run check") < workflow.indexOf("ssh-key:"));
+  assert.ok(workflow.indexOf("bun scripts/docs-export.ts") < workflow.indexOf("ssh-key:"));
 });

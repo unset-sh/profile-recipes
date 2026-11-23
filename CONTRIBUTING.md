@@ -42,13 +42,13 @@ For new contributions, keep one recipe per pull request. A shared schema or prev
    platform listed in `limits.json` with "example" in the path or query. Never a real person's account.
 4. Sample pictures go in `assets/` as JPEG with no metadata, at most 2560 px on the longest side, your own work or
    generated, released under CC0. This JPEG policy is stricter than the upstream schemas' `image/*`. Get the
-   reference to paste into a record with `npm run blob-ref -- recipes/<id>/assets/<file>.jpg`.
+   reference to paste into a record with `bun run blob-ref -- recipes/<id>/assets/<file>.jpg`.
 5. Write a slot in `recipe.json` for every field a person fills in: `ask` is the question, `write` is how to word
    the answer, `required` is a boolean, and optional slots need `ifEmpty` (`drop-field`, `drop-item` or `drop-card`).
    Links use HTTPS without credentials. Check the README's app support notes before choosing a block or image field:
    a valid schema record alone does not mean the app shows it.
 6. Write `GUIDE.md` with these sections: Who this is for, The layout, Interview, Writing rules, Before publishing.
-7. Run `npm run previews`, then `npm run check`, and open a pull request.
+7. Run `bun run previews`, then `bun run check`, and open a pull request.
 
 ## Versions
 
@@ -67,7 +67,7 @@ To update the snapshot, copy the relevant files and all referenced definitions f
 `lexicon.commit`; migrate records and slot pointers if the format changed. Derive the editor limits in
 `limits.json` from `APP_LIMITS`, `CARD_EDIT_LIMITS` and `TEXT_EDIT_BYTES`. The `sampleHosts` list is repository
 policy, not copied app configuration. Review the actual editor and renderer before updating support claims, then
-regenerate previews and run `npm run check`.
+regenerate previews and run `bun run check`.
 
 The checks deliberately reject unknown fields and block types in samples to catch typos. AT Protocol itself allows
 extensions; do not describe this stricter template policy as an upstream write rule.

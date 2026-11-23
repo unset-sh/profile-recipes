@@ -5,17 +5,14 @@
   "description": "Ready-made unset.sh profile layouts for different kinds of people, with guides an AI can follow.",
   "license": "AGPL-3.0-only",
   "type": "module",
-  "engines": {
-    "node": ">=22.18"
-  },
   "scripts": {
-    "validate": "node scripts/validate.ts",
-    "render": "node scripts/render.ts",
-    "previews": "node scripts/previews.ts",
-    "blob-ref": "node scripts/blob-ref.ts",
+    "validate": "bun scripts/validate.ts",
+    "render": "bun scripts/render.ts",
+    "previews": "bun scripts/previews.ts",
+    "blob-ref": "bun scripts/blob-ref.ts",
     "typecheck": "tsc --noEmit",
-    "test": "node --test \"scripts/**/*.test.ts\"",
-    "check": "npm run typecheck && npm test && npm run validate"
+    "test": "bun test scripts/",
+    "check": "bun run typecheck && bun run test && bun run validate"
   },
   "devDependencies": {
     "@atproto/lexicon": "0.7.21",

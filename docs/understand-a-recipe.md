@@ -50,7 +50,7 @@ not exported here as app documentation.
 
 ## What validation proves
 
-`npm run check` checks recipe records against the vendored schemas, then applies this repository's stricter sample
+`bun run check` checks recipe records against the vendored schemas, then applies this repository's stricter sample
 rules: known fields and blocks, editor limits, safe example URLs, image references, slot pointers and guide structure.
 For example, sample text respects the inspected editor's 10,000-byte UTF-8 cap even if a schema permits more.
 
