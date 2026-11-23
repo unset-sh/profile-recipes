@@ -1,0 +1,33 @@
+{
+  "kit": "unset-sh/agent-kit",
+  "commit": "2887e848e52f88ce5f4d6b013da2e1e016e9f6f1",
+  "files": {
+    ".claude/agent-kit/sync.mjs": "7af3db86739394cf25fd4a10d0b533a338777e9895731e6b70ca9af237227851",
+    ".claude/rules/org/org.md": "24c17eee3729358590631dc28aeea96e9afbf7d067e573477bc2301d2df52fd9",
+    ".claude/rules/org/principles.md": "ab0518a893f2099721310a055b1dcd0a9921579f8aae1db85c552ed47e7bfaaf",
+    ".claude/rules/org/working.md": "a8cf660711436a89786489e3cdac327960fb1f0aebc86b0a548072cd09b62788",
+    ".claude/skills/org-brand-request/SKILL.md": "cd9594345f9759f9d7468674814d521fc1697e1f4a242fb84aeef35b93533241",
+    ".claude/skills/org-decisions/SKILL.md": "e058cb274f3b95c53f9bd86f88b7bde8b97a659005e4ef6bf87a5b04fc0e29e5",
+    ".claude/skills/org-decisions/records/org-0001-decision-records-live-in-agent-kit.md": "1a9a046c22297851fe1a9dd45d9b57ce8e7713053bb14121afd868069ca8132c",
+    ".claude/skills/org-decisions/records/org-0002-docs-site-shows-only-organisation-docs.md": "7ccb2c2e98318231ad977b3905b4018e62f8058d1ebccd382f067b03ab1cfc57",
+    ".claude/skills/org-decisions/records/org-0003-shared-workflows-live-in-workflows.md": "35c9b8bf04ab8b52ebb046fbed0ec0fc32125ff9c3d646a5a9333a791a73ad7e",
+    ".claude/skills/org-decisions/records/org-0004-workflows-live-in-github.md": "8551b7ace62a754fb7a1b9c078952cf55e231174a5a618997faed61d3d59ee22",
+    ".claude/skills/org-decisions/records/org-0005-ai-working-material-lives-in-agent-kit.md": "758f7e2730d34a1660439a7e64ff88eeb4cc951a322fe525ccadeec53eae5160",
+    ".claude/skills/org-decisions/records/org-0006-developer-tooling-lives-in-tooling.md": "d6e6cb6337ebe25bc8eb4f7385dd0d43ea2530177dc804e7e1c2893c4c65f3c0",
+    ".claude/skills/org-decisions/records/org-0007-backend-web-and-deployment-boundaries.md": "56979721e011b80a31fea32593ca98d7ff9743d7b4e5dbead16b34ec57da81b9",
+    ".claude/skills/org-decisions/records/org-0008-brand-requests-use-issues.md": "d57ad4154a4d12ff19cbd8fede04750805efb15dca07064dbdbfe8c069b77d43",
+    ".claude/skills/org-decisions/records/org-0009-maps-refresh-through-shared-tooling.md": "b2a40ae8f397d6beb8cac5fb1104eca7260780021f5020e437420dd48f956cfc",
+    ".claude/skills/org-decisions/records/org-0010-staged-delivery-on-main.md": "5a0047e0d630c28ef66d2f79ab7987ef4a2468b7bfe4870857179c0c605eab8b",
+    ".claude/skills/org-decisions/records/org-0011-presentation-is-rendering-and-workflows-retired.md": "ca45fe43f4ce79f98f2e6ef013b4d79b60da6689cdfd6aa9db8f6f94fce74294",
+    ".claude/skills/org-decisions/records/org-0012-release-approvals-and-lexicon-drafts.md": "a8722e7f5dbc1fb3068d9aa71d7ca9577a30fa406d6fb6eaccb76abc18b8de68",
+    ".claude/skills/org-decisions/records/org-0013-agents-manage-agent-kit.md": "3d692bfc02b97cb6d373fa933fb697b1967cb3b08281b059a3eb9ed75189ef26",
+    ".claude/skills/org-kit-update/SKILL.md": "36ca24d027882de4f3043288f5de344ed2ee43a35f5f7456751b6d96379a4331",
+    ".claude/skills/org-map-maintenance/SKILL.md": "f5861b5bf21b3445d04e3c60c8e82844d33fd79ad61e9a819e4fadb93b1fd0ab",
+    ".claude/skills/org-new-repo/SKILL.md": "748de2354f23b734c499fcda2aea431375f08e683bd5b9d97ac5165b46b34fb0",
+    ".claude/skills/org-principles/SKILL.md": "8b7b92ee9b1978bfed221e6dfa1cde82f32c9f753cfabb35902a28534b684cef",
+    ".claude/skills/org-principles/architecture-instructions.md": "40823a64896ef8a9b15de3d0a9373f4dc4408b0095a8110d40e4aaf8fad74ca7",
+    ".claude/skills/org-principles/engineering-practices.md": "c5257630f9526cdf6a3e914d1ffbca90d7df5419f2e721ee0772394144f5b820",
+    ".claude/skills/org-principles/workflow-and-change-management.md": "933dde2833e7ca8a9db0ac7de680c54111a9cfe4d216c28e1c36e29966d22aa0",
+    ".claude/skills/org-release/SKILL.md": "6cfc4eced1f49fffa8bab1584d9099a5d8d4ff9469270d39495f386df34c9118"
+  }
+}

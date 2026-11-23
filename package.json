@@ -12,7 +12,7 @@
     "blob-ref": "bun scripts/blob-ref.ts",
     "typecheck": "tsc --noEmit",
     "test": "bun test scripts/",
-    "check": "bun run typecheck && bun run test && bun run validate"
+    "check": "bun run typecheck && bun run test && bun run validate && bun .claude/agent-kit/sync.mjs --check"
   },
   "devDependencies": {
     "@atproto/lexicon": "0.7.21",

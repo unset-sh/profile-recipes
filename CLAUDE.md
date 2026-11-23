@@ -10,7 +10,8 @@ follows to build someone's profile.
   `profile-recipes/` to `unset-sh/docs`; that repository owns site rendering and deployment.
 - **Does not belong here:** the lexicon schemas (`schemas/upstream/` is a copy; the source is `Undefined6799/unset`), and the
   profile editor and its limits (`limits.json` mirrors the app).
-- **Uses:** `Undefined6799/unset`, whose lexicon schemas and editor limits are copied here at a pinned commit.
+- **Uses:** `Undefined6799/unset`, whose lexicon schemas and editor limits are copied here at a pinned commit;
+  `unset-sh/tooling` for the branch policy check at a full commit; `unset-sh/agent-kit` as the copy under `.claude/`.
 - **Licence:** recipes and sample content are CC0-1.0. Tooling and documentation are AGPL-3.0-only. Copied schemas
   retain their upstream MIT notice; the export preserves the notices for its own content.
 - **Outside contributions:** recipes only, and only when every commit is signed off under the DCO and the DCO check
@@ -26,9 +27,17 @@ organisation, and before changing the licence of anything already published.
 
 ## Working here
 
-- To add or change a recipe, follow [`CONTRIBUTING.md`](CONTRIBUTING.md); `npm run check` must pass.
+- To add or change a recipe, follow [`CONTRIBUTING.md`](CONTRIBUTING.md); `bun run check` must pass.
 - [`AGENTS.md`](AGENTS.md) is for an assistant applying a recipe for a member, not for work on this repository. Keep
   its rules intact when you change it.
 - Changes reach `main` only through a pull request.
 - When behavior changes, review `docs/` with the source change. Check the publishing boundary and recovery steps in
   [`.github/DOCS-PUBLISHING.md`](.github/DOCS-PUBLISHING.md); Alex manages keys and environment settings.
+
+## Commands
+
+```sh
+bun install --frozen-lockfile
+bun run check      # types, tests, all recipes, and the agent-kit copy check
+bun run previews   # rebuild dist/ and the preview PNGs (needs Playwright's Chromium)
+```
