@@ -16,6 +16,11 @@ There is nothing else to sign.
 
 The DCO check on your pull request says which commits still need it.
 
+Validation runs for pull requests and pushes to `staging` and `main`. The separate
+`policy / Validate branch policy` check calls pinned organisation tooling to validate PR branch relationships,
+including retargets. It does not publish recipes or documentation. Repository settings adopt required checks
+separately; the documentation publisher retains its existing `main` restriction and environment gate.
+
 Recipes are what this repository takes from outside. The tooling (scripts, site, workflows) is
 [AGPL-3.0-only](LICENSE) and takes no outside pull requests for now: open an issue and we will make the change. The
 rules for every unset-sh repository, security reports included, are in the
