@@ -44,7 +44,7 @@ source SHA, source/output SHA-256 digests and licences. Only Markdown under `doc
 and the two relevant licence notices are included. Source links are frozen to that commit during export.
 
 Before the first merge, render this exact generated section in an isolated checkout of the approved docs framework.
-Run that repository's `bun run check` and `bun run build`; check the learning and understanding entries, example image,
+Run that repository's `npm run check` and `npm run build`; check the learning and understanding entries, example image,
 internal links, narrow layout and both themes. Never hand-edit the export to make the build pass: fix the source and
 generate it again. PR CI runs the source checks and a real dry export, but does not claim to replace the docs build.
 
