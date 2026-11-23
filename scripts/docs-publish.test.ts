@@ -164,10 +164,31 @@ test("workflow confines publication to current main, its protected environment a
   assert.match(workflow, /cancel-in-progress: false/);
   assert.equal((workflow.match(/ref: main/g) ?? []).length, 2);
   const actions = [...workflow.matchAll(/uses: ([^\s]+)/g)].map((match) => match[1]!);
-  assert.equal(actions.length, 3);
-  for (const action of actions) assert.match(action, /^(?:actions\/checkout|oven-sh\/setup-bun)@[a-f0-9]{40}$/);
+  assert.equal(actions.length, 5);
+  for (const action of actions) {
+    assert.match(action, /^(?:actions\/checkout|oven-sh\/setup-bun|actions\/upload-artifact|actions\/download-artifact)@[a-f0-9]{40}$/);
+  }
   assert.deepEqual([...new Set([...workflow.matchAll(/secrets\.([A-Z_]+)/g)].map((match) => match[1]))], ["DOCS_DEPLOY_KEY"]);
   assert.match(workflow, /SOURCE_COMMIT: \$\{\{ steps\.export\.outputs\.commit \}\}/);
   assert.ok(workflow.indexOf("bun run check") < workflow.indexOf("ssh-key:"));
   assert.ok(workflow.indexOf("bun scripts/docs-export.ts") < workflow.indexOf("ssh-key:"));
+});
+
+test("the job that holds the publishing key runs none of this repository's code", () => {
+  const [, exporter, mirror] = workflow.split(/^  (?:export|mirror):\n/m);
+  assert.ok(exporter && mirror, "Keep the export and mirror jobs");
+  // The exporter runs the source and its dependencies, so it gets no environment and no secret.
+  assert.doesNotMatch(exporter, /environment:|secrets\./);
+  assert.match(exporter, /bun run check/);
+  // The mirror job never checks out this repository, installs Bun or runs a script from it.
+  assert.match(mirror, /needs: export\n/);
+  assert.match(mirror, /environment: docs-mirror/);
+  assert.doesNotMatch(mirror, /setup-bun|\bbun |scripts\/|node_modules/);
+  const checkouts = [...mirror.matchAll(/uses: actions\/checkout@[a-f0-9]{40}[^\n]*\n {8}with:\n {10}repository: ([^\n]+)/g)];
+  assert.equal(checkouts.length, 1);
+  assert.equal(checkouts[0]![1], "unset-sh/docs");
+  assert.equal((mirror.match(/uses: actions\/checkout@/g) ?? []).length, 1);
+  // What arrives from the exporter is checked before the key is read.
+  assert.ok(mirror.indexOf("^[0-9a-f]{40}$") < mirror.indexOf("secrets.DOCS_DEPLOY_KEY"));
+  assert.ok(mirror.indexOf("! -type d ! -type f") < mirror.indexOf("secrets.DOCS_DEPLOY_KEY"));
 });
