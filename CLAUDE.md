@@ -8,9 +8,10 @@ follows to build someone's profile.
 - **Belongs here:** recipes (`recipe.json`, `GUIDE.md`, sample records, assets, preview), the rules for applying
   them, the validator that checks them, and human documentation in `docs/`. The guarded exporter ships only
   `profile-recipes/` to `unset-sh/docs`; that repository owns site rendering and deployment.
-- **Does not belong here:** the lexicon schemas (`schemas/upstream/` is a copy; the source is `Undefined6799/unset`), and the
+- **Does not belong here:** the lexicon schemas (`schemas/upstream/` is a copy; the consumed source is `unset-sh/lexicons`), and the
   profile editor and its limits (`limits.json` mirrors the app).
-- **Uses:** `Undefined6799/unset`, whose lexicon schemas and editor limits are copied here at a pinned commit.
+- **Uses:** `unset-sh/lexicons` for schema copies at an exact commit; `Undefined6799/unset` for separately pinned
+  editor limits and checked consumer behavior. Recipes follow the schema repository’s current contract.
 - **Licence:** recipes and sample content are CC0-1.0. Tooling and documentation are AGPL-3.0-only. Copied schemas
   retain their upstream MIT notice; the export preserves the notices for its own content.
 - **Outside contributions:** recipes only, and only when every commit is signed off under the DCO and the DCO check

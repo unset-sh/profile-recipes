@@ -45,12 +45,19 @@ The person enters the cards in the unset.sh profile editor themselves. You do no
 
 ## Records, for tools
 
-The sample records in each recipe are `sh.unset.profile` and `sh.unset.card` records. Each card's `content.$type`
-names a `sh.unset.block.*` definition. A tool that prepares records from a recipe must replace sample timestamps
-with the time of creation and replace every blob with one the person uploaded. Leave `cards` out of the profile
-until the card records exist; then use `{ "uri": "at://<did>/sh.unset.card/<rkey>" }` entries, in recipe order and
-within that person's repository. Cards absent from this list do not show. Preparing records does not authorize
-publishing them.
+The sample records in each recipe are `sh.unset.profile`, `sh.unset.page` and `sh.unset.card` records.
+`profile.json` holds identity details only. `page.json` is the main page template, written under record key `self`;
+its `visibility` controls the requested audience. Each card's `content.$type` names a `sh.unset.block.*` definition.
+
+A tool preparing new records must replace sample timestamps with creation times and every blob with one the person
+uploaded. Leave `cards` out of the page template until card record keys are assigned. Then fill the page's `cards`
+with `{ "uri": "at://<did>/sh.unset.card/<rkey>" }` entries in the retained manifest order, using the same person's
+DID and repository. Never put `cards` or `visibility` on the profile. Unlisted cards do not appear on the page.
+
+For existing profile, page and card records, merge only the intended changes; preserve unknown fields, including
+those inside blocks, and existing creation times. Preserve the page's visibility and references unless the person
+explicitly changes them. The sample's public visibility is not permission to replace their choice. Preparing records
+does not authorize publishing them.
 
 Use only fields and block types defined in the vendored snapshot. This is a template rule: the protocol permits
 extensions, and readers may ignore them. Schema support also does not guarantee the current app editor or renderer

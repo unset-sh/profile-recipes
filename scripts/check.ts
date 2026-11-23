@@ -2,8 +2,9 @@
 // should. Samples use the vendored upstream schemas and the editor's stricter limits (limits.json).
 // Rejecting unknown fields and union members is this repository's template policy, not an AT Protocol rule.
 import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { join } from "node:path";
-import { jsonToLex, Lexicons, type LexiconDoc } from "@atproto/lexicon";
+import { jsonToLex, Lexicons, parseLexiconDoc, type LexiconDoc } from "@atproto/lexicon";
 import { cidOf, jpegFacts } from "./blob.ts";
 
 export type Problem = string;
@@ -36,17 +37,36 @@ const GUIDE_HEADINGS = ["## Who this is for", "## The layout", "## Interview", "
 const SEMVER = /^\d+\.\d+\.\d+$/;
 const ID = /^[a-z][a-z0-9-]{1,40}$/;
 const EXAMPLE_DOMAIN = /(^|\.)example\.(com|org|net)$/;
+const SCHEMA_IDS = ["sh.unset.profile", "sh.unset.page", "sh.unset.card", ...["text", "links", "showcase", "buttons", "images", "defs"].map(kind => `sh.unset.block.${kind}`)];
 
 export function loadContext(root: string): Context {
   const lexicons = new Lexicons();
   const docs = new Map<string, LexiconDoc>();
   const dir = join(root, "schemas", "upstream");
-  for (const file of readdirSync(dir).filter((f) => f.startsWith("sh.unset.") && f.endsWith(".json"))) {
-    const doc = readJson(join(dir, file)) as unknown as LexiconDoc;
+  const source = readJson(join(dir, "source.json"));
+  if (!isObj(source) || source.repository !== "https://github.com/unset-sh/lexicons" || typeof source.commit !== "string" || !/^[0-9a-f]{40}$/.test(source.commit) || !isObj(source.files)) {
+    throw new Error("schemas/upstream/source.json: needs the canonical repository, full commit and file provenance");
+  }
+  const expected = SCHEMA_IDS.map(id => `${id}.json`).sort();
+  const actual = readdirSync(dir).filter(file => file.endsWith(".json") && file !== "source.json").sort();
+  if (JSON.stringify(actual) !== JSON.stringify(expected) || JSON.stringify(Object.keys(source.files).sort()) !== JSON.stringify(expected)) {
+    throw new Error("schemas/upstream/source.json: schema inventory must match all recipe record and block dependencies exactly");
+  }
+  for (const file of expected) {
+    const provenance = source.files[file];
+    const id = file.slice(0, -5);
+    if (!isObj(provenance) || provenance.sourcePath !== `lexicons/${id.replaceAll(".", "/")}.json`) {
+      throw new Error(`schemas/upstream/${file}: sourcePath must name its canonical Lexicon file`);
+    }
+    const bytes = readFileSync(join(dir, file));
+    if (provenance.sha256 !== createHash("sha256").update(bytes).digest("hex")) {
+      throw new Error(`schemas/upstream/${file}: sha256 does not match source.json; copy upstream bytes unchanged`);
+    }
+    const doc = parseLexiconDoc(JSON.parse(bytes.toString("utf8")));
+    if (doc.id !== id) throw new Error(`schemas/upstream/${file}: schema id must be ${id}`);
     docs.set(doc.id, structuredClone(doc)); // Lexicons.add rewrites refs to absolute lex: URIs in place.
     lexicons.add(doc);
   }
-  const source = readJson(join(dir, "source.json")) as { commit: string; repository: string };
   return { lexicons, docs, limits: readJson(join(root, "limits.json")) as unknown as Limits, lexiconCommit: source.commit, lexiconRepository: source.repository };
 }
 
@@ -59,6 +79,8 @@ export function checkRecipe(ctx: Context, dir: string, id: string): Problem[] {
   const problems = checkManifest(ctx, manifest, id).map((p) => `${id}/recipe.json: ${p}`);
   const records = loadRecords(dir, manifest, problems, id);
   for (const [file, record] of records) {
+    const expected = file === "profile.json" ? "sh.unset.profile" : file === "page.json" ? "sh.unset.page" : "sh.unset.card";
+    if (record.$type !== expected) problems.push(`${id}/${file}: $type must be "${expected}"`);
     problems.push(...checkRecord(ctx, dir, record).map((p) => `${id}/${file}: ${p}`));
   }
   problems.push(...checkSlots(manifest, records).map((p) => `${id}/recipe.json: ${p}`));
@@ -85,11 +107,11 @@ function checkManifest(ctx: Context, m: Obj, id: string): Problem[] {
   return problems;
 }
 
-/** The profile and each card, keyed by file, in page order. Missing or unreadable files are reported. */
+/** The profile, page and each card, keyed by file, in manifest order. Missing or unreadable files are reported. */
 function loadRecords(dir: string, m: Obj, problems: Problem[], id: string): Map<string, Obj> {
   const records = new Map<string, Obj>();
   const listed = Array.isArray(m.cards) ? m.cards : [];
-  const files = ["profile.json", ...listed.map((c) => (isObj(c) && typeof c.file === "string" ? c.file : ""))];
+  const files = ["profile.json", "page.json", ...listed.map((c) => (isObj(c) && typeof c.file === "string" ? c.file : ""))];
   for (const file of files) {
     if (file === "") {
       problems.push(`${id}/recipe.json: each card needs a file`);
@@ -112,8 +134,8 @@ function loadRecords(dir: string, m: Obj, problems: Problem[], id: string): Map<
 
 export function checkRecord(ctx: Context, dir: string, record: Obj): Problem[] {
   const nsid = record.$type;
-  if (nsid !== "sh.unset.profile" && nsid !== "sh.unset.card") {
-    return ['$type must be "sh.unset.profile" or "sh.unset.card"'];
+  if (nsid !== "sh.unset.profile" && nsid !== "sh.unset.page" && nsid !== "sh.unset.card") {
+    return ['$type must be "sh.unset.profile", "sh.unset.page" or "sh.unset.card"'];
   }
   const problems: Problem[] = [];
   try {
@@ -124,14 +146,14 @@ export function checkRecord(ctx: Context, dir: string, record: Obj): Problem[] {
   const root = ctx.docs.get(nsid)?.defs.main as unknown as Def;
   problems.push(...walk(ctx, dir, nsid, root, record, "$"));
   if (nsid === "sh.unset.profile") problems.push(...checkProfile(ctx, record));
-  else problems.push(...checkCardLimits(ctx, record));
+  if (nsid === "sh.unset.card") problems.push(...checkCardLimits(ctx, record));
+  if (nsid === "sh.unset.page" && "cards" in record) problems.push("$.cards: leave out; whoever applies the recipe writes references to the member's actual card records in manifest order");
   problems.push(...sampleData(ctx, record, "$"));
   return problems;
 }
 
 function checkProfile(ctx: Context, record: Obj): Problem[] {
   const problems: Problem[] = [];
-  if ("cards" in record) problems.push("$.cards: leave out; whoever applies the recipe writes it from the card order");
   const headline = record.headline;
   const max = ctx.limits.profile.headlineGraphemes;
   if (typeof headline === "string" && graphemes(headline) > max) {
