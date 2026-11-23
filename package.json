@@ -1,6 +1,6 @@
 {
   "name": "@unset-sh/profile-recipes",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "description": "Ready-made unset.sh profile layouts for different kinds of people, with guides an AI can follow.",
   "license": "AGPL-3.0-only",

@@ -1,18 +1,48 @@
 {
-  "repository": "https://github.com/Undefined6799/unset",
-  "path": "shared/lexicons/schemas",
-  "commit": "0dd079517074917ebd5217f7ecf15f4984cdd5d3",
-  "copied": "2026-11-21",
-  "files": [
-    "sh.unset.profile.json",
-    "sh.unset.card.json",
-    "sh.unset.block.text.json",
-    "sh.unset.block.links.json",
-    "sh.unset.block.showcase.json",
-    "sh.unset.block.buttons.json",
-    "sh.unset.block.images.json",
-    "sh.unset.block.defs.json"
-  ],
-  "published": false,
-  "note": "Vendored upstream Lexicon documents, not recipe examples. The upstream published.lock.json is empty at this commit; these schemas remain drafts. Local validation does not establish that every schema feature is exposed by the app editor or renderer."
+  "repository": "https://github.com/unset-sh/lexicons",
+  "commit": "52cfb6990f3833e4bdd260cd5bb520fc4446e122",
+  "copied": "2026-11-22",
+  "files": {
+    "sh.unset.block.buttons.json": {
+      "sourcePath": "lexicons/sh/unset/block/buttons.json",
+      "sha256": "13427ba986b9f7680dd2e78abcf458894a6f5a1916cb24644401894fee93ddde"
+    },
+    "sh.unset.block.defs.json": {
+      "sourcePath": "lexicons/sh/unset/block/defs.json",
+      "sha256": "b454fa27b0a994c2c2b04a13b9d11afd4eee3214e2a1af9a073fa383c0b1d0fb"
+    },
+    "sh.unset.block.images.json": {
+      "sourcePath": "lexicons/sh/unset/block/images.json",
+      "sha256": "59b12b9b2cf516a14bac0f9e15b27ec5485d6833c4945c9efeb7e30ed3d27ec2"
+    },
+    "sh.unset.block.links.json": {
+      "sourcePath": "lexicons/sh/unset/block/links.json",
+      "sha256": "94422b277881aec14d52d18997e08a985b65b9206d9f65d216e46e53c88e0820"
+    },
+    "sh.unset.block.showcase.json": {
+      "sourcePath": "lexicons/sh/unset/block/showcase.json",
+      "sha256": "b8a33742290a2033cc71c65ab1710d0cc1f0c52407982ac4216a43baf58c24e7"
+    },
+    "sh.unset.block.text.json": {
+      "sourcePath": "lexicons/sh/unset/block/text.json",
+      "sha256": "9db3f9668359fec5ff9ecdabed5d4d568043218d6f82de150658424f8b68178e"
+    },
+    "sh.unset.card.json": {
+      "sourcePath": "lexicons/sh/unset/card.json",
+      "sha256": "cecaeeeb5db992f03b97b11d9b701d0b19e1892ee2a018ade474870ccbd25987"
+    },
+    "sh.unset.page.json": {
+      "sourcePath": "lexicons/sh/unset/page.json",
+      "sha256": "79e6fdea38c7e3ebb3b35783f2fe47a6a2195f4c1944007b5d35fa0a37bdbb75"
+    },
+    "sh.unset.profile.json": {
+      "sourcePath": "lexicons/sh/unset/profile.json",
+      "sha256": "19ec531c273812f0b35438fe42fc4f4e4b7e38abfa3bd285a327975d96b6a588"
+    }
+  },
+  "upstreamApplication": {
+    "repository": "https://github.com/Undefined6799/unset",
+    "commit": "9817f1e7ed51fdd5989d6bad6261a9e167d97b80"
+  },
+  "note": "Unmodified canonical Lexicon documents consumed by recipe templates. The authFull permission set is not a record or a referenced object and is not needed by this validator. Local validation establishes neither network publication status nor app support for every schema feature."
 }

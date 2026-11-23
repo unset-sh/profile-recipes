@@ -13,7 +13,6 @@
   "avatarShape": "round",
   "location": "Rotterdam",
   "website": "https://rhea.example.com",
-  "visibility": "public",
   "listed": true,
   "createdAt": "2026-01-01T00:00:00.000Z"
 }

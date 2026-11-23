@@ -1,6 +1,6 @@
 {
   "id": "photographer",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "title": "Photographer",
   "summary": "Introduce your photographic practice, present a coherent picture series and named projects, then explain how to commission you.",
   "persona": {
@@ -14,8 +14,8 @@
     ]
   },
   "lexicon": {
-    "repository": "https://github.com/Undefined6799/unset",
-    "commit": "0dd079517074917ebd5217f7ecf15f4984cdd5d3"
+    "repository": "https://github.com/unset-sh/lexicons",
+    "commit": "52cfb6990f3833e4bdd260cd5bb520fc4446e122"
   },
   "preview": "preview.png",
   "cards": [

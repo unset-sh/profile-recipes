@@ -1,22 +1,23 @@
 # Vendored upstream Lexicon schemas
 
-These JSON files are actual AT Protocol Lexicon documents copied from
-[Undefined6799/unset](https://github.com/Undefined6799/unset/tree/0dd079517074917ebd5217f7ecf15f4984cdd5d3/shared/lexicons/schemas)
-at commit `0dd079517074917ebd5217f7ecf15f4984cdd5d3`. They are validation dependencies, not recipe examples and not
-definitions authored or published by this repository. The sample records live in [recipes/](../../recipes/).
+These are exact copies from [unset-sh/lexicons](https://github.com/unset-sh/lexicons/tree/52cfb6990f3833e4bdd260cd5bb520fc4446e122/lexicons)
+at commit `52cfb6990f3833e4bdd260cd5bb520fc4446e122`. Recipes and tooling follow this contract; this repository does not edit or publish it.
+Sample records live under [recipes/](../../recipes/).
 
-[source.json](source.json) records the exact repository, source path, commit, copy date and file list.
-[LICENSE](LICENSE) is copied from upstream's `shared/lexicons/LICENSE`.
-Preserve the schema files and their NSIDs exactly; propose definition changes upstream.
+[source.json](source.json) records the source commit, paths, inventory and copied-file hashes. [LICENSE](LICENSE)
+retains the upstream MIT notice. The source repository also records its original application provenance.
 
-The snapshot contains `sh.unset.profile`, `sh.unset.card`, five `sh.unset.block.*` content definitions and shared
-`sh.unset.block.defs`. It supersedes the older `sh.unset.section` and `sh.unset.defs` snapshot.
-The upstream [published lock](https://github.com/Undefined6799/unset/blob/0dd079517074917ebd5217f7ecf15f4984cdd5d3/shared/lexicons/published.lock.json)
-is empty at this commit, so all these definitions are drafts.
+The nine inputs are `sh.unset.profile`, `sh.unset.page`, `sh.unset.card`, five `sh.unset.block.*` content definitions
+and `sh.unset.block.defs`. The OAuth permission set `sh.unset.authFull` is not needed to validate recipe records.
+Identity is on the profile; card references and visibility are on the page. The main page uses record key `self`.
 
-The validator checks schema shape plus the repository's stricter sample rules and the editor limits in
-[limits.json](../../limits.json). Unknown fields and union members are rejected here to catch template mistakes,
-although the protocol allows extensions. Passing validation does not establish that the current app editor or
-renderer supports every schema feature. See the root README's app support notes.
+GitHub availability does not prove DNS/PDS publication. See the source repository's
+[publication guide](https://github.com/unset-sh/lexicons/blob/52cfb6990f3833e4bdd260cd5bb520fc4446e122/docs/publication.md).
+Compatibility applies after public adoption too: new fields must be optional and existing types and limits must
+remain compatible under the [Lexicon evolution rules](https://atproto.com/specs/lexicon#lexicon-evolution).
 
-Follow [CONTRIBUTING.md](../../CONTRIBUTING.md#when-the-app-changes) when refreshing this snapshot.
+The validator also applies stricter sample rules and separately pinned [editor limits](../../limits.json).
+Unknown sample fields and union members are rejected to catch template mistakes; the protocol permits extensions.
+Passing schema validation does not prove display support. The README names the checked app consumer revision.
+
+Follow [CONTRIBUTING.md](../../CONTRIBUTING.md#when-the-app-changes) to update the snapshot and its consumers together.

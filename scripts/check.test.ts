@@ -11,6 +11,7 @@ const ctx = loadContext(root);
 const dir = join(root, "recipes", "journalist");
 const T = "2026-01-01T00:00:00.000Z";
 const profile = (extra: object) => ({ $type: "sh.unset.profile", displayName: "Sample", createdAt: T, ...extra });
+const page = (extra: object = {}) => ({ $type: "sh.unset.page", createdAt: T, ...extra });
 const readme = (extra: object) => ({ $type: "sh.unset.card", createdAt: T, content: { $type: "sh.unset.block.text", text: "Hi" }, ...extra });
 
 test("every shipped recipe passes", () => {
@@ -43,8 +44,24 @@ test("showcase templates respect the editor's row cap", () => {
   assert.match(checkRecord(ctx, dir, content(31)).join(), /editor allows 30 rows/);
 });
 
-test("a template that sets the card order fails", () => {
-  assert.match(checkRecord(ctx, dir, profile({ cards: ["3kabc"] })).join(), /\$\.cards: leave out/);
+test("historical profile visibility and card order are not profile fields", () => {
+  assert.match(checkRecord(ctx, dir, profile({ visibility: "public" })).join(), /\$\.visibility: not defined/);
+  assert.match(checkRecord(ctx, dir, profile({ cards: ["3kabc"] })).join(), /\$\.cards: not defined/);
+});
+
+test("page templates accept visibility and dates but leave card references for the member's actual records", () => {
+  assert.deepEqual(checkRecord(ctx, dir, page({ visibility: "public" })), []);
+  assert.deepEqual(checkRecord(ctx, dir, { $type: "sh.unset.page" }), []);
+  assert.match(checkRecord(ctx, dir, page({ createdAt: "yesterday" })).join(), /datetime/);
+  for (const cards of [[], ["3kabc"], [{ uri: "at://did:plc:sample/sh.unset.card/3kabc" }]]) {
+    assert.match(checkRecord(ctx, dir, page({ cards })).join(), /\$\.cards: leave out/);
+  }
+});
+
+test("unknown knownValues remain valid and do not become closed template enums", () => {
+  assert.deepEqual(checkRecord(ctx, dir, profile({ avatarShape: "future-shape" })), []);
+  assert.deepEqual(checkRecord(ctx, dir, page({ visibility: "future-policy" })), []);
+  assert.deepEqual(checkRecord(ctx, dir, readme({ width: "future-width", surface: "future-surface" })), []);
 });
 
 test("sample data may not point at real people", () => {
@@ -131,4 +148,89 @@ test("slots include writing guidance and a rule for unanswered optional fields",
   } finally {
     rmSync(fixture, { recursive: true, force: true });
   }
+});
+
+// These fixtures exercise the real file loader and the same provenance gate used by bun run check.
+function withRecipe(run: (fixture: string) => void): void {
+  const fixture = mkdtempSync(join(tmpdir(), "recipe-records-"));
+  try {
+    cpSync(dir, fixture, { recursive: true });
+    writeFileSync(join(fixture, "page.json"), JSON.stringify(page({ visibility: "public" })));
+    run(fixture);
+  } finally {
+    rmSync(fixture, { recursive: true, force: true });
+  }
+}
+
+test("a recipe needs its page record", () => {
+  withRecipe(fixture => {
+    rmSync(join(fixture, "page.json"));
+    assert.match(checkRecipe(ctx, fixture, "journalist").join(), /journalist\/page\.json: missing/);
+  });
+});
+
+test("each record file must have the type its role expects", () => {
+  for (const [file, expected, wrong] of [
+    ["profile.json", "sh.unset.profile", page()],
+    ["page.json", "sh.unset.page", profile({})],
+    ["cards/01-about.json", "sh.unset.card", profile({})],
+  ] as const) {
+    withRecipe(fixture => {
+      writeFileSync(join(fixture, file), JSON.stringify(wrong));
+      assert.ok(checkRecipe(ctx, fixture, "journalist").some(problem => problem.includes(`${file}: $type must be "${expected}"`)));
+    });
+  }
+});
+
+test("recipe manifests must pin the same source repository and commit as the schemas", () => {
+  withRecipe(fixture => {
+    const file = join(fixture, "recipe.json");
+    const manifest = JSON.parse(readFileSync(file, "utf8"));
+    manifest.lexicon = { repository: "https://github.com/Undefined6799/unset", commit: "0dd079517074917ebd5217f7ecf15f4984cdd5d3" };
+    writeFileSync(file, JSON.stringify(manifest));
+    const problems = checkRecipe(ctx, fixture, "journalist").join();
+    assert.match(problems, /lexicon\.repository must be/);
+    assert.match(problems, /lexicon\.commit must be/);
+  });
+});
+
+function withSchemas(run: (fixture: string) => void): void {
+  const fixture = mkdtempSync(join(tmpdir(), "recipe-schemas-"));
+  try {
+    cpSync(join(root, "schemas"), join(fixture, "schemas"), { recursive: true });
+    cpSync(join(root, "limits.json"), join(fixture, "limits.json"));
+    run(fixture);
+  } finally {
+    rmSync(fixture, { recursive: true, force: true });
+  }
+}
+
+test("schema provenance detects byte drift before loading records", () => {
+  withSchemas(fixture => {
+    const file = join(fixture, "schemas/upstream/sh.unset.profile.json");
+    writeFileSync(file, `${readFileSync(file, "utf8")}\n`);
+    assert.throws(() => loadContext(fixture), /sh\.unset\.profile\.json.*sha256/);
+  });
+});
+
+test("schema provenance requires the exact declared file inventory", () => {
+  withSchemas(fixture => {
+    rmSync(join(fixture, "schemas/upstream/sh.unset.block.text.json"));
+    assert.throws(() => loadContext(fixture), /schema inventory/);
+  });
+  withSchemas(fixture => {
+    writeFileSync(join(fixture, "schemas/upstream/extra.json"), "{}");
+    assert.throws(() => loadContext(fixture), /schema inventory/);
+  });
+});
+
+test("schema provenance records canonical paths for all recipe dependencies", () => {
+  assert.ok(ctx.docs.has("sh.unset.page"));
+  withSchemas(fixture => {
+    const path = join(fixture, "schemas/upstream/source.json");
+    const source = JSON.parse(readFileSync(path, "utf8"));
+    source.files = { ...source.files, "sh.unset.profile.json": { sourcePath: "wrong/profile.json", sha256: "0".repeat(64) } };
+    writeFileSync(path, JSON.stringify(source));
+    assert.throws(() => loadContext(fixture), /sourcePath|schema inventory/);
+  });
 });
