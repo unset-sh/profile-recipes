@@ -51,7 +51,9 @@ generate it again. PR CI runs the source checks and a real dry export, but does 
 Once setup and the docs cutover are ready, merge through the source PR and inspect **Actions → docs-mirror**. A push
 with relevant input changes starts it automatically. A manual run must select `main`; queued and manual runs check
 out the latest `main`, so an old event does not intentionally republish an older source revision. Validation precedes
-key use. The source's `GITHUB_TOKEN` stays read-only; the destination checkout uses the environment key.
+key use, and it runs in a separate `export` job with no environment or secret. The `mirror` job that holds the key
+downloads only the generated section and runs no code, script or dependency from this repository. The source's
+`GITHUB_TOKEN` stays read-only; the destination checkout uses the environment key.
 
 After the first push:
 

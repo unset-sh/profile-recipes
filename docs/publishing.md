@@ -26,9 +26,12 @@ source pull request -> validation and dry export -> merge to main
 
 1. **Validate.** The pull-request workflow typechecks the tools, runs tests, validates recipes, renders the catalogue
    and prepares an export in a temporary directory. It has no publishing key.
-2. **Prepare.** On relevant `main` changes, or a manual run on `main`, `docs-mirror` repeats the checks. The exporter
-   requires a clean committed checkout, rejects links and special files, and writes a new temporary folder.
-3. **Publish the section.** The protected `docs-mirror` environment supplies `DOCS_DEPLOY_KEY`. The workflow checks out
+2. **Prepare.** On relevant `main` changes, or a manual run on `main`, the `docs-mirror` export job repeats the checks.
+   The exporter requires a clean committed checkout, rejects links and special files, and writes a new temporary
+   folder. This job has no publishing key; it hands on only the generated section and its source commit.
+3. **Publish the section.** A separate job in the protected `docs-mirror` environment receives `DOCS_DEPLOY_KEY`. It
+   runs no code from this repository: it checks that the section holds only files and folders and that the commit is
+   a full revision before reading the key. It then checks out
    `unset-sh/docs`, replaces only `profile-recipes/` and verifies its staged paths. Before every normal Git push, it
    checks that all outgoing changes stay in that section and its files still match the generated export exactly.
 4. **Build the site.** The docs repository owns Hugo, the shared theme and its deployment checks. A successful export
