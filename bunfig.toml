@@ -1,0 +1,8 @@
+[install]
+# Write exact versions, never ranges.
+exact = true
+# No dependency lifecycle scripts, locally or in CI.
+ignoreScripts = true
+# Resolve only versions published at least 7 days ago, so a hijacked release has time to be caught before it
+# reaches us. profile-recipes takes no @unset-sh package, so nothing is exempt.
+minimumReleaseAge = 604800 # seconds

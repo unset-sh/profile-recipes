@@ -28,14 +28,14 @@ enforce the `profile-recipes/` boundary. A workflow file alone does not prove ac
 
 ## Verify and release
 
-Use Node from `.nvmrc`. From a clean, committed source checkout:
+Use Bun from `.bun-version`. From a clean, committed source checkout:
 
 ```sh
-npm ci --ignore-scripts
-npm run check
-npm run render
+bun install --frozen-lockfile --ignore-scripts
+bun run check
+bun run render
 docs_stage_parent="$(mktemp -d)"
-node scripts/docs-export.ts "$docs_stage_parent/export"
+bun scripts/docs-export.ts "$docs_stage_parent/export"
 ```
 
 The last command prepares files only; it has no credential or network behavior. It refuses dirty source inputs,

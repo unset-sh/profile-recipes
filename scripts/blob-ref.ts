@@ -1,11 +1,11 @@
 // Prints the blob reference and aspect ratio for a sample picture, ready to paste into a card record.
-// Usage: npm run blob-ref -- recipes/<id>/assets/<file>.jpg
+// Usage: bun run blob-ref -- recipes/<id>/assets/<file>.jpg
 import { readFileSync } from "node:fs";
 import { blobRefFor, jpegFacts } from "./blob.ts";
 
 const path = process.argv[2];
 if (path === undefined) {
-  console.error("usage: npm run blob-ref -- <file.jpg>");
+  console.error("usage: bun run blob-ref -- <file.jpg>");
   process.exit(2);
 }
 const facts = jpegFacts(readFileSync(path));

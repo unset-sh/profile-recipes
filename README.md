@@ -4,7 +4,7 @@ Fifteen [unset.sh](https://unset.sh) profile recipes, with invented sample recor
 and mobile mockups. Each has a different reading order and purpose within the same profile theme and card controls.
 
 **Start with the [design review](DESIGN-REVIEW.md)** for research references, the changes to every recipe, repository
-findings, and privacy-preserving media options. Run `npm run previews` and open `dist/index.html` for the local
+findings, and privacy-preserving media options. Run `bun run previews` and open `dist/index.html` for the local
 browsable catalogue; it needs no server or external assets.
 
 The [human documentation](docs/_index.md) explains how to use a recipe, its architecture boundaries and the developer
@@ -108,13 +108,13 @@ repository records confidential.
 
 ## Checks and previews
 
-Use Node **26.12.0**, as pinned in `.nvmrc`.
+Use Bun, as pinned in `.bun-version`.
 
 ```sh
-npm ci --ignore-scripts
+bun install --frozen-lockfile
 npx playwright install chromium --only-shell
-npm run check      # typecheck, tests, validate all fifteen recipes
-npm run previews   # build dist/, capture all sixty PNGs, then refresh catalogue thumbnails
+bun run check      # typecheck, tests, validate all fifteen recipes
+bun run previews   # build dist/, capture all sixty PNGs, then refresh catalogue thumbnails
 ```
 
 The checks verify the schema inventory and hashes, profile/page/card placement, supported block types, editor limits,
@@ -126,7 +126,7 @@ cap; schema ceilings can be higher. [limits.json](limits.json) separates editor 
 The preview pass checks local image decoding, no horizontal page overflow at desktop/mobile and 320px dark mode,
 no third-party HTTP requests, and keyboard opening/closing of About. It saves desktop at 1120px and mobile at 390px,
 plus `dist/overview.png`. These checks cover the preview tool, not end-to-end live app behavior or a full accessibility
-audit. `npm run render` can rebuild HTML alone from committed previews; there are no runtime dependencies in the
+audit. `bun run render` can rebuild HTML alone from committed previews; there are no runtime dependencies in the
 output, no JavaScript, analytics, provider frames or external fonts.
 
 ## Dependencies

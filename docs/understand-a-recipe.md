@@ -51,7 +51,7 @@ limits and verified reader behavior. A repository split does not change the sche
 
 ## What validation proves
 
-`npm run check` checks recipe records against the vendored schemas, then applies this repository's stricter sample
+`bun run check` checks recipe records against the vendored schemas, then applies this repository's stricter sample
 rules: correct profile/page/card placement, known fields and blocks, editor limits, safe example URLs, image
 references, slot pointers and guide structure. It also checks copied-schema inventory and hashes.
 For example, sample text respects the inspected editor's 10,000-byte UTF-8 cap even if a schema permits more.

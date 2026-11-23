@@ -3,8 +3,9 @@
 # Pull requests from the owner and from bots are exempt. The rules are in scripts/dco.ts; CONTRIBUTING.md says what
 # contributors do.
 #
-# It runs on `pull_request`, so a fork's run gets a read-only token and no secrets, installs no package and uses only
-# GitHub's own actions. The job name "DCO" is the check to require in the "Protect main" ruleset.
+# It runs on `pull_request`, so a fork's run gets a read-only token and no secrets, and installs no package. Beyond
+# GitHub's own checkout it uses only oven-sh/setup-bun, pinned by commit, to run the check script. The job name "DCO"
+# is the check to require in the "Protect main" ruleset.
 
 name: dco
 
@@ -31,12 +32,15 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
         with:
-          node-version-file: .nvmrc
-          package-manager-cache: false
+          bun-version-file: .bun-version
+          no-cache: true
+          token: ""
+      - name: Bun is the pinned version
+        run: test "$(bun --version)" = "$(cat .bun-version)"
       - name: Check every commit is signed off
-        run: node scripts/dco-check.ts
+        run: bun scripts/dco-check.ts
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}

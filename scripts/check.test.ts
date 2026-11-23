@@ -150,7 +150,7 @@ test("slots include writing guidance and a rule for unanswered optional fields",
   }
 });
 
-// These fixtures exercise the real file loader and the same provenance gate used by npm run check.
+// These fixtures exercise the real file loader and the same provenance gate used by bun run check.
 function withRecipe(run: (fixture: string) => void): void {
   const fixture = mkdtempSync(join(tmpdir(), "recipe-records-"));
   try {

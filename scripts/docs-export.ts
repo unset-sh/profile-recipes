@@ -110,7 +110,7 @@ export function exportDocs(source: string, destination: string, commit: string):
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   try {
     const output = process.argv[2];
-    if (!output || process.argv.length !== 3) throw new Error("Usage: node scripts/docs-export.ts <new-output-directory>");
+    if (!output || process.argv.length !== 3) throw new Error("Usage: bun scripts/docs-export.ts <new-output-directory>");
     const root = resolve(import.meta.dirname, "..");
     const git = (...args: string[]) => execFileSync("git", ["-C", root, ...args], { encoding: "utf8" }).trim();
     if (git("status", "--porcelain", "--untracked-files=all")) throw new Error("Commit source changes before exporting; provenance requires a clean checkout");
